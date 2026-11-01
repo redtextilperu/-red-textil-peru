@@ -161,13 +161,7 @@ section{padding:88px 0}
 .perks b{display:block;font-family:var(--f-display);font-size:.9688rem;color:var(--navy);line-height:1.2}
 .perks span.t{font-size:.8438rem;color:var(--ink-soft);line-height:1.35;display:block;margin-top:2px}
 @media (max-width:900px){.perks ul{grid-template-columns:repeat(2,1fr)}.perks li:nth-child(2){border-right:0}.perks li:nth-child(-n+2){border-bottom:1px solid var(--line)}}
-@media (max-width:480px){.perks li{padding:0}.perks li>a{padding:14px 12px;gap:10px}.perks .pi{width:38px;height:38px}.perks .pi svg{width:19px;height:19px}.perks b{font-size:.875rem}.perks span.t{display:none}}
-/* Beneficios de portada: tarjetas completas y accesibles como enlaces */
-.perks li{padding:0}
-.perks li>a{display:flex;align-items:center;gap:14px;width:100%;height:100%;padding:22px 20px;color:inherit;text-decoration:none;border-radius:inherit;transition:background .2s}
-.perks li>a:hover{background:var(--sky-soft)}
-.perks li>a:focus-visible{outline:3px solid var(--electric);outline-offset:-3px}
-@media(max-width:480px){.perks li>a{padding:14px 12px;gap:10px}}
+@media (max-width:480px){.perks li{padding:14px 12px;gap:10px}.perks .pi{width:38px;height:38px}.perks .pi svg{width:19px;height:19px}.perks b{font-size:.875rem}.perks span.t{display:none}}
 
 /* ============ IMÁGENES (con respaldo de textura) ============ */
 .ph{position:absolute;inset:0;overflow:hidden;display:block;
@@ -276,37 +270,18 @@ section{padding:88px 0}
 .panel .btn{margin-top:24px}
 @media (max-width:900px){.panel{grid-template-columns:1fr}.panel .pimg{min-height:0;aspect-ratio:16/8}.panel .pbody{padding:24px}.steps{flex-direction:column}.steps li{display:grid;grid-template-columns:34px 1fr;gap:0}.steps li::before{margin:0}}
 
-/* ============ CATÁLOGO MARKETPLACE ============ */
-.catalog-intro{max-width:760px;color:var(--ink-soft);margin-top:10px}
-.catalog-tools{display:grid;grid-template-columns:minmax(240px,1fr) auto;gap:14px;align-items:center;margin:24px 0 16px}
-.catalog-search{height:54px;display:flex;align-items:center;gap:12px;padding:0 16px;border:2px solid var(--line);border-radius:14px;background:var(--white)}
-.catalog-search svg{width:20px;height:20px;color:var(--electric);flex:none}
-.catalog-search input{width:100%;height:48px;border:0;outline:0;background:transparent;color:var(--ink);font:inherit}
-.catalog-roles{display:flex;gap:8px;flex-wrap:wrap}
-.catalog-role{border:1px solid var(--line);border-radius:999px;padding:10px 15px;background:var(--white);color:var(--navy);font-weight:700;cursor:pointer}
-.catalog-role[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
-.catalog-note{display:flex;gap:10px;align-items:flex-start;padding:13px 16px;margin:18px 0 20px;border:1px solid #D8E5F5;border-radius:12px;background:#F3F8FF;color:#355078;font-size:.875rem}
-.catalog-note svg{width:19px;height:19px;flex:none;color:var(--electric)}
-.prod-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
-.prod{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.25s;min-width:0}
-.prod:hover{border-color:var(--electric);box-shadow:var(--shadow);transform:translateY(-2px)}
-.prod .pic{position:relative;aspect-ratio:4/3;background:var(--navy);overflow:hidden}
-.prod .pic .ph,.prod .pic .ph img{width:100%;height:100%;display:block;object-fit:cover}
-.prod .pic .ph>svg{position:absolute;z-index:1;left:50%;top:50%;width:52px;height:52px;transform:translate(-50%,-50%);color:rgba(255,255,255,.8)}
-.prod .pill{position:absolute;top:12px;left:12px;z-index:2}
-.prod .demo-tag{position:absolute;right:10px;top:10px;z-index:3;border-radius:999px;padding:5px 9px;background:rgba(10,27,77,.86);color:white;font-size:.7rem;font-weight:700}
-.prod .bd{padding:17px;display:flex;flex-direction:column;gap:7px;flex:1}
-.prod h3{font-size:1.05rem;font-weight:700;line-height:1.3;color:var(--navy)}
-.prod .by{font-size:.85rem;color:var(--ink-soft)}
-.prod .seller-line{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px}
-.prod .seller-role{font-size:.72rem;font-weight:700;color:var(--electric-deep);background:#EAF0FF;border-radius:999px;padding:5px 9px}
-.prod .ask{margin-top:auto;padding-top:9px;font-size:.85rem;font-weight:700;color:var(--pink-deep)}
-.catalog-publish{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:28px;padding:22px 24px;border-radius:18px;background:var(--navy);color:white}
-.catalog-publish p{color:#C3D1EF;margin-top:4px}
-.catalog-publish .btn{flex:none}
-@media (max-width:1020px){.prod-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:760px){.catalog-tools{grid-template-columns:1fr}.prod-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.prod .bd{padding:12px}.prod h3{font-size:.96rem}.catalog-publish{align-items:stretch;flex-direction:column}.catalog-publish .btn{width:100%}}
-@media (max-width:420px){.prod-grid{grid-template-columns:1fr 1fr}.prod .by{font-size:.78rem}}
+/* ============ CATÁLOGO ============ */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.prod{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;transition:.25s}
+.prod:hover{border-color:var(--electric);box-shadow:var(--shadow)}
+.prod .pic{position:relative;aspect-ratio:1/1;background:var(--navy)}
+.prod .bd{padding:16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.prod h3{font-size:1.0625rem;font-weight:700;line-height:1.25}
+.prod .by{font-size:.875rem;color:var(--ink-soft)}
+.prod .ask{margin-top:8px;font-size:.875rem;font-weight:700;color:var(--pink-deep)}
+.prod .btn{margin-top:12px}
+@media (max-width:1020px){.prod-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.prod-grid{grid-template-columns:repeat(2,1fr);gap:12px}.prod .bd{padding:12px}.prod h3{font-size:.9688rem}.prod .btn{padding:0 10px}}
 
 /* ============ OPORTUNIDADES ============ */
 .opp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -566,7 +541,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
         </div>
         <div class="f-tabs" role="group" aria-label="¿Qué buscas?">
           <button type="button" class="f-tab" data-scope="all" aria-pressed="true">Todo</button>
-          <button type="button" class="f-tab" data-scope="fab" aria-pressed="false">Productores</button>
+          <button type="button" class="f-tab" data-scope="fab" aria-pressed="false">Fabricantes</button>
           <button type="button" class="f-tab" data-scope="prov" aria-pressed="false">Proveedores</button>
           <button type="button" class="f-tab" data-scope="maq" aria-pressed="false">Maquinaria</button>
           <button type="button" class="f-tab" data-scope="ins" aria-pressed="false">Insumos</button>
@@ -591,10 +566,10 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
 <div class="perks" aria-label="Qué puedes hacer en la red">
   <div class="wrap">
     <ul>
-      <li><a class="perk-link" href="#categorias"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><span><b>Busca por rubro</b><span class="t">Fabricantes, telas, estampado y más</span></span></a></li>
-      <li><a class="perk-link" href="#directorio"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span><b>Cotiza directo</b><span class="t">Escribe a la empresa sin intermediarios</span></span></a></li>
-      <li><a class="perk-link" href="#oportunidades"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v13H3zM8 7V4h8v3"/></svg></span><span><b>Oportunidades</b><span class="t">Pedidos, maquila y alianzas</span></span></a></li>
-      <li><a class="perk-link" href="#capacitaciones"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5-10-5zM6 11.5V16c3 2.5 9 2.5 12 0v-4.5"/></svg></span><span><b>Aprende y conecta</b><span class="t">Capacitaciones y comunidad</span></span></a></li>
+      <li><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><span><b>Busca por rubro</b><span class="t">Fabricantes, telas, estampado y más</span></span></li>
+      <li><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span><b>Cotiza directo</b><span class="t">Escribe a la empresa sin intermediarios</span></span></li>
+      <li><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v13H3zM8 7V4h8v3"/></svg></span><span><b>Oportunidades</b><span class="t">Pedidos, maquila y alianzas</span></span></li>
+      <li><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5-10-5zM6 11.5V16c3 2.5 9 2.5 12 0v-4.5"/></svg></span><span><b>Aprende y conecta</b><span class="t">Capacitaciones y comunidad</span></span></li>
     </ul>
   </div>
 </div>
@@ -619,7 +594,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
     <div class="s-head">
       <div>
         <h2>Productores destacados</h2>
-        <p>Conoce talleres y fábricas textiles aprobados que forman parte de nuestra red.</p>
+        <p>Talleres y fábricas de Trujillo con su especialidad a la vista. Los perfiles que ves hoy son ejemplos para validar el diseño.</p>
       </div>
       <a class="more" href="#directorio">Ver todos →</a>
     </div>
@@ -633,7 +608,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
     <div class="s-head">
       <div>
         <h2>Directorio de empresas textiles</h2>
-        <p>Busca por nombre, servicio o distrito, y filtra entre productores y proveedores.</p>
+        <p>Busca por nombre, servicio o distrito, y filtra por rubro o tipo de empresa.</p>
       </div>
     </div>
 
@@ -645,7 +620,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
       </div>
       <div class="seg" id="roleSeg" role="group" aria-label="Tipo de empresa">
         <button type="button" data-role="all" aria-pressed="true">Todas</button>
-        <button type="button" data-role="productor" aria-pressed="false">Productores</button>
+        <button type="button" data-role="productor" aria-pressed="false">Fabricantes</button>
         <button type="button" data-role="proveedor" aria-pressed="false">Proveedores</button>
       </div>
       <span class="count" id="count" aria-live="polite"></span>
@@ -681,30 +656,12 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
   <div class="wrap">
     <div class="s-head">
       <div>
-        <span class="eyebrow">MERCADO TEXTIL</span>
-        <h2>Encuentra productos y proveedores</h2>
-        <p class="catalog-intro">Explora prendas, telas, insumos y maquinaria. Compara la oferta de productores y proveedores en un solo lugar.</p>
+        <h2>Catálogo de productos</h2>
+        <p>Prendas, telas, estampados y equipos publicados por las empresas. Pide tu cotización en un toque.</p>
       </div>
     </div>
-    <div class="catalog-tools">
-      <label class="catalog-search">
-        <span class="sr">Buscar productos</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input id="prodSearch" type="search" placeholder="¿Qué necesitas? Ej. polos, tela dry-fit, tinta DTF…" autocomplete="off">
-      </label>
-      <div class="catalog-roles" role="group" aria-label="Filtrar por tipo de empresa">
-        <button type="button" class="catalog-role" data-prod-role="all" aria-pressed="true">Todos</button>
-        <button type="button" class="catalog-role" data-prod-role="productor" aria-pressed="false">Productores</button>
-        <button type="button" class="catalog-role" data-prod-role="proveedor" aria-pressed="false">Proveedores</button>
-      </div>
-    </div>
-    <div class="chips" id="prodChips" role="group" aria-label="Filtrar por categoría"></div>
-    <div class="catalog-note"><span aria-hidden="true">ⓘ</span><span>Vista de demostración: estos productos son ejemplos de diseño, todavía no son publicaciones reales de empresas.</span></div>
+    <div class="chips" id="prodChips" role="group" aria-label="Filtrar catálogo"></div>
     <div class="prod-grid" id="prodGrid"></div>
-    <div class="catalog-publish">
-      <div><strong>¿Fabricas o vendes productos textiles?</strong><p>Prepara tu perfil para mostrar tu oferta a compradores de todo el Perú.</p></div>
-      <button class="btn btn-pink" type="button" data-open="join">Registrar mi empresa</button>
-    </div>
   </div>
 </section>
 
@@ -995,14 +952,14 @@ const COMPANIES = [
 ];
 
 const PRODUCTS = [
-  {n:'Polos corporativos',          by:'Hilos del Norte',              c:'confeccion', tag:'Prendas', role:'productor'},
-  {n:'Buzos dry-fit para academias',by:'Andes Sport Lab',              c:'deportiva',  tag:'Deportivo', role:'productor'},
-  {n:'Camisetas sublimadas full color', by:'Sublima Trujillo',         c:'sublimacion',tag:'Sublimado', role:'productor'},
-  {n:'Transfers DTF por metro',     by:'Print DTF Norte',              c:'dtf',        tag:'DTF', role:'productor'},
-  {n:'Telas de algodón y poliéster',by:'Telas Moche',                  c:'telas',      tag:'Telas', role:'proveedor'},
-  {n:'Gorras bordadas con logo',    by:'Regalo Corporativo Chan Chan', c:'merch',      tag:'Merchandising', role:'productor'},
-  {n:'Uniformes escolares e industriales', by:'Uniformes Santa Rosa',  c:'uniformes',  tag:'Uniformes', role:'productor'},
-  {n:'Máquinas rectas y remalladoras', by:'Maquinaria Textil Huanchaco', c:'maquinaria', tag:'Maquinaria', role:'proveedor'}
+  {n:'Polos corporativos',          by:'Hilos del Norte',              c:'confeccion', tag:'Prendas'},
+  {n:'Buzos dry-fit para academias',by:'Andes Sport Lab',              c:'deportiva',  tag:'Deportivo'},
+  {n:'Camisetas sublimadas full color', by:'Sublima Trujillo',         c:'sublimacion',tag:'Sublimado'},
+  {n:'Transfers DTF por metro',     by:'Print DTF Norte',              c:'dtf',        tag:'DTF'},
+  {n:'Telas de algodón y poliéster',by:'Telas Moche',                  c:'telas',      tag:'Telas'},
+  {n:'Gorras bordadas con logo',    by:'Regalo Corporativo Chan Chan', c:'merch',      tag:'Merchandising'},
+  {n:'Uniformes escolares e industriales', by:'Uniformes Santa Rosa',  c:'uniformes',  tag:'Uniformes'},
+  {n:'Máquinas rectas y remalladoras', by:'Maquinaria Textil Huanchaco', c:'maquinaria', tag:'Maquinaria'}
 ];
 
 const OPPS = [
@@ -1116,31 +1073,21 @@ $('#catGrid').addEventListener('click',e=>{
    PRODUCTORES DESTACADOS
    ========================================================= */
 function renderFeat(){
-  const list = directorioEmpresas.filter(x=>x.r==='productor');
-  if(directorioCargando){
-    $('#featGrid').innerHTML = '<div class="empty"><p>Cargando productores aprobados de Red Textil Perú…</p></div>';
-    return;
-  }
-  if(directorioError || !list.length){
-    $('#featGrid').innerHTML = '<div class="empty"><p>Aún no hay productores aprobados para destacar. Cuando una empresa productora sea aprobada, aparecerá aquí automáticamente.</p></div>';
-    return;
-  }
-  $('#featGrid').innerHTML = list.slice(0,8).map((x,i)=>{
-    const logo = x.logo_url && /^https:\/\//i.test(x.logo_url)
-      ? `<img src="${escaparHTML(x.logo_url)}" alt="Logo de ${escaparHTML(x.n)}" style="width:100%;height:100%;object-fit:contain;background:#fff;padding:12px">`
-      : photo(x.c,x.c,i);
-    return `<article class="fcard">
-      <div class="pic">${logo}<span class="pill pk">Productor</span></div>
+  const list = COMPANIES.filter(x=>x.f);
+  $('#featGrid').innerHTML = list.map((x,i)=>`
+    <article class="fcard">
+      <div class="pic">${photo(x.c,x.c,i)}<span class="pill pk">Perfil de ejemplo</span></div>
       <div class="bd">
-        <h3>${escaparHTML(x.n)}</h3>
-        <p class="meta">${escaparHTML(x.categoria)} · ${escaparHTML([x.d,x.departamento].filter(Boolean).join(', ')||'Perú')}</p>
-        <p class="ds">${escaparHTML(x.t || 'Empresa productora de la industria textil.')}</p>
+        <h3>${x.n}</h3>
+        <p class="meta">${catName(x.c)} · ${x.d}, Trujillo</p>
+        <p class="ds">${x.t}</p>
+        <div class="tags">${x.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
         <div class="acts">
-          <button class="btn btn-electric btn-sm" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil</button>
+          <button class="btn btn-electric btn-sm" data-contact="${x.n}">Contactar</button>
+          <button class="btn btn-line btn-sm" data-quote="Cotización a ${x.n}">Cotizar</button>
         </div>
       </div>
-    </article>`;
-  }).join('');
+    </article>`).join('');
 }
 
 /* =========================================================
@@ -1194,7 +1141,7 @@ function renderDir(){
       <div class="th">${logo}</div>
       <div>
         <h3>${escaparHTML(x.n)}</h3>
-        <p class="meta">${escaparHTML(x.categoria)} · ${x.r==='productor'?'Productor':x.r==='comprador'?'Comprador':'Proveedor'} · ${escaparHTML(x.d || x.departamento || '')}</p>
+        <p class="meta">${escaparHTML(x.categoria)} · ${x.r==='productor'?'Fabricante':x.r==='comprador'?'Comprador':'Proveedor'} · ${escaparHTML(x.d || x.departamento || '')}</p>
         <p class="ds">${escaparHTML(x.t || 'Empresa registrada en Red Textil Perú.')}</p>
         <div class="tags">${x.tags.map(t=>`<span class="tag">${escaparHTML(t)}</span>`).join('')}</div>
         <button class="profile-btn" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil de empresa</button>
@@ -1219,10 +1166,10 @@ async function cargarDirectorio(){
       const c = slugCategoria(categoria);
       return {id:row.id,n:row.nombre||'Empresa textil',c,r:row.tipo_empresa||'proveedor',d:row.ciudad||'',departamento:row.departamento||'',t:row.descripcion||'',categoria,whatsapp:row.whatsapp||'',correo:row.correo||'',logo_url:row.logo_url||'',sitio_web:row.sitio_web||'',direccion:row.direccion||'',capacidad:row.capacidad_produccion||'',tags:[]};
     });
-    directorioCargando = false; renderDir(); renderCats(); renderFeat();
+    directorioCargando = false; renderDir(); renderCats();
   }catch(err){
     console.error('RED TEXTIL PERÚ: no se pudo cargar el directorio desde Supabase.',err);
-    directorioCargando = false; directorioError = String(err?.message || 'Error de conexión'); renderDir(); renderFeat();
+    directorioCargando = false; directorioError = String(err?.message || 'Error de conexión'); renderDir();
   }
 }
 $('#dirList').addEventListener('click',e=>{ if(e.target.id==='reintentarDirectorio') cargarDirectorio(); });
@@ -1235,27 +1182,15 @@ $('#roleSeg').addEventListener('click',e=>{
 
 /* Buscador de la portada */
 let heroScope = 'all';
-const heroScopeMap = {
-  all:{cat:'todas',role:'all'},
-  fab:{cat:'todas',role:'productor'},
-  prov:{cat:'todas',role:'proveedor'},
-  maq:{cat:'maquinaria',role:'all'},
-  ins:{cat:'telas',role:'all'}
-};
-function aplicarFiltroPortada(buscarTexto=false){
-  const filtro = heroScopeMap[heroScope] || heroScopeMap.all;
-  setDir({...filtro, q:buscarTexto ? $('#hq').value : ''});
-  $('#directorio').scrollIntoView({behavior:'smooth',block:'start'});
-}
 $$('.f-tab').forEach(b=>b.addEventListener('click',()=>{
   heroScope = b.dataset.scope;
-  $$('.f-tab').forEach(x=>x.setAttribute('aria-pressed', x===b ? 'true' : 'false'));
-  // Al elegir Productores, Proveedores, Maquinaria o Insumos, aplicar el filtro inmediatamente.
-  aplicarFiltroPortada(false);
+  $$('.f-tab').forEach(x=>x.setAttribute('aria-pressed', x===b));
 }));
 $('#finder').addEventListener('submit',e=>{
   e.preventDefault();
-  aplicarFiltroPortada(true);
+  const map = {all:{cat:'todas',role:'all'}, fab:{cat:'todas',role:'productor'}, prov:{cat:'todas',role:'proveedor'}, maq:{cat:'maquinaria',role:'all'}, ins:{cat:'telas',role:'all'}};
+  setDir({...map[heroScope], q:$('#hq').value});
+  $('#directorio').scrollIntoView({behavior:'smooth'});
 });
 
 /* =========================================================
@@ -1292,41 +1227,52 @@ tabs.forEach((t,i)=>{
 });
 
 /* =========================================================
-   CATÁLOGO
+   CATÁLOGO REAL: productos publicados en Supabase
    ========================================================= */
-const prodState = {cat:'todas',role:'all',q:''};
+const prodState = {cat:'todas'};
+let catalogoProductos = [];
+let catalogoCargando = true;
+let catalogoError = '';
 function renderProds(){
-  const q=norm(prodState.q.trim());
-  const list = PRODUCTS.filter(p=>
-    (prodState.cat==='todas'||p.c===prodState.cat) &&
-    (prodState.role==='all'||p.role===prodState.role) &&
-    (!q||norm([p.n,p.by,p.tag,catName(p.c)].join(' ')).includes(q))
-  );
-  $('#prodGrid').innerHTML = list.length ? list.map((p,i)=>`
-    <article class="prod">
-      <div class="pic">${photo(p.c,p.c,i)}<span class="pill">${p.tag}</span><span class="demo-tag">Ejemplo</span></div>
-      <div class="bd">
-        <h3>${p.n}</h3>
-        <div class="seller-line"><p class="by">${p.by}</p><span class="seller-role">${p.role==='productor'?'Productor':'Proveedor'}</span></div>
-        <p class="ask">Precio y disponibilidad por consultar</p>
-      </div>
-    </article>`).join('')
-    : `<div class="empty" style="grid-column:1/-1"><p>No encontramos productos con esos filtros.</p><button class="btn btn-line btn-sm" type="button" id="clearProdFilters">Limpiar filtros</button></div>`;
+  const chips = [{id:'todas',name:'Todos'},...CATS.filter(c=>catalogoProductos.some(p=>p.c===c.id))];
+  const chipHost=$('#prodChips');
+  chipHost.innerHTML=chips.map(c=>`<button type="button" class="chip" data-v="${c.id}" aria-pressed="${prodState.cat===c.id}">${c.name}</button>`).join('');
+  if(catalogoCargando){$('#prodGrid').innerHTML='<div class="empty" style="grid-column:1/-1"><p>Cargando productos publicados por las empresas…</p></div>';return;}
+  if(catalogoError){$('#prodGrid').innerHTML='<div class="empty" style="grid-column:1/-1"><p>No pudimos cargar el catálogo en este momento.</p><button class="btn btn-line btn-sm" type="button" id="retryCatalog">Volver a intentar</button></div>';return;}
+  const list=catalogoProductos.filter(p=>prodState.cat==='todas'||p.c===prodState.cat);
+  $('#prodGrid').innerHTML=list.length?list.map(p=>{
+    const image=p.imagen_url&&/^https:\/\//i.test(p.imagen_url)
+      ? `<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.n)}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`
+      : photo(p.c,p.c,0);
+    const wa=p.whatsapp?'https://wa.me/51'+String(p.whatsapp).replace(/\D/g,'').replace(/^51/,''):'';
+    const precio=p.precio!==null&&p.precio!==undefined&&p.precio!==''?`S/ ${Number(p.precio).toLocaleString('es-PE',{maximumFractionDigits:2})}`:'Precio a cotizar';
+    return `<article class="prod"><div class="pic">${image}<span class="pill">${escaparHTML(p.tag||catName(p.c)||'Producto')}</span></div><div class="bd"><h3>${escaparHTML(p.n)}</h3><p class="by">${escaparHTML(p.by||'Empresa de Red Textil Perú')}</p>${p.descripcion?`<p class="by">${escaparHTML(p.descripcion)}</p>`:''}<p class="ask">${precio}</p>${wa?`<a class="btn btn-line btn-sm" href="${wa}" target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>`:`<span class="hint">Contacto no disponible</span>`}</div></article>`;
+  }).join(''):`<div class="empty" style="grid-column:1/-1"><p>${prodState.cat==='todas'?'Todavía no hay productos publicados.':'Aún no hay productos publicados en esta categoría.'}</p><p class="hint">Cuando una empresa aprobada publique sus productos, aparecerán aquí automáticamente.</p></div>`;
 }
-chipRow($('#prodChips'), [{id:'todas',name:'Todas las categorías'},...CATS.filter(c=>PRODUCTS.some(p=>p.c===c.id))], 'todas', v=>{prodState.cat=v;renderProds()});
-$('#prodSearch').addEventListener('input',e=>{prodState.q=e.target.value;renderProds()});
-$$('[data-prod-role]').forEach(b=>b.addEventListener('click',()=>{
-  prodState.role=b.dataset.prodRole;
-  $$('[data-prod-role]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
-  renderProds();
-}));
-$('#prodGrid').addEventListener('click',e=>{
-  if(e.target.id==='clearProdFilters'){
-    prodState.cat='todas';prodState.role='all';prodState.q='';$('#prodSearch').value='';
-    $$('[data-prod-role]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.prodRole==='all')));
-    const all=$('#prodChips .chip');if(all)all.click();renderProds();
-  }
-});
+$('#prodChips').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(!b)return;prodState.cat=b.dataset.v;renderProds();});
+$('#prodGrid').addEventListener('click',e=>{if(e.target.id==='retryCatalog') cargarCatalogo();});
+async function cargarCatalogo(){
+  catalogoCargando=true;catalogoError='';renderProds();
+  if(!sb){catalogoCargando=false;catalogoError='Supabase no está configurado';renderProds();return;}
+  try{
+    const {data:rows,error}=await sb.from('productos').select('id,empresa_id,categoria_id,nombre,descripcion,precio,imagen_url,created_at').eq('activo',true).order('created_at',{ascending:false});
+    if(error) throw error;
+    const ids=[...new Set((rows||[]).map(r=>r.empresa_id).filter(Boolean))];
+    let empresas=[];
+    if(ids.length){const res=await sb.from('empresas').select('id,nombre,whatsapp,activa,estado_revision').in('id',ids).eq('activa',true).eq('estado_revision','aprobada');if(res.error)throw res.error;empresas=res.data||[];}
+    const empMap=new Map(empresas.map(e=>[String(e.id),e]));
+    const catIds=[...new Set((rows||[]).map(r=>r.categoria_id).filter(v=>v!==null&&v!==undefined))];
+    let cats=[];
+    if(catIds.length){const res=await sb.from('categorias').select('id,nombre').in('id',catIds);if(res.error)throw res.error;cats=res.data||[];}
+    const catMap=new Map(cats.map(c=>[String(c.id),String(c.nombre||'')]));
+    catalogoProductos=(rows||[]).filter(r=>empMap.has(String(r.empresa_id))).map(r=>{
+      const empresa=empMap.get(String(r.empresa_id));
+      const categoria=catMap.get(String(r.categoria_id))||'Confección';
+      return {id:r.id,n:r.nombre||'Producto textil',by:empresa.nombre||'Empresa',whatsapp:empresa.whatsapp||'',c:slugCategoria(categoria),tag:categoria,descripcion:r.descripcion||'',precio:r.precio,imagen_url:r.imagen_url||''};
+    });
+    catalogoCargando=false;renderProds();
+  }catch(err){console.error('No se pudo cargar el catálogo desde Supabase:',err);catalogoCargando=false;catalogoError=String(err?.message||'Error de conexión');renderProds();}
+}
 
 /* =========================================================
    OPORTUNIDADES
@@ -1405,7 +1351,7 @@ document.addEventListener('click',e=>{
     const company = directorioEmpresas.find(x=>String(x.id)===String(pf.dataset.profile));
     if(!company) return;
     if(pf.dataset.ownerProfile) cerrar('empDlg');
-    const roleLabel = company.r==='productor'?'Productor':company.r==='comprador'?'Comprador':'Proveedor';
+    const roleLabel = company.r==='productor'?'Fabricante o productor':company.r==='comprador'?'Comprador':'Proveedor';
     const wa = company.whatsapp ? 'https://wa.me/51'+String(company.whatsapp).replace(/\D/g,'').replace(/^51/,'') : '';
     const email = company.correo ? 'mailto:'+encodeURIComponent(company.correo) : '';
     let website = '';
@@ -1460,7 +1406,7 @@ const COL = {
   estado_revision: 'estado_revision', activa: 'activa'
 };
 const CAT = { tabla: 'categorias', id: 'id', nombre: 'nombre' };
-const TIPOS_EMPRESA = [['productor','Productor'],['proveedor','Proveedor'],['comprador','Comprador']];
+const TIPOS_EMPRESA = [['productor','Fabricante o productor'],['proveedor','Proveedor'],['comprador','Comprador']];
 const TIPO_POR_ROL = {Productor:'productor', Proveedor:'proveedor', Comprador:'comprador'};
 const REDIRECT = location.origin + location.pathname;
 
@@ -1961,6 +1907,7 @@ actualizarNav();
    ========================================================= */
 renderCats(); renderFeat(); renderDir(); renderProds(); renderOpps(); renderEvents();
 cargarDirectorio();
+cargarCatalogo();
 </script>
 </body>
 </html>
