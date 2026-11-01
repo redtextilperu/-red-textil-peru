@@ -475,6 +475,18 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
+
+/* ============ GALERÍA DE EMPRESA ============ */
+.gallery-owner{display:grid;gap:10px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gallery-item{position:relative;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
+.gallery-item img{width:100%;height:100%;object-fit:cover}
+.gallery-item button{position:absolute;right:6px;top:6px;border:0;border-radius:8px;background:rgba(7,18,56,.88);color:#fff;padding:6px 9px;font-size:.75rem}
+.gallery-public{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.gallery-public img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+.gallery-title{font-family:var(--f-display);font-size:1.05rem;color:var(--navy);font-weight:700}
+@media(max-width:480px){.gallery-grid,.gallery-public{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 </head>
 
@@ -1317,8 +1329,9 @@ document.addEventListener('click',e=>{
     let website = '';
     if(company.sitio_web){ try{ const u=new URL(/^https?:\/\//i.test(company.sitio_web)?company.sitio_web:'https://'+company.sitio_web); if(['http:','https:'].includes(u.protocol)) website=u.href; }catch(_){} }
     const image = company.logo_url && /^https:\/\//i.test(company.logo_url) ? `<img class="profile-cover" src="${escaparHTML(company.logo_url)}" alt="Imagen de ${escaparHTML(company.n)}">` : `<div class="profile-cover" style="display:grid;place-items:center;color:var(--ink-soft)">Perfil de ${escaparHTML(company.n)}</div>`;
-    $('#profileContent').innerHTML = `${image}<p class="meta">${escaparHTML(company.categoria)} · ${roleLabel}</p><p class="sub">${escaparHTML(company.t || 'Empresa registrada en Red Textil Perú.')}</p><div class="profile-meta"><div><small>Ciudad</small><strong>${escaparHTML([company.d,company.departamento].filter(Boolean).join(', ')||'No especificada')}</strong></div>${company.capacidad?`<div><small>Capacidad de producción</small><strong>${escaparHTML(company.capacidad)}</strong></div>`:''}${company.direccion?`<div><small>Dirección</small><strong>${escaparHTML(company.direccion)}</strong></div>`:''}${company.correo?`<div><small>Correo</small><strong>${escaparHTML(company.correo)}</strong></div>`:''}</div><div class="profile-actions">${wa?`<a class="btn btn-pink" href="${wa}" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>`:''}${email?`<a class="btn btn-line" href="${email}">Enviar correo</a>`:''}${website?`<a class="btn btn-line" href="${escaparHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio web</a>`:''}</div>`;
+    $('#profileContent').innerHTML = `${image}<p class="meta">${escaparHTML(company.categoria)} · ${roleLabel}</p><p class="sub">${escaparHTML(company.t || 'Empresa registrada en Red Textil Perú.')}</p><h4 class="gallery-title">Galería de trabajos</h4><div id="publicCompanyGallery" class="gallery-public"><p class="hint">Cargando fotografías…</p></div><div class="profile-meta"><div><small>Ciudad</small><strong>${escaparHTML([company.d,company.departamento].filter(Boolean).join(', ')||'No especificada')}</strong></div>${company.capacidad?`<div><small>Capacidad de producción</small><strong>${escaparHTML(company.capacidad)}</strong></div>`:''}${company.direccion?`<div><small>Dirección</small><strong>${escaparHTML(company.direccion)}</strong></div>`:''}${company.correo?`<div><small>Correo</small><strong>${escaparHTML(company.correo)}</strong></div>`:''}</div><div class="profile-actions">${wa?`<a class="btn btn-pink" href="${wa}" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>`:''}${email?`<a class="btn btn-line" href="${email}">Enviar correo</a>`:''}${website?`<a class="btn btn-line" href="${escaparHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio web</a>`:''}</div>`;
     $('#profileDlg').showModal();
+    cargarGaleriaPublica(company.id, $('#publicCompanyGallery'));
     return;
   }
 
@@ -1593,6 +1606,7 @@ function mostrarEstado(){
         ${detail('Sitio web',d.sitio_web)}
       </div>
       ${d.descripcion ? `<div class="owner-description"><small>Descripción</small><p>${escaparHTML(d.descripcion)}</p></div>` : ''}
+      ${publicado ? `<div class="gallery-owner"><strong class="gallery-title">Fotografías de mi empresa</strong><p class="owner-note">Sube hasta 5 fotos de tus productos, trabajos o instalaciones. Se publicarán automáticamente si son imágenes válidas. Máximo 5 MB por imagen.</p><label class="btn btn-line btn-sm" for="companyGalleryFiles">Agregar fotografías</label><input id="companyGalleryFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden><div id="ownerCompanyGallery" class="gallery-grid"><p class="hint">Cargando fotografías…</p></div></div>` : ''}
       <div class="owner-actions">${publicButton}${publicado ? `<button class="btn btn-line" type="button" data-edit-company>Editar mi empresa</button>` : ''}</div>
       ${publicado ? `
       <form id="editCompanyForm" class="owner-edit-form" hidden>
@@ -1617,6 +1631,9 @@ function mostrarEstado(){
     </section>` : `<section class="owner-dashboard"><h4>Tu empresa</h4><p>No encontramos una empresa vinculada a esta cuenta. Puedes completar el formulario de registro.</p></section>`;
   $('#empStatus').hidden = false;
   $('#empForm').hidden = !!d;
+  if(d && d.activa && ['aprobada','aprobado'].includes(String(d.estado_revision||'').toLowerCase())){
+    cargarGaleriaPropietario();
+  }
 }
 async function abrirEmpresa(role){
   $('#empTitle').textContent = 'Mi empresa';
@@ -1728,6 +1745,101 @@ document.addEventListener('submit',async e=>{
     console.error('No se pudo actualizar el perfil:',err);
     toast(err?.message || 'No se pudieron guardar los cambios. Revisa la configuración de Supabase.');
   }finally{ bloquear(btn,false); }
+});
+
+
+// Galería pública y privada de cada empresa (Supabase Storage).
+const GALERIA_BUCKET = 'empresa-galeria';
+function rutaGaleriaEmpresa(companyId){ return String(companyId); }
+async function listarFotosEmpresa(companyId){
+  const {data,error}=await sb.storage.from(GALERIA_BUCKET).list(rutaGaleriaEmpresa(companyId),{
+    limit:5, sortBy:{column:'created_at',order:'asc'}
+  });
+  if(error) throw error;
+  return (data||[]).filter(x=>x.name && !x.name.startsWith('.')).slice(0,5);
+}
+async function cargarGaleriaPublica(companyId, target){
+  if(!target || !sb) return;
+  try{
+    const files=await listarFotosEmpresa(companyId);
+    if(!files.length){target.innerHTML='<p class="hint">Esta empresa aún no ha publicado fotografías.</p>';return;}
+    target.innerHTML=files.map(file=>{
+      const {data}=sb.storage.from(GALERIA_BUCKET).getPublicUrl(`${rutaGaleriaEmpresa(companyId)}/${file.name}`);
+      return `<img src="${escaparHTML(data.publicUrl)}" alt="Fotografía de trabajos de empresa" loading="lazy">`;
+    }).join('');
+  }catch(err){
+    console.warn('No se pudo cargar la galería pública:',err);
+    target.innerHTML='<p class="hint">Las fotografías estarán disponibles cuando se configure la galería.</p>';
+  }
+}
+async function cargarGaleriaPropietario(){
+  const target=$('#ownerCompanyGallery');
+  if(!target || !miEmpresa?.id || !sb) return;
+  try{
+    const files=await listarFotosEmpresa(miEmpresa.id);
+    if(!files.length){target.innerHTML='<p class="hint">Todavía no has agregado fotografías.</p>';return;}
+    target.innerHTML=files.map(file=>{
+      const {data}=sb.storage.from(GALERIA_BUCKET).getPublicUrl(`${rutaGaleriaEmpresa(miEmpresa.id)}/${file.name}`);
+      return `<div class="gallery-item"><img src="${escaparHTML(data.publicUrl)}" alt="Fotografía de mi empresa" loading="lazy"><button type="button" data-delete-gallery="${escaparHTML(file.name)}">Eliminar</button></div>`;
+    }).join('');
+  }catch(err){
+    console.warn('No se pudo cargar la galería del propietario:',err);
+    target.innerHTML='<p class="hint">No se pudo cargar la galería. Verifica la configuración de almacenamiento.</p>';
+  }
+}
+async function subirFotosEmpresa(input){
+  if(!miEmpresa?.id || !sb || !input.files?.length) return;
+  const target=$('#ownerCompanyGallery');
+  const files=Array.from(input.files);
+  try{
+    const actuales=await listarFotosEmpresa(miEmpresa.id);
+    if(actuales.length + files.length > 5){
+      toast(`Puedes tener hasta 5 fotografías. Ya tienes ${actuales.length}.`);
+      input.value=''; return;
+    }
+    for(const file of files){
+      if(!['image/jpeg','image/png','image/webp'].includes(file.type)){
+        toast('Solo se permiten imágenes JPG, PNG o WEBP.'); input.value=''; return;
+      }
+      if(file.size > 5*1024*1024){
+        toast('Cada fotografía debe pesar máximo 5 MB.'); input.value=''; return;
+      }
+    }
+    const userId=sesion?.user?.id;
+    if(!userId) throw new Error('Tu sesión venció. Inicia sesión nuevamente.');
+    const {data:authData}=await sb.auth.getUser();
+    if(!authData?.user) throw new Error('Tu sesión venció. Inicia sesión nuevamente.');
+    const base=`${rutaGaleriaEmpresa(miEmpresa.id)}/`;
+    for(const file of files){
+      const ext=file.type==='image/jpeg'?'jpg':file.type==='image/png'?'png':'webp';
+      const name=`${crypto.randomUUID()}.${ext}`;
+      const {error}=await sb.storage.from(GALERIA_BUCKET).upload(base+name,file,{
+        cacheControl:'3600',upsert:false,contentType:file.type
+      });
+      if(error) throw error;
+    }
+    await cargarGaleriaPropietario();
+    toast('Fotografías publicadas en el perfil de tu empresa.');
+  }catch(err){
+    console.error('Error al subir fotografías:',err);
+    toast(err?.message || 'No se pudieron subir las fotografías. Revisa el almacenamiento de Supabase.');
+    await cargarGaleriaPropietario();
+  }finally{input.value='';}
+}
+async function eliminarFotoEmpresa(name){
+  if(!miEmpresa?.id || !sb || !name || name.includes('/') || name.includes('..')) return;
+  if(!confirm('¿Eliminar esta fotografía de tu empresa?')) return;
+  const {error}=await sb.storage.from(GALERIA_BUCKET).remove([`${rutaGaleriaEmpresa(miEmpresa.id)}/${name}`]);
+  if(error){toast(error.message || 'No se pudo eliminar la fotografía.');return;}
+  await cargarGaleriaPropietario();
+  toast('Fotografía eliminada.');
+}
+document.addEventListener('change',e=>{
+  if(e.target?.id==='companyGalleryFiles') subirFotosEmpresa(e.target);
+});
+document.addEventListener('click',e=>{
+  const del=e.target.closest('[data-delete-gallery]');
+  if(del) eliminarFotoEmpresa(del.dataset.deleteGallery);
 });
 
 async function cerrarSesion(){
