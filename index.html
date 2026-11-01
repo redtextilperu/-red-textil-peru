@@ -988,14 +988,15 @@ $$('#nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('op
    ========================================================= */
 function renderCats(){
   $('#catGrid').innerHTML = CATS.map((c,i)=>{
-    const n = COMPANIES.filter(x=>x.c===c.id).length;
+    const n = directorioEmpresas.filter(x=>x.c===c.id).length;
     return `<button class="cat" data-cat="${c.id}" aria-label="${c.name}: ver empresas">
       ${photo(c.id,c.id,i)}
       <span class="go">${svgIco('M5 12h14M13 6l6 6-6 6',2.2)}</span>
-      <span class="tx"><h3>${c.name}</h3><span class="n">${n} ${n===1?'perfil':'perfiles'} de ejemplo</span></span>
+      <span class="tx"><h3>${c.name}</h3><span class="n">${n} ${n===1?'empresa':'empresas'}</span></span>
     </button>`;
   }).join('');
 }
+
 $('#catGrid').addEventListener('click',e=>{
   const b = e.target.closest('.cat'); if(!b) return;
   setDir({cat:b.dataset.cat, role:'all', q:''});
@@ -1026,6 +1027,8 @@ function renderFeat(){
 /* =========================================================
    DIRECTORIO
    ========================================================= */
+let directorioEmpresas = [];
+let directorioCargando = true;
 const dirState = {cat:'todas', role:'all', q:''};
 function setDir(p){
   Object.assign(dirState,p);
@@ -1036,28 +1039,92 @@ function setDir(p){
 }
 function renderDir(){
   const q = norm(dirState.q.trim());
-  const list = COMPANIES.filter(x=>{
+  const list = directorioEmpresas.filter(x=>{
     if(dirState.cat!=='todas' && x.c!==dirState.cat) return false;
     if(dirState.role!=='all' && x.r!==dirState.role) return false;
     if(!q) return true;
     return norm([x.n,x.t,x.d,catName(x.c),x.r,x.tags.join(' ')].join(' ')).includes(q);
   });
-  $('#count').textContent = `${list.length} ${list.length===1?'empresa':'empresas'}`;
-  if(!list.length){
-    $('#dirList').innerHTML = `<div class="empty"><p>No hay empresas con ese filtro todavía.</p><button class="btn btn-pink btn-sm" data-open="join">Registrar mi empresa</button></div>`;
+  $('#count').textContent = directorioCargando ? 'Cargando empresas…' : `${list.length} ${list.length===1?'empresa':'empresas'}`;
+  if(directorioCargando){
+    $('#dirList').innerHTML = '<div class="empty"><p>Estamos cargando las empresas aprobadas…</p></div>';
     return;
   }
-  $('#dirList').innerHTML = list.map((x,i)=>`
-    <article class="co">
+  if(!list.length){
+    $('#dirList').innerHTML = `<div class="empty"><p>No hay empresas aprobadas con ese filtro todavía.</p><button class="btn btn-pink btn-sm" data-open="join">Registrar mi empresa</button></div>`;
+    return;
+  }
+  $('#dirList').innerHTML = list.map((x,i)=>{
+    const contacto = x.whatsapp
+      ? `<a class="go" href="https://wa.me/51${String(x.whatsapp).replace(/\\D/g,'')}" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>`
+      : x.correo ? `<a class="go" href="mailto:${encodeURIComponent(x.correo)}">Contactar por correo</a>` : '';
+    const tipo = x.r==='productor'?'Fabricante':x.r==='comprador'?'Comprador':'Proveedor';
+    return `<article class="co">
       <div class="th">${photo(x.c,x.c,i+1)}</div>
       <div>
-        <h3>${x.n}<span class="ex">Ejemplo</span></h3>
-        <p class="meta">${catName(x.c)} · ${x.r==='productor'?'Fabricante':'Proveedor'} · ${x.d}</p>
-        <p class="ds">${x.t}</p>
-        <div class="tags">${x.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-        <button class="go" data-contact="${x.n}">Contactar empresa</button>
+        <h3>${escapeHTML(x.n)}</h3>
+        <p class="meta">${escapeHTML(catName(x.c))} · ${tipo} · ${escapeHTML(x.d)}</p>
+        <p class="ds">${escapeHTML(x.t || 'Empresa registrada en Red Textil Perú.')}</p>
+        <div class="tags">${x.tags.map(t=>`<span class="tag">${escapeHTML(t)}</span>`).join('')}</div>
+        ${contacto}
       </div>
-    </article>`).join('');
+    </article>`;
+  }).join('');
+}
+function escapeHTML(value){
+  return String(value ?? '').replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function slugCategoria(nombre){
+  const n = norm(String(nombre||'')).trim();
+  if(n.includes('confeccion')) return 'confeccion';
+  if(n.includes('deportiva')) return 'deportiva';
+  if(n.includes('sublimacion')) return 'sublimacion';
+  if(n==='dtf' || n.includes('dtf')) return 'dtf';
+  if(n.includes('telas') || n.includes('insumos')) return 'telas';
+  if(n.includes('merch')) return 'merch';
+  if(n.includes('maquinaria')) return 'maquinaria';
+  if(n.includes('uniformes')) return 'uniformes';
+  return 'confeccion';
+}
+async function cargarDirectorio(){
+  if(!sb){
+    directorioCargando = false;
+    $('#dirList').innerHTML = '<div class="empty"><p>No se pudo conectar con el directorio. Inténtalo más tarde.</p></div>';
+    $('#count').textContent = 'Sin conexión';
+    return;
+  }
+  directorioCargando = true; renderDir();
+  try{
+    const [catsRes, empresasRes] = await Promise.all([
+      sb.from('categorias').select('id,nombre'),
+      sb.from('empresas')
+        .select('id,nombre,descripcion,ciudad,departamento,whatsapp,correo,tipo_empresa,categoria_id')
+        .eq('activa',true).eq('estado_revision','aprobada').order('nombre')
+    ]);
+    if(catsRes.error) throw catsRes.error;
+    if(empresasRes.error) throw empresasRes.error;
+    const catMap = new Map((catsRes.data||[]).map(c=>[String(c.id),slugCategoria(c.nombre)]));
+    directorioEmpresas = (empresasRes.data||[]).map(row=>({
+      n:row.nombre || 'Empresa sin nombre',
+      c:catMap.get(String(row.categoria_id)) || 'confeccion',
+      r:row.tipo_empresa || 'proveedor',
+      d:[row.ciudad,row.departamento].filter(Boolean).join(', ') || 'Perú',
+      t:row.descripcion || '',
+      tags:[row.tipo_empresa==='productor'?'Producción':row.tipo_empresa==='comprador'?'Compras':'Suministros'],
+      whatsapp:row.whatsapp || '',
+      correo:row.correo || ''
+    }));
+    directorioCargando = false;
+    renderCats();
+    renderDir();
+  }catch(error){
+    console.error('No se pudo cargar el directorio de Supabase:',error);
+    directorioCargando = false;
+    directorioEmpresas = [];
+    $('#count').textContent = 'No disponible';
+    $('#dirList').innerHTML = '<div class="empty"><p>No pudimos cargar las empresas en este momento. Vuelve a intentarlo más tarde.</p></div>';
+    renderCats();
+  }
 }
 chipRow($('#dirChips'), [{id:'todas',name:'Todas'},...CATS], 'todas', v=>{dirState.cat=v;renderDir()});
 $('#q').addEventListener('input',e=>{dirState.q=e.target.value;renderDir()});
@@ -1547,6 +1614,7 @@ actualizarNav();
    INICIO
    ========================================================= */
 renderCats(); renderFeat(); renderDir(); renderProds(); renderOpps(); renderEvents();
+cargarDirectorio();
 </script>
 </body>
 </html>
