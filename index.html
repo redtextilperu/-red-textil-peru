@@ -443,6 +443,21 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
 .showpw input{width:18px;height:18px;accent-color:var(--electric)}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .status{border:1px solid var(--line);border-radius:var(--r-m);padding:18px;background:var(--paper);margin-bottom:14px}
+.owner-dashboard{display:grid;gap:15px}
+.owner-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.owner-head h4{font-family:var(--f-display);font-size:1.25rem;color:var(--navy);margin-top:10px}
+.owner-head p,.owner-status-text,.owner-note{color:var(--ink-soft);font-size:.9rem;line-height:1.5;margin-top:6px}
+.owner-logo{width:76px;height:76px;object-fit:contain;border:1px solid var(--line);border-radius:14px;background:#fff;padding:5px}
+.owner-details{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.owner-detail{padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;min-width:0}
+.owner-detail small,.owner-description small{display:block;color:var(--ink-soft);font-size:.75rem;margin-bottom:4px}
+.owner-detail strong{font-size:.9rem;overflow-wrap:anywhere}
+.owner-description{padding:12px;border-radius:11px;background:#fff;border:1px solid var(--line)}
+.owner-description p{font-size:.9rem;line-height:1.5}
+.owner-actions{display:flex;flex-wrap:wrap;gap:9px}
+.owner-note{font-size:.78rem}
+@media(max-width:480px){.owner-details{grid-template-columns:1fr}.owner-head{align-items:center}}
+
 .status b{display:block;font-family:var(--f-display);font-size:1.125rem;color:var(--navy)}
 .status p{margin-top:8px;color:var(--ink-soft);font-size:.9688rem}
 .badge{display:inline-block;margin-top:10px;font-size:.8125rem;font-weight:700;padding:4px 12px;border-radius:999px;background:var(--pink-soft);color:var(--pink-deep)}
@@ -1276,6 +1291,7 @@ document.addEventListener('click',e=>{
   if(pf){
     const company = directorioEmpresas.find(x=>String(x.id)===String(pf.dataset.profile));
     if(!company) return;
+    if(pf.dataset.ownerProfile) cerrar('empDlg');
     const roleLabel = company.r==='productor'?'Fabricante o productor':company.r==='comprador'?'Comprador':'Proveedor';
     const wa = company.whatsapp ? 'https://wa.me/51'+String(company.whatsapp).replace(/\D/g,'').replace(/^51/,'') : '';
     const email = company.correo ? 'mailto:'+encodeURIComponent(company.correo) : '';
@@ -1492,7 +1508,11 @@ async function trasIngreso(){ await abrirEmpresa(rolPendiente); }
 async function cargarMiEmpresa(){
   miEmpresa = undefined;
   if(!sb || !sesion) return;
-  const cols = [COL.nombre, COL.estado_revision, COL.activa].join(',');
+  const cols = [
+    'id','nombre','ruc','representante','tipo_empresa','categoria_id',
+    'ciudad','departamento','direccion','whatsapp','correo','descripcion',
+    'logo_url','sitio_web','capacidad_produccion','estado_revision','activa','verificada'
+  ].join(',');
   const {data, error} = await sb.from(COL.tabla).select(cols).eq(COL.owner, sesion.user.id).maybeSingle();
   miEmpresa = error ? {error:true} : (data || null);
 }
@@ -1513,16 +1533,51 @@ async function cargarCategorias(){
 }
 function mostrarEstado(){
   const d = (miEmpresa && !miEmpresa.error) ? miEmpresa : null;
-  const est = d ? String(d[COL.estado_revision] || '').toLowerCase() : 'pendiente';
-  const badge = $('#empStBadge'); badge.className = 'badge';
-  $('#empStName').textContent = d ? String(d[COL.nombre] || 'Tu empresa') : 'Tu empresa';
-  let etiqueta, texto;
-  if(est === 'pendiente'){ etiqueta = 'Pendiente de aprobación'; texto = 'Recibimos los datos de tu empresa. Los revisaremos antes de publicarla en el directorio. Puedes volver a iniciar sesión para ver el estado.'; }
-  else if(est === 'aprobada' || est === 'aprobado'){ badge.classList.add('ok'); etiqueta = 'Aprobada'; texto = 'Tu empresa fue aprobada.'; }
-  else if(est === 'rechazada' || est === 'rechazado'){ etiqueta = 'No aprobada'; texto = 'Tu solicitud no fue aprobada.'; }
-  else { etiqueta = 'Estado: ' + est; texto = ''; }
-  badge.textContent = etiqueta; $('#empStText').textContent = texto;
-  $('#empStatus').hidden = false; $('#empForm').hidden = true;
+  const est = d ? String(d.estado_revision || '').toLowerCase() : 'pendiente';
+  const publicado = !!(d && d.activa && (est === 'aprobada' || est === 'aprobado'));
+  const etiqueta = publicado ? 'Publicada en el directorio' :
+    est === 'pendiente' ? 'Pendiente de aprobación' :
+    (est === 'rechazada' || est === 'rechazado') ? 'Requiere revisión' : 'Estado: ' + est;
+  const badgeClass = publicado ? 'badge ok' : 'badge';
+  const tipo = d?.tipo_empresa === 'productor' ? 'Fabricante o productor' :
+    d?.tipo_empresa === 'comprador' ? 'Comprador' : 'Proveedor';
+  const cat = CATS.find(c=>String(c.id)===String(d?.categoria_id));
+  const catNameText = cat ? cat.name : 'Categoría registrada';
+  const detail = (label,value)=>value ? `<div class="owner-detail"><small>${label}</small><strong>${escaparHTML(value)}</strong></div>` : '';
+  const publicButton = publicado && d?.id
+    ? `<button class="btn btn-pink" type="button" data-profile="${escaparHTML(d.id)}" data-owner-profile="1">Ver mi perfil público</button>`
+    : '';
+  const statusText = publicado
+    ? 'Tu empresa está visible para compradores, fabricantes y proveedores que visitan Red Textil Perú.'
+    : est === 'pendiente'
+      ? 'Recibimos los datos de tu empresa. La publicaremos cuando termine la revisión administrativa.'
+      : (est === 'rechazada' || est === 'rechazado')
+        ? 'Tu solicitud necesita revisión. Comunícate con el equipo de Red Textil Perú para conocer qué debes corregir.'
+        : 'Aquí puedes consultar la información y el estado de tu empresa.';
+  $('#empStatus').innerHTML = d ? `
+    <section class="owner-dashboard">
+      <div class="owner-head">
+        <div><span class="${badgeClass}">${etiqueta}</span><h4>${escaparHTML(d.nombre || 'Mi empresa')}</h4>
+        <p>${escaparHTML(catNameText)} · ${escaparHTML(tipo)}${d.ciudad ? ' · '+escaparHTML(d.ciudad) : ''}</p></div>
+        ${d.logo_url && /^https:\/\//i.test(d.logo_url) ? `<img class="owner-logo" src="${escaparHTML(d.logo_url)}" alt="Logotipo de ${escaparHTML(d.nombre)}">` : ''}
+      </div>
+      <p class="owner-status-text">${statusText}</p>
+      <div class="owner-details">
+        ${detail('RUC',d.ruc)}
+        ${detail('Representante',d.representante)}
+        ${detail('Ciudad', [d.ciudad,d.departamento].filter(Boolean).join(', '))}
+        ${detail('Dirección',d.direccion)}
+        ${detail('WhatsApp',d.whatsapp)}
+        ${detail('Correo de contacto',d.correo)}
+        ${detail('Capacidad de producción',d.capacidad_produccion)}
+        ${detail('Sitio web',d.sitio_web)}
+      </div>
+      ${d.descripcion ? `<div class="owner-description"><small>Descripción</small><p>${escaparHTML(d.descripcion)}</p></div>` : ''}
+      <div class="owner-actions">${publicButton}</div>
+      ${publicado ? `<p class="owner-note">Para mantener la seguridad de tu perfil, los cambios de datos publicados se habilitarán mediante un flujo de actualización y revisión.</p>` : ''}
+    </section>` : `<section class="owner-dashboard"><h4>Tu empresa</h4><p>No encontramos una empresa vinculada a esta cuenta. Puedes completar el formulario de registro.</p></section>`;
+  $('#empStatus').hidden = false;
+  $('#empForm').hidden = !!d;
 }
 async function abrirEmpresa(role){
   const m = $('#empMsg');
