@@ -895,6 +895,18 @@ const IMG = {
   uniformes:   P('1782828152662-cb3ba2eff30d'), // telares en fábrica
   telar:       P('1758270804188-8ca0b6d254bc')  // telares con carrete grande
 };
+// Fotografías locales exclusivas para las ocho tarjetas de categorías.
+// Se guardan en el repositorio para que GitHub Pages las sirva sin depender de terceros.
+const CAT_IMG = {
+  confeccion:  'assets/categorias/confeccion.webp',
+  deportiva:   'assets/categorias/deportiva.webp',
+  sublimacion: 'assets/categorias/sublimacion.webp',
+  dtf:         'assets/categorias/dtf.webp',
+  telas:       'assets/categorias/telas.webp',
+  merch:       'assets/categorias/merchandising.webp',
+  maquinaria:  'assets/categorias/maquinaria.webp',
+  uniformes:   'assets/categorias/uniformes.webp'
+};
 
 /* =========================================================
    DATOS DE EJEMPLO (se reemplazarán por base de datos luego)
@@ -979,9 +991,9 @@ const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''
 const GRAD = [['#0A1B4D','#1F4BFF'],['#1F4BFF','#D4107F'],['#D4107F','#0A1B4D'],['#0A1B4D','#7CD3F7']];
 
 /* Imagen con textura de respaldo */
-function photo(slot, catId, i=0){
+function photo(slot, catId, i=0, sourceMap=IMG){
   const g = GRAD[i % GRAD.length];
-  const url = IMG[slot];
+  const url = sourceMap[slot];
   return `<span class="ph" style="--g1:${g[0]};--g2:${g[1]}">${catId?svgIco(catIco(catId),1.4):''}${url?`<img src="${url}" alt="" loading="lazy" decoding="async" onload="this.classList.add('on')" onerror="this.remove()">`:''}</span>`;
 }
 
@@ -1033,7 +1045,7 @@ function renderCats(){
   $('#catGrid').innerHTML = CATS.map((c,i)=>{
     const n = directorioEmpresas.filter(x=>x.c===c.id).length;
     return `<button class="cat" data-cat="${c.id}" aria-label="${c.name}: ver empresas">
-      ${photo(c.id,c.id,i)}
+      ${photo(c.id,c.id,i,CAT_IMG)}
       <span class="go">${svgIco('M5 12h14M13 6l6 6-6 6',2.2)}</span>
       <span class="tx"><h3>${c.name}</h3><span class="n">${n} ${n===1?'empresa':'empresas'} registradas</span></span>
     </button>`;
