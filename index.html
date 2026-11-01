@@ -1540,6 +1540,7 @@ async function cargarCategorias(){
 }
 function mostrarEstado(){
   const d = (miEmpresa && !miEmpresa.error) ? miEmpresa : null;
+  $('#empTitle').textContent = d ? 'Mi empresa' : 'Registra tu empresa';
   const est = d ? String(d.estado_revision || '').toLowerCase() : 'pendiente';
   const publicado = !!(d && d.activa && (est === 'aprobada' || est === 'aprobado'));
   const etiqueta = publicado ? 'Publicada en el directorio' :
@@ -1606,12 +1607,14 @@ function mostrarEstado(){
   $('#empForm').hidden = !!d;
 }
 async function abrirEmpresa(role){
+  $('#empTitle').textContent = 'Mi empresa';
   const m = $('#empMsg');
   avisar(m,'',''); $('#empStatus').hidden = true; $('#empForm').hidden = true;
   $('#empWho').textContent = sesion && sesion.user ? 'Sesión: ' + sesion.user.email : '';
   if(!$('#empDlg').open) $('#empDlg').showModal();
   await cargarMiEmpresa();
   if(miEmpresa && !miEmpresa.error){ mostrarEstado(); return; }
+  if(!miEmpresa || miEmpresa.error) $('#empTitle').textContent = 'Registra tu empresa';
   if(miEmpresa && miEmpresa.error) avisar(m,'info','No pudimos consultar si tu cuenta ya tiene una empresa. Si ya la registraste, no necesitas volver a hacerlo.');
   $('#empForm').hidden = false;
   if(role && TIPO_POR_ROL[role]) $('#e-tipo').value = TIPO_POR_ROL[role];
