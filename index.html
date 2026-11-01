@@ -231,6 +231,16 @@ section{padding:88px 0}
 .co .meta{font-size:.875rem;color:var(--ink-soft);margin-top:2px}
 .co .ds{font-size:.9375rem;margin-top:8px}
 .co .go{margin-top:12px;padding:0;border:0;background:none;font-weight:700;font-size:.9375rem;color:var(--electric);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--pink);text-decoration-thickness:2px}
+.co .profile-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;margin-right:16px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--navy);font-weight:700;font-size:.875rem}
+.co .profile-btn:hover{border-color:var(--electric);color:var(--electric)}
+.profile-cover{width:100%;height:190px;object-fit:cover;background:var(--paper);border-radius:14px;margin:8px 0 18px}
+.profile-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.profile-meta div{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.profile-meta small{display:block;color:var(--ink-soft);font-size:.75rem;margin-bottom:4px}
+.profile-meta strong{font-size:.9375rem}
+.profile-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.profile-actions .btn{flex:1 1 180px}
+@media(max-width:480px){.profile-meta{grid-template-columns:1fr}.profile-cover{height:150px}}
 .empty{grid-column:1/-1;padding:40px 24px;text-align:center;border:2px dashed var(--line);border-radius:var(--r-m);color:var(--ink-soft);background:var(--white)}
 .empty .btn{margin-top:16px}
 @media (max-width:860px){.dir-list{grid-template-columns:1fr}.count{margin-left:0}}
@@ -820,6 +830,17 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
   </div>
 </dialog>
 
+<!-- ============ PERFIL PÚBLICO DE EMPRESA ============ -->
+<dialog id="profileDlg" aria-labelledby="profileTitle">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h3 id="profileTitle">Perfil de empresa</h3>
+      <button type="button" class="x" id="profileClose" aria-label="Cerrar">✕</button>
+    </div>
+    <div id="profileContent"></div>
+  </div>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
@@ -1069,13 +1090,15 @@ function renderDir(){
   $('#dirList').innerHTML = list.map((x,i)=>{
     const contact = x.whatsapp ? `https://wa.me/51${String(x.whatsapp).replace(/\D/g,'').replace(/^51/,'')}` : (x.correo ? `mailto:${encodeURIComponent(x.correo)}` : '');
     const contactLabel = x.whatsapp ? 'Contactar por WhatsApp' : (x.correo ? 'Contactar por correo' : 'Contacto no disponible');
+    const logo = x.logo_url && /^https:\/\//i.test(x.logo_url) ? `<img src="${escaparHTML(x.logo_url)}" alt="Logo de ${escaparHTML(x.n)}" style="width:100%;height:100%;object-fit:cover">` : photo(x.c,x.c,i+1);
     return `<article class="co">
-      <div class="th">${photo(x.c,x.c,i+1)}</div>
+      <div class="th">${logo}</div>
       <div>
         <h3>${escaparHTML(x.n)}</h3>
         <p class="meta">${escaparHTML(x.categoria)} · ${x.r==='productor'?'Fabricante':x.r==='comprador'?'Comprador':'Proveedor'} · ${escaparHTML(x.d || x.departamento || '')}</p>
         <p class="ds">${escaparHTML(x.t || 'Empresa registrada en Red Textil Perú.')}</p>
         <div class="tags">${x.tags.map(t=>`<span class="tag">${escaparHTML(t)}</span>`).join('')}</div>
+        <button class="profile-btn" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil de empresa</button>
         ${contact ? `<a class="go" href="${contact}" target="_blank" rel="noopener noreferrer">${contactLabel}</a>` : `<span class="go">${contactLabel}</span>`}
       </div>
     </article>`;
@@ -1087,7 +1110,7 @@ async function cargarDirectorio(){
   try{
     const [{data:cats,error:catError},{data:rows,error}] = await Promise.all([
       sb.from('categorias').select('id,nombre'),
-      sb.from('empresas').select('id,nombre,descripcion,ciudad,departamento,whatsapp,correo,tipo_empresa,categoria_id,logo_url,sitio_web').eq('activa',true).eq('estado_revision','aprobada').order('nombre')
+      sb.from('empresas').select('id,nombre,descripcion,ciudad,departamento,whatsapp,correo,tipo_empresa,categoria_id,logo_url,sitio_web,direccion,capacidad_produccion').eq('activa',true).eq('estado_revision','aprobada').order('nombre')
     ]);
     if(error) throw error;
     if(catError) throw catError;
@@ -1095,7 +1118,7 @@ async function cargarDirectorio(){
     directorioEmpresas = (rows||[]).map(row=>{
       const categoria = catById.get(String(row.categoria_id)) || 'Confección';
       const c = slugCategoria(categoria);
-      return {n:row.nombre||'Empresa textil',c,r:row.tipo_empresa||'proveedor',d:row.ciudad||'',departamento:row.departamento||'',t:row.descripcion||'',categoria,whatsapp:row.whatsapp||'',correo:row.correo||'',tags:[]};
+      return {id:row.id,n:row.nombre||'Empresa textil',c,r:row.tipo_empresa||'proveedor',d:row.ciudad||'',departamento:row.departamento||'',t:row.descripcion||'',categoria,whatsapp:row.whatsapp||'',correo:row.correo||'',logo_url:row.logo_url||'',sitio_web:row.sitio_web||'',direccion:row.direccion||'',capacidad:row.capacidad_produccion||'',tags:[]};
     });
     directorioCargando = false; renderDir(); renderCats();
   }catch(err){
@@ -1249,6 +1272,21 @@ document.addEventListener('click',e=>{
     return;
   }
 
+  const pf = e.target.closest('[data-profile]');
+  if(pf){
+    const company = directorioEmpresas.find(x=>String(x.id)===String(pf.dataset.profile));
+    if(!company) return;
+    const roleLabel = company.r==='productor'?'Fabricante o productor':company.r==='comprador'?'Comprador':'Proveedor';
+    const wa = company.whatsapp ? 'https://wa.me/51'+String(company.whatsapp).replace(/\D/g,'').replace(/^51/,'') : '';
+    const email = company.correo ? 'mailto:'+encodeURIComponent(company.correo) : '';
+    let website = '';
+    if(company.sitio_web){ try{ const u=new URL(/^https?:\/\//i.test(company.sitio_web)?company.sitio_web:'https://'+company.sitio_web); if(['http:','https:'].includes(u.protocol)) website=u.href; }catch(_){} }
+    const image = company.logo_url && /^https:\/\//i.test(company.logo_url) ? `<img class="profile-cover" src="${escaparHTML(company.logo_url)}" alt="Imagen de ${escaparHTML(company.n)}">` : `<div class="profile-cover" style="display:grid;place-items:center;color:var(--ink-soft)">Perfil de ${escaparHTML(company.n)}</div>`;
+    $('#profileContent').innerHTML = `${image}<p class="meta">${escaparHTML(company.categoria)} · ${roleLabel}</p><p class="sub">${escaparHTML(company.t || 'Empresa registrada en Red Textil Perú.')}</p><div class="profile-meta"><div><small>Ciudad</small><strong>${escaparHTML([company.d,company.departamento].filter(Boolean).join(', ')||'No especificada')}</strong></div>${company.capacidad?`<div><small>Capacidad de producción</small><strong>${escaparHTML(company.capacidad)}</strong></div>`:''}${company.direccion?`<div><small>Dirección</small><strong>${escaparHTML(company.direccion)}</strong></div>`:''}${company.correo?`<div><small>Correo</small><strong>${escaparHTML(company.correo)}</strong></div>`:''}</div><div class="profile-actions">${wa?`<a class="btn btn-pink" href="${wa}" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>`:''}${email?`<a class="btn btn-line" href="${email}">Enviar correo</a>`:''}${website?`<a class="btn btn-line" href="${escaparHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio web</a>`:''}</div>`;
+    $('#profileDlg').showModal();
+    return;
+  }
+
   const ct = e.target.closest('[data-contact]');
   if(ct){
     openDlg({title:'Contactar empresa', sub:ct.dataset.contact, btn:'Enviar mensaje', role:'Comprador', msg:true, placeholder:'Escribe tu consulta'});
@@ -1259,6 +1297,8 @@ document.addEventListener('click',e=>{
   if(en){ toast('Anotado (demo): te avisaremos cuando abra "'+en.dataset.enroll+'".'); }
 });
 $('#dlgClose').onclick = ()=>dlg.close();
+$('#profileClose').onclick = ()=>$('#profileDlg').close();
+$('#profileDlg').addEventListener('click',e=>{ if(e.target===$('#profileDlg')) $('#profileDlg').close(); });
 dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
 form.addEventListener('submit',e=>{
   e.preventDefault();
