@@ -456,6 +456,13 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
 .owner-description p{font-size:.9rem;line-height:1.5}
 .owner-actions{display:flex;flex-wrap:wrap;gap:9px}
 .owner-note{font-size:.78rem}
+.owner-edit-form{display:grid;gap:12px;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.owner-edit-form h5{font-family:var(--f-display);font-size:1.05rem;color:var(--navy)}
+.owner-edit-form label{display:grid;gap:5px;font-size:.82rem;color:var(--ink-soft);font-weight:600}
+.owner-edit-form input,.owner-edit-form textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 11px;background:#fff;color:var(--ink);font:inherit}
+.owner-edit-form textarea{min-height:95px;resize:vertical}
+.owner-edit-form .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
 @media(max-width:480px){.owner-details{grid-template-columns:1fr}.owner-head{align-items:center}}
 
 .status b{display:block;font-family:var(--f-display);font-size:1.125rem;color:var(--navy)}
@@ -1573,8 +1580,27 @@ function mostrarEstado(){
         ${detail('Sitio web',d.sitio_web)}
       </div>
       ${d.descripcion ? `<div class="owner-description"><small>Descripción</small><p>${escaparHTML(d.descripcion)}</p></div>` : ''}
-      <div class="owner-actions">${publicButton}</div>
-      ${publicado ? `<p class="owner-note">Para mantener la seguridad de tu perfil, los cambios de datos publicados se habilitarán mediante un flujo de actualización y revisión.</p>` : ''}
+      <div class="owner-actions">${publicButton}${publicado ? `<button class="btn btn-line" type="button" data-edit-company>Editar mi empresa</button>` : ''}</div>
+      ${publicado ? `
+      <form id="editCompanyForm" class="owner-edit-form" hidden>
+        <h5>Editar información comercial</h5>
+        <p class="owner-note">Estos datos se actualizarán automáticamente. Los cambios de RUC, representante, nombre comercial, categoría o propietario requieren revisión administrativa.</p>
+        <label>Descripción<textarea name="descripcion" maxlength="600">${escaparHTML(d.descripcion||'')}</textarea></label>
+        <div class="two">
+          <label>Ciudad<input name="ciudad" maxlength="60" value="${escaparHTML(d.ciudad||'')}"></label>
+          <label>Departamento<input name="departamento" maxlength="60" value="${escaparHTML(d.departamento||'')}"></label>
+        </div>
+        <label>Dirección<input name="direccion" maxlength="150" value="${escaparHTML(d.direccion||'')}"></label>
+        <div class="two">
+          <label>WhatsApp<input name="whatsapp" maxlength="20" value="${escaparHTML(d.whatsapp||'')}"></label>
+          <label>Correo<input name="correo" type="email" maxlength="120" value="${escaparHTML(d.correo||'')}"></label>
+        </div>
+        <label>Sitio web<input name="sitio_web" maxlength="200" value="${escaparHTML(d.sitio_web||'')}" placeholder="https://"></label>
+        <label>Capacidad de producción<input name="capacidad_produccion" maxlength="160" value="${escaparHTML(d.capacidad_produccion||'')}"></label>
+        <label>URL del logotipo<input name="logo_url" maxlength="500" value="${escaparHTML(d.logo_url||'')}" placeholder="https://..."></label>
+        <div class="owner-actions"><button class="btn btn-pink" type="submit">Guardar cambios</button><button class="btn btn-line" type="button" data-cancel-edit>Cancelar</button></div>
+        <p class="owner-note">Al guardar, los cambios permitidos se publicarán automáticamente y quedará un registro de actividad para administración.</p>
+      </form>` : ''}
     </section>` : `<section class="owner-dashboard"><h4>Tu empresa</h4><p>No encontramos una empresa vinculada a esta cuenta. Puedes completar el formulario de registro.</p></section>`;
   $('#empStatus').hidden = false;
   $('#empForm').hidden = !!d;
@@ -1649,6 +1675,44 @@ $('#empForm').addEventListener('submit', async e=>{
   }catch(err){
     avisar(m,'err',errDB(err || {}));
   }finally{ bloquear(btn, false); }
+});
+
+
+// Edición automática de campos comerciales de bajo riesgo vía RPC segura de Supabase.
+document.addEventListener('click',e=>{
+  const edit=e.target.closest('[data-edit-company]');
+  if(edit){ const f=$('#editCompanyForm'); if(f) f.hidden=!f.hidden; return; }
+  const cancel=e.target.closest('[data-cancel-edit]');
+  if(cancel){ const f=$('#editCompanyForm'); if(f) f.hidden=true; }
+});
+document.addEventListener('submit',async e=>{
+  const f=e.target.closest('#editCompanyForm');
+  if(!f) return;
+  e.preventDefault();
+  const btn=f.querySelector('button[type="submit"]');
+  const fd=new FormData(f);
+  const cambios={};
+  ['descripcion','ciudad','departamento','direccion','whatsapp','correo','sitio_web','capacidad_produccion','logo_url'].forEach(k=>{
+    cambios[k]=String(fd.get(k)||'').trim();
+  });
+  if(cambios.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cambios.correo)){
+    toast('Escribe un correo válido.'); return;
+  }
+  if(cambios.logo_url && !/^https:\/\//i.test(cambios.logo_url)){
+    toast('El logotipo debe tener una dirección HTTPS segura.'); return;
+  }
+  bloquear(btn,true,'Guardando…');
+  try{
+    const {error}=await sb.rpc('actualizar_perfil_empresa',{p_cambios:cambios});
+    if(error) throw error;
+    await cargarMiEmpresa();
+    await cargarDirectorio();
+    mostrarEstado();
+    toast('Perfil actualizado. Se registró una alerta informativa para administración.');
+  }catch(err){
+    console.error('No se pudo actualizar el perfil:',err);
+    toast(err?.message || 'No se pudieron guardar los cambios. Revisa la configuración de Supabase.');
+  }finally{ bloquear(btn,false); }
 });
 
 async function cerrarSesion(){
