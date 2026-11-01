@@ -421,6 +421,25 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
   .comm .btn,.panel .btn{width:100%}
 }
 
+/* ============ CUENTAS Y REGISTRO (nuevo) ============ */
+.authtabs{display:flex;width:100%;margin-bottom:16px}
+.authtabs button{flex:1}
+.msg{padding:12px 14px;border-radius:12px;font-size:.9375rem;line-height:1.45;margin-bottom:14px;border:1px solid transparent}
+.msg.ok{background:var(--sky-soft);color:var(--navy);border-color:#BFE6F8}
+.msg.err{background:var(--pink-soft);color:var(--pink-deep);border-color:#F6BFDC}
+.msg.info{background:var(--paper);color:var(--ink-soft);border-color:var(--line)}
+.hint{font-size:.8125rem;color:var(--ink-soft)}
+.showpw{display:flex;align-items:center;gap:8px;font-size:.875rem;color:var(--ink-soft);margin:-4px 0 14px}
+.showpw input{width:18px;height:18px;accent-color:var(--electric)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.status{border:1px solid var(--line);border-radius:var(--r-m);padding:18px;background:var(--paper);margin-bottom:14px}
+.status b{display:block;font-family:var(--f-display);font-size:1.125rem;color:var(--navy)}
+.status p{margin-top:8px;color:var(--ink-soft);font-size:.9688rem}
+.badge{display:inline-block;margin-top:10px;font-size:.8125rem;font-weight:700;padding:4px 12px;border-radius:999px;background:var(--pink-soft);color:var(--pink-deep)}
+.badge.ok{background:var(--sky-soft);color:var(--electric-deep)}
+.dlg .btn+.btn{margin-top:10px}
+.who{font-size:.875rem;color:var(--ink-soft);margin-bottom:14px;overflow-wrap:anywhere}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
 }
@@ -454,6 +473,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
       <a class="l" href="#oportunidades">Oportunidades</a>
       <a class="l" href="#comunidad">Comunidad</a>
       <a class="l" href="#capacitaciones">Capacitaciones</a>
+      <a class="l" id="navLogout" href="#" hidden>Salir</a>
       <button class="btn btn-pink btn-sm" data-open="join">Registrar empresa</button>
     </nav>
   </div>
@@ -733,8 +753,76 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
   </form>
 </dialog>
 
+<!-- ============ CUENTA (registro / inicio de sesión) ============ -->
+<dialog id="authDlg" aria-labelledby="authTitle">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h3 id="authTitle">Crea tu cuenta</h3>
+      <button type="button" class="x" data-close="authDlg" aria-label="Cerrar">✕</button>
+    </div>
+    <p class="sub" id="authSub"></p>
+    <div class="seg authtabs" role="group" aria-label="Crear cuenta o iniciar sesión">
+      <button type="button" data-auth="register" aria-pressed="true">Crear cuenta</button>
+      <button type="button" data-auth="login" aria-pressed="false">Iniciar sesión</button>
+    </div>
+    <div id="authMsg" class="msg" role="alert" hidden></div>
+    <form id="authForm" novalidate>
+      <div class="field"><label for="a-email">Correo electrónico</label><input id="a-email" type="email" inputmode="email" autocomplete="email" placeholder="correo@tuempresa.com"></div>
+      <div class="field"><label for="a-pass">Contraseña</label><input id="a-pass" type="password" autocomplete="new-password" minlength="8"><span class="hint" id="a-hint">Mínimo 8 caracteres.</span></div>
+      <div class="field" id="a-pass2Wrap"><label for="a-pass2">Repite la contraseña</label><input id="a-pass2" type="password" autocomplete="new-password"></div>
+      <label class="showpw"><input type="checkbox" id="a-show"> Mostrar contraseña</label>
+      <div class="hp" aria-hidden="true"><label>No llenar este campo<input id="a-hp" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn btn-pink" type="submit" id="authSubmit">Crear cuenta</button>
+      <button class="btn btn-line" type="button" id="authResend" hidden>Reenviar correo de confirmación</button>
+    </form>
+  </div>
+</dialog>
+
+<!-- ============ DATOS DE LA EMPRESA ============ -->
+<dialog id="empDlg" aria-labelledby="empTitle">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h3 id="empTitle">Registra tu empresa</h3>
+      <button type="button" class="x" data-close="empDlg" aria-label="Cerrar">✕</button>
+    </div>
+    <p class="who" id="empWho"></p>
+    <div id="empMsg" class="msg" role="alert" hidden></div>
+
+    <div class="status" id="empStatus" hidden>
+      <b id="empStName"></b>
+      <span class="badge" id="empStBadge"></span>
+      <p id="empStText"></p>
+    </div>
+
+    <form id="empForm" novalidate hidden>
+      <p class="sub">Tu empresa quedará <b>pendiente de aprobación</b> y no aparecerá en el directorio hasta que la revisemos.</p>
+      <div class="field"><label for="e-nombre">Nombre comercial</label><input id="e-nombre" maxlength="120" autocomplete="organization"></div>
+      <div class="two">
+        <div class="field"><label for="e-ruc">RUC</label><input id="e-ruc" inputmode="numeric" maxlength="11" placeholder="11 dígitos"></div>
+        <div class="field"><label for="e-rep">Representante</label><input id="e-rep" maxlength="100" autocomplete="name"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="e-tipo">Tipo de empresa</label><select id="e-tipo"></select></div>
+        <div class="field"><label for="e-cat">Categoría</label><select id="e-cat"><option value="">Cargando…</option></select></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="e-ciudad">Ciudad</label><input id="e-ciudad" value="Trujillo" maxlength="60"></div>
+        <div class="field"><label for="e-dir">Dirección</label><input id="e-dir" maxlength="150" autocomplete="street-address"></div>
+      </div>
+      <div class="field"><label for="e-wsp">WhatsApp de contacto</label><input id="e-wsp" type="tel" inputmode="tel" maxlength="20" placeholder="9XX XXX XXX"></div>
+      <div class="field"><label for="e-correo">Correo de contacto</label><input id="e-correo" type="email" inputmode="email" maxlength="120"></div>
+      <div class="field"><label for="e-desc">Descripción</label><textarea id="e-desc" maxlength="600" placeholder="Qué fabricas o vendes, tu capacidad y tu experiencia"></textarea></div>
+      <div class="hp" aria-hidden="true"><label>No llenar este campo<input id="e-hp" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn btn-pink" type="submit" id="empSubmit">Enviar para aprobación</button>
+    </form>
+
+    <button class="btn btn-line btn-sm" type="button" id="empLogout">Cerrar sesión</button>
+  </div>
+</dialog>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script>
 /* =========================================================
    FOTOGRAFÍAS
@@ -1100,7 +1188,7 @@ function openDlg({title='Registra tu empresa', sub='Cuéntanos sobre tu empresa.
 }
 document.addEventListener('click',e=>{
   const o = e.target.closest('[data-open]');
-  if(o){ nav.classList.remove('open'); openDlg({role:o.dataset.role}); return; }
+  if(o){ nav.classList.remove('open'); abrirRegistro(o.dataset.role); return; }
 
   const qt = e.target.closest('[data-quote]');
   if(qt){
@@ -1129,12 +1217,331 @@ $('#dlgClose').onclick = ()=>dlg.close();
 dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
 form.addEventListener('submit',e=>{
   e.preventDefault();
-  const name = $('#f-name'), contact = $('#f-contact');
-  if(!name.value.trim()){ name.focus(); toast('Escribe el nombre de tu empresa.'); return; }
-  if(!contact.value.trim()){ contact.focus(); toast('Indica un WhatsApp o correo para contactarte.'); return; }
-  dlg.close(); form.reset(); $('#f-city').value='Trujillo';
-  toast('Solicitud enviada. Es una versión de prueba y aún no se guarda.');
+  toast('Esta función aún no está habilitada, por eso tu solicitud no se envió.');
 });
+
+
+/* =========================================================
+   SUPABASE: cuentas y registro de empresas
+   ---------------------------------------------------------
+   1) Completa url y publishableKey (sb_publishable_en1WycE_AVozTEV5VjBuWQ_8gjPjUmQ).
+      NUNCA pegues aquí la clave secret ni la service_role.
+   2) Los nombres de COL se ajustaron a la tabla empresas
+      existente. La conexión permanece deshabilitada hasta
+      configurar URL y clave publishable.
+   ========================================================= */
+const CFG = {
+  url: 'https://ffhsgajnufujnrhqyibl.supabase.co',
+  publishableKey: 'sb_publishable_en1WycE_AVozTEV5VjBuWQ_8gjPjUmQ',         // sb_publishable_...
+  columnasVerificadas: true   // columnas contrastadas con la tabla existente
+};
+const COL = {
+  tabla: 'empresas',
+  owner: 'propietario',       // columna UUID que guarda auth.uid()
+  nombre: 'nombre', ruc: 'ruc', representante: 'representante',
+  tipo_empresa: 'tipo_empresa', categoria_id: 'categoria_id', ciudad: 'ciudad',
+  direccion: 'direccion', whatsapp: 'whatsapp',
+  correo: 'correo', descripcion: 'descripcion',
+  estado_revision: 'estado_revision', activa: 'activa'
+};
+const CAT = { tabla: 'categorias', id: 'id', nombre: 'nombre' };
+const TIPOS_EMPRESA = [['productor','Fabricante o productor'],['proveedor','Proveedor'],['comprador','Comprador']];
+const TIPO_POR_ROL = {Productor:'productor', Proveedor:'proveedor', Comprador:'comprador'};
+const REDIRECT = location.origin + location.pathname;
+
+function claveSegura(k){
+  if(/^sb_secret_/i.test(k)) return false;
+  try{
+    const parts = k.split('.');
+    if(parts.length === 3){
+      const j = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+      if(j.role === 'service_role') return false;
+    }
+  }catch(_){}
+  return true;
+}
+let sb = null;
+if(window.supabase && CFG.url && CFG.publishableKey){
+  if(claveSegura(CFG.publishableKey)){
+    sb = window.supabase.createClient(CFG.url, CFG.publishableKey, {
+      auth:{flowType:'pkce', persistSession:true, autoRefreshToken:true, detectSessionInUrl:true}
+    });
+  }else{
+    console.error('RED TEXTIL PERÚ: la clave configurada no es una clave publishable. No se conectó a Supabase.');
+  }
+}
+const registroHabilitado = ()=> !!sb && CFG.columnasVerificadas === true;
+
+let sesion = null, miEmpresa, rolPendiente, modoAuth = 'register', categoriasListas = false;
+
+/* ---------- utilidades de interfaz ---------- */
+function avisar(el, tipo, texto){
+  el.className = 'msg' + (tipo ? ' ' + tipo : '');
+  el.textContent = texto || '';
+  el.hidden = !texto;
+}
+function bloquear(btn, on, texto){
+  if(on){ btn.dataset.t = btn.textContent; btn.textContent = texto; btn.disabled = true; }
+  else { btn.disabled = false; if(btn.dataset.t){ btn.textContent = btn.dataset.t; } }
+}
+function cerrar(id){ const d = $('#'+id); if(d && d.open) d.close(); }
+$$('[data-close]').forEach(b=>b.addEventListener('click',()=>cerrar(b.dataset.close)));
+['authDlg','empDlg'].forEach(id=>{
+  const d = $('#'+id);
+  d.addEventListener('click',e=>{ if(e.target === d) d.close(); });
+});
+$('#e-tipo').innerHTML = '<option value="">Elige una opción</option>' + TIPOS_EMPRESA.map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('');
+
+function actualizarNav(){
+  const b = $('#nav .btn[data-open="join"]');
+  if(b) b.textContent = sesion ? 'Mi empresa' : 'Registrar empresa';
+  $('#navLogout').hidden = !sesion;
+}
+
+/* ---------- mensajes de error comprensibles ---------- */
+function errAuth(err){
+  const c = String(err.code || '').toLowerCase(), m = String(err.message || '').toLowerCase();
+  if(c === 'invalid_credentials' || m.includes('invalid login')) return 'Correo o contraseña incorrectos.';
+  if(c === 'email_not_confirmed' || m.includes('not confirmed')) return 'Aún no confirmaste tu correo. Abre el enlace que te enviamos o pide que te lo reenviemos.';
+  if(c.includes('rate_limit') || err.status === 429 || m.includes('rate limit')) return 'Demasiados intentos. Espera unos minutos e inténtalo otra vez.';
+  if(c === 'weak_password' || m.includes('password should')) return 'La contraseña es muy débil. Usa 8 o más caracteres, con letras y números.';
+  if(c === 'user_already_exists' || m.includes('already registered')) return 'Ese correo ya tiene una cuenta. Usa «Iniciar sesión».';
+  if(m.includes('fetch') || m.includes('network')) return 'No hay conexión con el servidor. Revisa tu internet e inténtalo otra vez.';
+  return 'No se pudo completar la acción. Inténtalo de nuevo en unos minutos.';
+}
+function errDB(err){
+  const c = String(err.code || ''), m = String(err.message || '');
+  if(c === '23505') return 'Ya existe una empresa con ese RUC, o tu cuenta ya tiene una empresa registrada. No se guardó nada nuevo.';
+  if(c === '23503') return 'La categoría elegida no es válida. Elígela otra vez.';
+  if(['23514','22001','22P02','23502'].includes(c)) return 'Algún dato no tiene el formato esperado. Revísalo e inténtalo otra vez.';
+  if(c === '42501' || /row-level security/i.test(m)) return 'No tienes permiso para registrar esta empresa. Confirma tu correo, cierra sesión, vuelve a ingresar e inténtalo otra vez.';
+  if(['PGRST204','PGRST205','42703','42P01'].includes(c)) return 'Error de configuración: la base de datos no coincide con el formulario. No se guardó nada. Avísanos para corregirlo.';
+  if(/fetch|network/i.test(m)) return 'No hay conexión con el servidor. No se guardó nada; revisa tu internet e inténtalo otra vez.';
+  return 'No se pudo guardar tu empresa. No se registró nada; inténtalo de nuevo en unos minutos.';
+}
+
+/* ---------- cuenta: crear / iniciar sesión ---------- */
+function aplicarDisponibilidad(){
+  const off = !registroHabilitado();
+  $$('#authForm input, #authForm button').forEach(x=>{ x.disabled = off; });
+  if(off) avisar($('#authMsg'),'info','El registro de empresas todavía no está habilitado. Estamos terminando la conexión con la base de datos; vuelve pronto.');
+}
+function setModo(m){
+  modoAuth = m;
+  const reg = m === 'register';
+  $$('[data-auth]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.auth === m));
+  $('#authTitle').textContent = reg ? 'Crea tu cuenta' : 'Inicia sesión';
+  $('#authSub').textContent = reg
+    ? 'Usa el correo de tu empresa. Luego completarás sus datos y quedará pendiente de aprobación.'
+    : 'Ingresa con el correo y la contraseña de tu cuenta.';
+  $('#a-pass2Wrap').hidden = !reg;
+  $('#a-hint').hidden = !reg;
+  $('#a-pass').autocomplete = reg ? 'new-password' : 'current-password';
+  $('#authSubmit').textContent = reg ? 'Crear cuenta' : 'Iniciar sesión';
+  $('#authResend').hidden = true;
+  avisar($('#authMsg'),'','');
+  aplicarDisponibilidad();
+}
+function abrirAuth(modo){
+  setModo(modo || 'register');
+  if(!$('#authDlg').open) $('#authDlg').showModal();
+  if(registroHabilitado()) $('#a-email').focus();
+}
+$$('[data-auth]').forEach(b=>b.addEventListener('click',()=>setModo(b.dataset.auth)));
+$('#a-show').addEventListener('change',e=>{
+  const t = e.target.checked ? 'text' : 'password';
+  $('#a-pass').type = t; $('#a-pass2').type = t;
+});
+
+$('#authForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(!registroHabilitado()) return;
+  if($('#a-hp').value) return;                       // trampa anti-bots
+  const m = $('#authMsg'), btn = $('#authSubmit');
+  const email = $('#a-email').value.trim().toLowerCase(), pass = $('#a-pass').value;
+  avisar(m,'',''); $('#authResend').hidden = true;
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ avisar(m,'err','Escribe un correo válido.'); $('#a-email').focus(); return; }
+  if(pass.length < 8){ avisar(m,'err','La contraseña debe tener al menos 8 caracteres.'); $('#a-pass').focus(); return; }
+  if(modoAuth === 'register' && pass !== $('#a-pass2').value){ avisar(m,'err','Las contraseñas no coinciden.'); $('#a-pass2').focus(); return; }
+
+  bloquear(btn, true, 'Enviando…');
+  try{
+    if(modoAuth === 'register'){
+      const {data, error} = await sb.auth.signUp({email, password: pass, options:{emailRedirectTo: REDIRECT}});
+      if(error) throw error;
+      if(data.session){                              // confirmación de correo desactivada en Supabase
+        sesion = data.session; actualizarNav(); cerrar('authDlg'); await trasIngreso();
+      }else{
+        avisar(m,'ok','Si este correo es nuevo, te enviamos un mensaje para confirmarlo. Ábrelo y toca el enlace; revisa también la carpeta de spam. Si ya tenías cuenta, usa «Iniciar sesión».');
+        $('#a-pass').value = ''; $('#a-pass2').value = '';
+      }
+    }else{
+      const {data, error} = await sb.auth.signInWithPassword({email, password: pass});
+      if(error) throw error;
+      sesion = data.session; actualizarNav(); cerrar('authDlg'); $('#a-pass').value = '';
+      await trasIngreso();
+    }
+  }catch(err){
+    avisar(m,'err',errAuth(err));
+    if(String(err.code||'').toLowerCase() === 'email_not_confirmed' || /not confirmed/i.test(String(err.message||''))) $('#authResend').hidden = false;
+  }finally{ bloquear(btn, false); }
+});
+
+$('#authResend').addEventListener('click', async ()=>{
+  if(!registroHabilitado()) return;
+  const m = $('#authMsg'), email = $('#a-email').value.trim().toLowerCase();
+  if(!email){ avisar(m,'err','Escribe tu correo para reenviar el mensaje.'); return; }
+  const {error} = await sb.auth.resend({type:'signup', email, options:{emailRedirectTo: REDIRECT}});
+  if(error) avisar(m,'err',errAuth(error));
+  else avisar(m,'ok','Si hay una cuenta pendiente de confirmar con ese correo, te reenviamos el mensaje. Revisa también el spam.');
+});
+
+/* ---------- empresa ---------- */
+function abrirRegistro(role){
+  rolPendiente = role;
+  if(sesion && registroHabilitado()){ abrirEmpresa(role); return; }
+  abrirAuth('register');
+}
+async function trasIngreso(){ await abrirEmpresa(rolPendiente); }
+
+async function cargarMiEmpresa(){
+  miEmpresa = undefined;
+  if(!sb || !sesion) return;
+  const cols = [COL.nombre, COL.estado_revision, COL.activa].join(',');
+  const {data, error} = await sb.from(COL.tabla).select(cols).eq(COL.owner, sesion.user.id).maybeSingle();
+  miEmpresa = error ? {error:true} : (data || null);
+}
+async function cargarCategorias(){
+  if(categoriasListas) return true;
+  const sel = $('#e-cat');
+  const {data, error} = await sb.from(CAT.tabla).select(CAT.id + ',' + CAT.nombre).order(CAT.nombre);
+  if(error || !data || !data.length){
+    sel.innerHTML = '';
+    const o = document.createElement('option'); o.value = ''; o.textContent = 'No se pudieron cargar las categorías'; sel.appendChild(o);
+    return false;
+  }
+  sel.innerHTML = '';
+  const o0 = document.createElement('option'); o0.value = ''; o0.textContent = 'Elige una categoría'; sel.appendChild(o0);
+  data.forEach(c=>{ const o = document.createElement('option'); o.value = String(c[CAT.id]); o.textContent = String(c[CAT.nombre]); sel.appendChild(o); });
+  categoriasListas = true;
+  return true;
+}
+function mostrarEstado(){
+  const d = (miEmpresa && !miEmpresa.error) ? miEmpresa : null;
+  const est = d ? String(d[COL.estado_revision] || '').toLowerCase() : 'pendiente';
+  const badge = $('#empStBadge'); badge.className = 'badge';
+  $('#empStName').textContent = d ? String(d[COL.nombre] || 'Tu empresa') : 'Tu empresa';
+  let etiqueta, texto;
+  if(est === 'pendiente'){ etiqueta = 'Pendiente de aprobación'; texto = 'Recibimos los datos de tu empresa. Los revisaremos antes de publicarla en el directorio. Puedes volver a iniciar sesión para ver el estado.'; }
+  else if(est === 'aprobada' || est === 'aprobado'){ badge.classList.add('ok'); etiqueta = 'Aprobada'; texto = 'Tu empresa fue aprobada.'; }
+  else if(est === 'rechazada' || est === 'rechazado'){ etiqueta = 'No aprobada'; texto = 'Tu solicitud no fue aprobada.'; }
+  else { etiqueta = 'Estado: ' + est; texto = ''; }
+  badge.textContent = etiqueta; $('#empStText').textContent = texto;
+  $('#empStatus').hidden = false; $('#empForm').hidden = true;
+}
+async function abrirEmpresa(role){
+  const m = $('#empMsg');
+  avisar(m,'',''); $('#empStatus').hidden = true; $('#empForm').hidden = true;
+  $('#empWho').textContent = sesion && sesion.user ? 'Sesión: ' + sesion.user.email : '';
+  if(!$('#empDlg').open) $('#empDlg').showModal();
+  await cargarMiEmpresa();
+  if(miEmpresa && !miEmpresa.error){ mostrarEstado(); return; }
+  if(miEmpresa && miEmpresa.error) avisar(m,'info','No pudimos consultar si tu cuenta ya tiene una empresa. Si ya la registraste, no necesitas volver a hacerlo.');
+  $('#empForm').hidden = false;
+  if(role && TIPO_POR_ROL[role]) $('#e-tipo').value = TIPO_POR_ROL[role];
+  if(!$('#e-correo').value && sesion && sesion.user) $('#e-correo').value = sesion.user.email || '';
+  const ok = await cargarCategorias();
+  if(!ok) avisar(m,'err','No pudimos cargar las categorías, así que por ahora no es posible registrar la empresa. Inténtalo más tarde.');
+}
+
+function leerEmpresa(){
+  const g = id => $('#'+id).value.trim().replace(/\s+/g,' ');
+  return {nombre:g('e-nombre'), ruc:g('e-ruc'), rep:g('e-rep'), tipo:$('#e-tipo').value, cat:$('#e-cat').value,
+          ciudad:g('e-ciudad'), dir:g('e-dir'), wsp:g('e-wsp'), correo:g('e-correo').toLowerCase(),
+          desc:$('#e-desc').value.trim()};
+}
+function validarEmpresa(v){
+  const f = (id,texto)=>({campo:$('#'+id), texto});
+  if(v.nombre.length < 3) return f('e-nombre','Escribe el nombre comercial de tu empresa.');
+  if(!/^\d{11}$/.test(v.ruc) || !/^(10|15|16|17|20)/.test(v.ruc)) return f('e-ruc','El RUC debe tener 11 dígitos y empezar con 10, 15, 16, 17 o 20.');
+  if(v.rep.length < 3) return f('e-rep','Escribe el nombre del representante.');
+  if(!TIPOS_EMPRESA.some(t=>t[0] === v.tipo)) return f('e-tipo','Elige el tipo de empresa.');
+  if(!v.cat) return f('e-cat','Elige una categoría.');
+  if(v.ciudad.length < 2) return f('e-ciudad','Escribe la ciudad.');
+  let w = v.wsp.replace(/\D/g,''); if(w.length === 11 && w.startsWith('51')) w = w.slice(2);
+  if(!/^9\d{8}$/.test(w)) return f('e-wsp','Escribe un WhatsApp de 9 dígitos que empiece con 9.');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.correo)) return f('e-correo','Escribe un correo de contacto válido.');
+  v.wspN = w;
+  return null;
+}
+$('#empForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const m = $('#empMsg'), btn = $('#empSubmit');
+  if(!registroHabilitado()){ avisar(m,'err','El registro todavía no está habilitado.'); return; }
+  if($('#e-hp').value) return;                       // trampa anti-bots
+  if(!categoriasListas){ avisar(m,'err','Las categorías no están disponibles, por eso no se puede enviar el registro.'); return; }
+  avisar(m,'','');
+  const v = leerEmpresa(), problema = validarEmpresa(v);
+  if(problema){ avisar(m,'err',problema.texto); problema.campo.focus(); return; }
+
+  bloquear(btn, true, 'Enviando…');
+  try{
+    const {data:u, error:eu} = await sb.auth.getUser();
+    if(eu || !u || !u.user){
+      sesion = null; actualizarNav(); cerrar('empDlg'); abrirAuth('login');
+      avisar($('#authMsg'),'err','Tu sesión venció. Inicia sesión otra vez.');
+      return;
+    }
+    const fila = {
+      [COL.owner]: u.user.id,
+      [COL.nombre]: v.nombre, [COL.ruc]: v.ruc, [COL.representante]: v.rep,
+      [COL.tipo_empresa]: v.tipo, [COL.categoria_id]: v.cat, [COL.ciudad]: v.ciudad,
+      [COL.direccion]: v.dir || null, [COL.whatsapp]: v.wspN,
+      [COL.correo]: v.correo, [COL.descripcion]: v.desc || null,
+      [COL.estado_revision]: 'pendiente', [COL.activa]: false
+    };
+    // Sin .select(): quien se registra no puede leer filas pendientes de otros, y no hace falta.
+    const {error} = await sb.from(COL.tabla).insert(fila);
+    if(error){ avisar(m,'err',errDB(error)); return; }  // fallo: NO se muestra confirmación
+    await cargarMiEmpresa();
+    mostrarEstado();
+    toast('Empresa registrada. Está pendiente de aprobación.');
+  }catch(err){
+    avisar(m,'err',errDB(err || {}));
+  }finally{ bloquear(btn, false); }
+});
+
+async function cerrarSesion(){
+  if(!sb) return;
+  const {error} = await sb.auth.signOut();
+  if(error){ toast('No se pudo cerrar la sesión. Inténtalo otra vez.'); return; }
+  sesion = null; miEmpresa = undefined; cerrar('empDlg'); actualizarNav();
+  toast('Sesión cerrada.');
+}
+$('#empLogout').addEventListener('click', cerrarSesion);
+$('#navLogout').addEventListener('click', e=>{ e.preventDefault(); nav.classList.remove('open'); cerrarSesion(); });
+
+/* ---------- arranque: sesión existente y regreso desde el correo de confirmación ---------- */
+if(sb){
+  sb.auth.onAuthStateChange((ev, ses)=>{ sesion = ses; if(ev === 'SIGNED_OUT') miEmpresa = undefined; actualizarNav(); });
+  (async ()=>{
+    const q = new URLSearchParams(location.search);
+    const h = new URLSearchParams(location.hash.replace(/^#/,''));
+    const huboError = h.has('error') || q.has('error');
+    const huboCodigo = q.has('code');
+    const {data} = await sb.auth.getSession();
+    sesion = data.session; actualizarNav();
+    if(huboError || huboCodigo) history.replaceState(null,'',location.pathname);
+    if(huboError){
+      toast('El enlace de confirmación no es válido o ya venció. Si ya confirmaste tu correo, inicia sesión.');
+      abrirAuth('login');
+    }else if(huboCodigo){
+      if(sesion){ toast('Correo confirmado. Completa los datos de tu empresa.'); trasIngreso(); }
+      else{ toast('Tu correo quedó confirmado. Inicia sesión para continuar.'); abrirAuth('login'); }
+    }
+  })();
+}
+actualizarNav();
 
 /* =========================================================
    INICIO
