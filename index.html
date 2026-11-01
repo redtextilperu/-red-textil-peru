@@ -276,18 +276,37 @@ section{padding:88px 0}
 .panel .btn{margin-top:24px}
 @media (max-width:900px){.panel{grid-template-columns:1fr}.panel .pimg{min-height:0;aspect-ratio:16/8}.panel .pbody{padding:24px}.steps{flex-direction:column}.steps li{display:grid;grid-template-columns:34px 1fr;gap:0}.steps li::before{margin:0}}
 
-/* ============ CATÁLOGO ============ */
-.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.prod{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;transition:.25s}
-.prod:hover{border-color:var(--electric);box-shadow:var(--shadow)}
-.prod .pic{position:relative;aspect-ratio:1/1;background:var(--navy)}
-.prod .bd{padding:16px;display:flex;flex-direction:column;gap:4px;flex:1}
-.prod h3{font-size:1.0625rem;font-weight:700;line-height:1.25}
-.prod .by{font-size:.875rem;color:var(--ink-soft)}
-.prod .ask{margin-top:8px;font-size:.875rem;font-weight:700;color:var(--pink-deep)}
-.prod .btn{margin-top:12px}
-@media (max-width:1020px){.prod-grid{grid-template-columns:repeat(3,1fr)}}
-@media (max-width:760px){.prod-grid{grid-template-columns:repeat(2,1fr);gap:12px}.prod .bd{padding:12px}.prod h3{font-size:.9688rem}.prod .btn{padding:0 10px}}
+/* ============ CATÁLOGO MARKETPLACE ============ */
+.catalog-intro{max-width:760px;color:var(--ink-soft);margin-top:10px}
+.catalog-tools{display:grid;grid-template-columns:minmax(240px,1fr) auto;gap:14px;align-items:center;margin:24px 0 16px}
+.catalog-search{height:54px;display:flex;align-items:center;gap:12px;padding:0 16px;border:2px solid var(--line);border-radius:14px;background:var(--white)}
+.catalog-search svg{width:20px;height:20px;color:var(--electric);flex:none}
+.catalog-search input{width:100%;height:48px;border:0;outline:0;background:transparent;color:var(--ink);font:inherit}
+.catalog-roles{display:flex;gap:8px;flex-wrap:wrap}
+.catalog-role{border:1px solid var(--line);border-radius:999px;padding:10px 15px;background:var(--white);color:var(--navy);font-weight:700;cursor:pointer}
+.catalog-role[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:var(--white)}
+.catalog-note{display:flex;gap:10px;align-items:flex-start;padding:13px 16px;margin:18px 0 20px;border:1px solid #D8E5F5;border-radius:12px;background:#F3F8FF;color:#355078;font-size:.875rem}
+.catalog-note svg{width:19px;height:19px;flex:none;color:var(--electric)}
+.prod-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.prod{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:.25s;min-width:0}
+.prod:hover{border-color:var(--electric);box-shadow:var(--shadow);transform:translateY(-2px)}
+.prod .pic{position:relative;aspect-ratio:4/3;background:var(--navy);overflow:hidden}
+.prod .pic .ph,.prod .pic .ph img{width:100%;height:100%;display:block;object-fit:cover}
+.prod .pic .ph>svg{position:absolute;z-index:1;left:50%;top:50%;width:52px;height:52px;transform:translate(-50%,-50%);color:rgba(255,255,255,.8)}
+.prod .pill{position:absolute;top:12px;left:12px;z-index:2}
+.prod .demo-tag{position:absolute;right:10px;top:10px;z-index:3;border-radius:999px;padding:5px 9px;background:rgba(10,27,77,.86);color:white;font-size:.7rem;font-weight:700}
+.prod .bd{padding:17px;display:flex;flex-direction:column;gap:7px;flex:1}
+.prod h3{font-size:1.05rem;font-weight:700;line-height:1.3;color:var(--navy)}
+.prod .by{font-size:.85rem;color:var(--ink-soft)}
+.prod .seller-line{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px}
+.prod .seller-role{font-size:.72rem;font-weight:700;color:var(--electric-deep);background:#EAF0FF;border-radius:999px;padding:5px 9px}
+.prod .ask{margin-top:auto;padding-top:9px;font-size:.85rem;font-weight:700;color:var(--pink-deep)}
+.catalog-publish{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:28px;padding:22px 24px;border-radius:18px;background:var(--navy);color:white}
+.catalog-publish p{color:#C3D1EF;margin-top:4px}
+.catalog-publish .btn{flex:none}
+@media (max-width:1020px){.prod-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.catalog-tools{grid-template-columns:1fr}.prod-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.prod .bd{padding:12px}.prod h3{font-size:.96rem}.catalog-publish{align-items:stretch;flex-direction:column}.catalog-publish .btn{width:100%}}
+@media (max-width:420px){.prod-grid{grid-template-columns:1fr 1fr}.prod .by{font-size:.78rem}}
 
 /* ============ OPORTUNIDADES ============ */
 .opp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -662,12 +681,30 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
   <div class="wrap">
     <div class="s-head">
       <div>
-        <h2>Catálogo de productos</h2>
-        <p>Prendas, telas, estampados y equipos publicados por las empresas. Pide tu cotización en un toque.</p>
+        <span class="eyebrow">MERCADO TEXTIL</span>
+        <h2>Encuentra productos y proveedores</h2>
+        <p class="catalog-intro">Explora prendas, telas, insumos y maquinaria. Compara la oferta de productores y proveedores en un solo lugar.</p>
       </div>
     </div>
-    <div class="chips" id="prodChips" role="group" aria-label="Filtrar catálogo"></div>
+    <div class="catalog-tools">
+      <label class="catalog-search">
+        <span class="sr">Buscar productos</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="prodSearch" type="search" placeholder="¿Qué necesitas? Ej. polos, tela dry-fit, tinta DTF…" autocomplete="off">
+      </label>
+      <div class="catalog-roles" role="group" aria-label="Filtrar por tipo de empresa">
+        <button type="button" class="catalog-role" data-prod-role="all" aria-pressed="true">Todos</button>
+        <button type="button" class="catalog-role" data-prod-role="productor" aria-pressed="false">Productores</button>
+        <button type="button" class="catalog-role" data-prod-role="proveedor" aria-pressed="false">Proveedores</button>
+      </div>
+    </div>
+    <div class="chips" id="prodChips" role="group" aria-label="Filtrar por categoría"></div>
+    <div class="catalog-note"><span aria-hidden="true">ⓘ</span><span>Vista de demostración: estos productos son ejemplos de diseño, todavía no son publicaciones reales de empresas.</span></div>
     <div class="prod-grid" id="prodGrid"></div>
+    <div class="catalog-publish">
+      <div><strong>¿Fabricas o vendes productos textiles?</strong><p>Prepara tu perfil para mostrar tu oferta a compradores de todo el Perú.</p></div>
+      <button class="btn btn-pink" type="button" data-open="join">Registrar mi empresa</button>
+    </div>
   </div>
 </section>
 
@@ -958,14 +995,14 @@ const COMPANIES = [
 ];
 
 const PRODUCTS = [
-  {n:'Polos corporativos',          by:'Hilos del Norte',              c:'confeccion', tag:'Prendas'},
-  {n:'Buzos dry-fit para academias',by:'Andes Sport Lab',              c:'deportiva',  tag:'Deportivo'},
-  {n:'Camisetas sublimadas full color', by:'Sublima Trujillo',         c:'sublimacion',tag:'Sublimado'},
-  {n:'Transfers DTF por metro',     by:'Print DTF Norte',              c:'dtf',        tag:'DTF'},
-  {n:'Telas de algodón y poliéster',by:'Telas Moche',                  c:'telas',      tag:'Telas'},
-  {n:'Gorras bordadas con logo',    by:'Regalo Corporativo Chan Chan', c:'merch',      tag:'Merchandising'},
-  {n:'Uniformes escolares e industriales', by:'Uniformes Santa Rosa',  c:'uniformes',  tag:'Uniformes'},
-  {n:'Máquinas rectas y remalladoras', by:'Maquinaria Textil Huanchaco', c:'maquinaria', tag:'Maquinaria'}
+  {n:'Polos corporativos',          by:'Hilos del Norte',              c:'confeccion', tag:'Prendas', role:'productor'},
+  {n:'Buzos dry-fit para academias',by:'Andes Sport Lab',              c:'deportiva',  tag:'Deportivo', role:'productor'},
+  {n:'Camisetas sublimadas full color', by:'Sublima Trujillo',         c:'sublimacion',tag:'Sublimado', role:'productor'},
+  {n:'Transfers DTF por metro',     by:'Print DTF Norte',              c:'dtf',        tag:'DTF', role:'productor'},
+  {n:'Telas de algodón y poliéster',by:'Telas Moche',                  c:'telas',      tag:'Telas', role:'proveedor'},
+  {n:'Gorras bordadas con logo',    by:'Regalo Corporativo Chan Chan', c:'merch',      tag:'Merchandising', role:'productor'},
+  {n:'Uniformes escolares e industriales', by:'Uniformes Santa Rosa',  c:'uniformes',  tag:'Uniformes', role:'productor'},
+  {n:'Máquinas rectas y remalladoras', by:'Maquinaria Textil Huanchaco', c:'maquinaria', tag:'Maquinaria', role:'proveedor'}
 ];
 
 const OPPS = [
@@ -1257,22 +1294,39 @@ tabs.forEach((t,i)=>{
 /* =========================================================
    CATÁLOGO
    ========================================================= */
-const prodState = {cat:'todas'};
+const prodState = {cat:'todas',role:'all',q:''};
 function renderProds(){
-  const list = PRODUCTS.filter(p=>prodState.cat==='todas'||p.c===prodState.cat);
+  const q=norm(prodState.q.trim());
+  const list = PRODUCTS.filter(p=>
+    (prodState.cat==='todas'||p.c===prodState.cat) &&
+    (prodState.role==='all'||p.role===prodState.role) &&
+    (!q||norm([p.n,p.by,p.tag,catName(p.c)].join(' ')).includes(q))
+  );
   $('#prodGrid').innerHTML = list.length ? list.map((p,i)=>`
     <article class="prod">
-      <div class="pic">${photo(p.c,p.c,i)}<span class="pill">${p.tag}</span></div>
+      <div class="pic">${photo(p.c,p.c,i)}<span class="pill">${p.tag}</span><span class="demo-tag">Ejemplo</span></div>
       <div class="bd">
         <h3>${p.n}</h3>
-        <p class="by">${p.by}</p>
-        <p class="ask">Precio a cotizar</p>
-        <button class="btn btn-line btn-sm" data-quote="${p.n}">Pedir cotización</button>
+        <div class="seller-line"><p class="by">${p.by}</p><span class="seller-role">${p.role==='productor'?'Productor':'Proveedor'}</span></div>
+        <p class="ask">Precio y disponibilidad por consultar</p>
       </div>
     </article>`).join('')
-    : `<div class="empty" style="grid-column:1/-1"><p>Aún no hay productos en esta categoría.</p><button class="btn btn-pink btn-sm" data-open="join" data-role="Proveedor">Publicar mis productos</button></div>`;
+    : `<div class="empty" style="grid-column:1/-1"><p>No encontramos productos con esos filtros.</p><button class="btn btn-line btn-sm" type="button" id="clearProdFilters">Limpiar filtros</button></div>`;
 }
-chipRow($('#prodChips'), [{id:'todas',name:'Todos'},...CATS.filter(c=>PRODUCTS.some(p=>p.c===c.id))], 'todas', v=>{prodState.cat=v;renderProds()});
+chipRow($('#prodChips'), [{id:'todas',name:'Todas las categorías'},...CATS.filter(c=>PRODUCTS.some(p=>p.c===c.id))], 'todas', v=>{prodState.cat=v;renderProds()});
+$('#prodSearch').addEventListener('input',e=>{prodState.q=e.target.value;renderProds()});
+$$('[data-prod-role]').forEach(b=>b.addEventListener('click',()=>{
+  prodState.role=b.dataset.prodRole;
+  $$('[data-prod-role]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+  renderProds();
+}));
+$('#prodGrid').addEventListener('click',e=>{
+  if(e.target.id==='clearProdFilters'){
+    prodState.cat='todas';prodState.role='all';prodState.q='';$('#prodSearch').value='';
+    $$('[data-prod-role]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.prodRole==='all')));
+    const all=$('#prodChips .chip');if(all)all.click();renderProds();
+  }
+});
 
 /* =========================================================
    OPORTUNIDADES
