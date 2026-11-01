@@ -541,7 +541,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
         </div>
         <div class="f-tabs" role="group" aria-label="¿Qué buscas?">
           <button type="button" class="f-tab" data-scope="all" aria-pressed="true">Todo</button>
-          <button type="button" class="f-tab" data-scope="fab" aria-pressed="false">Fabricantes</button>
+          <button type="button" class="f-tab" data-scope="fab" aria-pressed="false">Productores</button>
           <button type="button" class="f-tab" data-scope="prov" aria-pressed="false">Proveedores</button>
           <button type="button" class="f-tab" data-scope="maq" aria-pressed="false">Maquinaria</button>
           <button type="button" class="f-tab" data-scope="ins" aria-pressed="false">Insumos</button>
@@ -594,7 +594,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
     <div class="s-head">
       <div>
         <h2>Productores destacados</h2>
-        <p>Conoce a los productores textiles registrados y aprobados en Red Textil Perú.</p>
+        <p>Conoce talleres y fábricas textiles aprobados que forman parte de nuestra red.</p>
       </div>
       <a class="more" href="#directorio">Ver todos →</a>
     </div>
@@ -608,7 +608,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
     <div class="s-head">
       <div>
         <h2>Directorio de empresas textiles</h2>
-        <p>Busca por nombre, servicio o distrito, y filtra por rubro o tipo de empresa.</p>
+        <p>Busca por nombre, servicio o distrito, y filtra entre productores y proveedores.</p>
       </div>
     </div>
 
@@ -1075,26 +1075,25 @@ $('#catGrid').addEventListener('click',e=>{
 function renderFeat(){
   const list = directorioEmpresas.filter(x=>x.r==='productor');
   if(directorioCargando){
-    $('#featGrid').innerHTML = '<div class="empty">Cargando productores registrados…</div>';
+    $('#featGrid').innerHTML = '<div class="empty"><p>Cargando productores aprobados de Red Textil Perú…</p></div>';
     return;
   }
-  if(!list.length){
-    $('#featGrid').innerHTML = '<div class="empty">Aún no hay productores aprobados para destacar. Cuando una empresa sea aprobada como productora, aparecerá aquí automáticamente.</div>';
+  if(directorioError || !list.length){
+    $('#featGrid').innerHTML = '<div class="empty"><p>Aún no hay productores aprobados para destacar. Cuando una empresa productora sea aprobada, aparecerá aquí automáticamente.</p></div>';
     return;
   }
   $('#featGrid').innerHTML = list.slice(0,8).map((x,i)=>{
     const logo = x.logo_url && /^https:\/\//i.test(x.logo_url)
       ? `<img src="${escaparHTML(x.logo_url)}" alt="Logo de ${escaparHTML(x.n)}" style="width:100%;height:100%;object-fit:contain;background:#fff;padding:12px">`
-      : photo(x.c,x.c,i+1);
+      : photo(x.c,x.c,i);
     return `<article class="fcard">
       <div class="pic">${logo}<span class="pill pk">Productor</span></div>
       <div class="bd">
         <h3>${escaparHTML(x.n)}</h3>
-        <p class="meta">${escaparHTML(x.categoria)} · ${escaparHTML(x.d || x.departamento || 'Perú')}</p>
-        <p class="ds">${escaparHTML(x.t || 'Productor registrado en Red Textil Perú.')}</p>
+        <p class="meta">${escaparHTML(x.categoria)} · ${escaparHTML([x.d,x.departamento].filter(Boolean).join(', ')||'Perú')}</p>
+        <p class="ds">${escaparHTML(x.t || 'Empresa productora de la industria textil.')}</p>
         <div class="acts">
           <button class="btn btn-electric btn-sm" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil</button>
-          <a class="btn btn-line btn-sm" href="#directorio" onclick="document.querySelector('#roleSeg [data-role=productor]')?.click()">Ver directorio</a>
         </div>
       </div>
     </article>`;
@@ -1152,7 +1151,7 @@ function renderDir(){
       <div class="th">${logo}</div>
       <div>
         <h3>${escaparHTML(x.n)}</h3>
-        <p class="meta">${escaparHTML(x.categoria)} · ${x.r==='productor'?'Fabricante':x.r==='comprador'?'Comprador':'Proveedor'} · ${escaparHTML(x.d || x.departamento || '')}</p>
+        <p class="meta">${escaparHTML(x.categoria)} · ${x.r==='productor'?'Productor':x.r==='comprador'?'Comprador':'Proveedor'} · ${escaparHTML(x.d || x.departamento || '')}</p>
         <p class="ds">${escaparHTML(x.t || 'Empresa registrada en Red Textil Perú.')}</p>
         <div class="tags">${x.tags.map(t=>`<span class="tag">${escaparHTML(t)}</span>`).join('')}</div>
         <button class="profile-btn" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil de empresa</button>
@@ -1334,7 +1333,7 @@ document.addEventListener('click',e=>{
     const company = directorioEmpresas.find(x=>String(x.id)===String(pf.dataset.profile));
     if(!company) return;
     if(pf.dataset.ownerProfile) cerrar('empDlg');
-    const roleLabel = company.r==='productor'?'Fabricante o productor':company.r==='comprador'?'Comprador':'Proveedor';
+    const roleLabel = company.r==='productor'?'Productor':company.r==='comprador'?'Comprador':'Proveedor';
     const wa = company.whatsapp ? 'https://wa.me/51'+String(company.whatsapp).replace(/\D/g,'').replace(/^51/,'') : '';
     const email = company.correo ? 'mailto:'+encodeURIComponent(company.correo) : '';
     let website = '';
@@ -1389,7 +1388,7 @@ const COL = {
   estado_revision: 'estado_revision', activa: 'activa'
 };
 const CAT = { tabla: 'categorias', id: 'id', nombre: 'nombre' };
-const TIPOS_EMPRESA = [['productor','Fabricante o productor'],['proveedor','Proveedor'],['comprador','Comprador']];
+const TIPOS_EMPRESA = [['productor','Productor'],['proveedor','Proveedor'],['comprador','Comprador']];
 const TIPO_POR_ROL = {Productor:'productor', Proveedor:'proveedor', Comprador:'comprador'};
 const REDIRECT = location.origin + location.pathname;
 
