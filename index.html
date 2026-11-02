@@ -624,7 +624,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
     <div class="s-head">
       <div>
         <h2>Productores destacados</h2>
-        <p>Talleres y fábricas de Trujillo con su especialidad a la vista. Los perfiles que ves hoy son ejemplos para validar el diseño.</p>
+        <p>Productores textiles registrados y aprobados en Red Textil Perú. Conoce sus especialidades y visita sus fichas comerciales.</p>
       </div>
       <a class="more" href="#directorio">Ver todos →</a>
     </div>
@@ -1103,21 +1103,33 @@ $('#catGrid').addEventListener('click',e=>{
    PRODUCTORES DESTACADOS
    ========================================================= */
 function renderFeat(){
-  const list = COMPANIES.filter(x=>x.f);
-  $('#featGrid').innerHTML = list.map((x,i)=>`
-    <article class="fcard">
-      <div class="pic">${photo(x.c,x.c,i)}<span class="pill pk">Perfil de ejemplo</span></div>
+  // Esta sección muestra empresas reales aprobadas, no perfiles de demostración.
+  const list = directorioEmpresas.filter(x=>x.r==='productor').slice(0,4);
+  if(directorioCargando){
+    $('#featGrid').innerHTML='<div class="empty" style="grid-column:1/-1">Cargando productores registrados…</div>';
+    return;
+  }
+  if(!list.length){
+    $('#featGrid').innerHTML='<div class="empty" style="grid-column:1/-1"><p>Aún no hay productores aprobados para destacar.</p><span class="hint">Las empresas aparecerán aquí cuando completen su registro y sean aprobadas.</span></div>';
+    return;
+  }
+  $('#featGrid').innerHTML = list.map((x,i)=>{
+    const image = x.logo_url && /^https:\/\//i.test(x.logo_url)
+      ? `<img src="${escaparHTML(x.logo_url)}" alt="Logo de ${escaparHTML(x.n)}" loading="lazy">`
+      : photo(x.c,x.c,i);
+    return `<article class="fcard">
+      <div class="pic">${image}<span class="pill pk">Productor registrado</span></div>
       <div class="bd">
-        <h3>${x.n}</h3>
-        <p class="meta">${catName(x.c)} · ${x.d}, Trujillo</p>
-        <p class="ds">${x.t}</p>
-        <div class="tags">${x.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <h3>${escaparHTML(x.n)}</h3>
+        <p class="meta">${escaparHTML(x.categoria)} · ${escaparHTML([x.d,x.departamento].filter(Boolean).join(', '))}</p>
+        <p class="ds">${escaparHTML(x.t || 'Empresa productora registrada en Red Textil Perú.')}</p>
         <div class="acts">
-          <button class="btn btn-electric btn-sm" data-contact="${x.n}">Contactar</button>
-          <button class="btn btn-line btn-sm" data-quote="Cotización a ${x.n}">Cotizar</button>
+          <button class="btn btn-electric btn-sm" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil</button>
+          ${x.whatsapp ? `<a class="btn btn-line btn-sm" href="https://wa.me/51${String(x.whatsapp).replace(/\D/g,'').replace(/^51/,'')}" target="_blank" rel="noopener noreferrer">Contactar</a>` : ''}
         </div>
       </div>
-    </article>`).join('');
+    </article>`;
+  }).join('');
 }
 
 /* =========================================================
@@ -1196,10 +1208,10 @@ async function cargarDirectorio(){
       const c = slugCategoria(categoria);
       return {id:row.id,n:row.nombre||'Empresa textil',c,r:row.tipo_empresa||'proveedor',d:row.ciudad||'',departamento:row.departamento||'',t:row.descripcion||'',categoria,whatsapp:row.whatsapp||'',correo:row.correo||'',logo_url:row.logo_url||'',sitio_web:row.sitio_web||'',direccion:row.direccion||'',capacidad:row.capacidad_produccion||'',tags:[]};
     });
-    directorioCargando = false; renderDir(); renderCats(); cargarProductosPublicos();
+    directorioCargando = false; renderDir(); renderCats(); renderFeat(); cargarProductosPublicos();
   }catch(err){
     console.error('RED TEXTIL PERÚ: no se pudo cargar el directorio desde Supabase.',err);
-    directorioCargando = false; directorioError = String(err?.message || 'Error de conexión'); renderDir();
+    directorioCargando = false; directorioError = String(err?.message || 'Error de conexión'); renderDir(); renderFeat();
   }
 }
 $('#dirList').addEventListener('click',e=>{ if(e.target.id==='reintentarDirectorio') cargarDirectorio(); });
@@ -1407,6 +1419,7 @@ document.addEventListener('click',e=>{
     $('#profileContent').innerHTML = `${image}<p class="meta">${escaparHTML(company.categoria)} · ${roleLabel}</p><p class="sub">${escaparHTML(company.t || 'Empresa registrada en Red Textil Perú.')}</p><h4 class="gallery-title">Galería de trabajos</h4><div id="publicCompanyGallery" class="gallery-public"><p class="hint">Cargando fotografías…</p></div><section class="profile-products"><h4 class="gallery-title">Productos de esta empresa</h4><div id="publicCompanyProducts" class="profile-product-grid"><p class="hint">Cargando productos…</p></div></section><div class="profile-meta"><div><small>Ciudad</small><strong>${escaparHTML([company.d,company.departamento].filter(Boolean).join(', ')||'No especificada')}</strong></div>${company.capacidad?`<div><small>Capacidad de producción</small><strong>${escaparHTML(company.capacidad)}</strong></div>`:''}${company.direccion?`<div><small>Dirección</small><strong>${escaparHTML(company.direccion)}</strong></div>`:''}${company.correo?`<div><small>Correo</small><strong>${escaparHTML(company.correo)}</strong></div>`:''}</div><div class="profile-actions">${wa?`<a class="btn btn-pink" href="${wa}" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>`:''}${email?`<a class="btn btn-line" href="${email}">Enviar correo</a>`:''}${website?`<a class="btn btn-line" href="${escaparHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio web</a>`:''}</div>`;
     $('#profileDlg').showModal();
     cargarGaleriaPublica(company.id, $('#publicCompanyGallery'));
+    cargarProductosPerfil(company.id, $('#publicCompanyProducts'));
     return;
   }
 
