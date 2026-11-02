@@ -1317,20 +1317,30 @@ async function cargarProductosPublicos(){
   }
 }
 async function cargarProductosPerfil(companyId,target){
-  if(!target||!sb)return;
+  if(!target) return;
+  if(!sb){
+    target.innerHTML='<p class="hint">No se pudo conectar con el catálogo.</p>';
+    return;
+  }
   target.innerHTML='<p class="hint">Cargando productos…</p>';
   try{
-    const catSelect=$('#ownerProductForm select[name="categoria_id"]');
-    if(catSelect && catSelect.options.length<=1){
-      const {data:cats,error:catErr}=await sb.from('categorias').select('id,nombre').order('nombre');
-      if(catErr)throw catErr;
-      catSelect.innerHTML='<option value="">Elige una categoría</option>'+(cats||[]).map(c=>`<option value="${escaparHTML(c.id)}">${escaparHTML(c.nombre)}</option>`).join('');
-    }
-    const {data,error}=await sb.from('productos').select('id,nombre,descripcion,precio,imagen_url').eq('empresa_id',companyId).eq('activo',true).order('created_at',{ascending:false});
+    // Consulta mínima: no depende del selector de categorías del panel privado.
+    const {data,error}=await sb.from('productos')
+      .select('id,nombre,descripcion,precio,imagen_url,activo,created_at')
+      .eq('empresa_id',companyId)
+      .eq('activo',true)
+      .order('created_at',{ascending:false});
     if(error) throw error;
-    target.innerHTML=(data||[]).length ? data.map(p=>`<article class="profile-product">${p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.nombre)}" loading="lazy">`:`<div style="aspect-ratio:4/3;background:var(--paper)"></div>`}<div class="bd"><strong>${escaparHTML(p.nombre)}</strong>${p.descripcion?`<p>${escaparHTML(p.descripcion)}</p>`:''}<p class="price">${precioProducto(p.precio)}</p></div></article>`).join('') : '<p class="hint">Esta empresa aún no ha publicado productos.</p>';
-  }catch(err){console.warn('No se pudieron cargar productos del perfil:',err);target.innerHTML='<p class="hint">No se pudieron cargar los productos en este momento.</p>';}
+    const rows=data||[];
+    target.innerHTML=rows.length ? rows.map(p=>`<article class="profile-product">${p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.nombre)}" loading="lazy">`:`<div style="aspect-ratio:4/3;background:var(--paper)"></div>`}<div class="bd"><strong>${escaparHTML(p.nombre)}</strong>${p.descripcion?`<p>${escaparHTML(p.descripcion)}</p>`:''}<p class="price">${precioProducto(p.precio)}</p></div></article>`).join('') : '<p class="hint">Esta empresa aún no ha publicado productos.</p>';
+  }catch(err){
+    console.error('No se pudieron cargar productos del perfil:',err);
+    // Si el catálogo público ya cargó, úsalo como respaldo para no dejar la ficha bloqueada.
+    const fallback=(productosPublicos||[]).filter(p=>String(p.empresa_id)===String(companyId));
+    target.innerHTML=fallback.length ? fallback.map(p=>`<article class="profile-product">${p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.nombre)}" loading="lazy">`:`<div style="aspect-ratio:4/3;background:var(--paper)"></div>`}<div class="bd"><strong>${escaparHTML(p.nombre)}</strong>${p.descripcion?`<p>${escaparHTML(p.descripcion)}</p>`:''}<p class="price">${precioProducto(p.precio)}</p></div></article>`).join('') : '<p class="hint">No se pudieron cargar los productos. Intenta actualizar la página.</p>';
+  }
 }
+
 chipRow($('#prodChips'), [{id:'todas',name:'Todos'},...CATS], 'todas', v=>{prodState.cat=v;renderProds()});
 
 /* =========================================================
