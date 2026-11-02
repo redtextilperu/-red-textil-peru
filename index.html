@@ -1412,7 +1412,7 @@ function abrirCotizacionProducto(producto){
   cotizacionProductoActual = producto;
   $('#dlgTitle').textContent = 'Solicitar cotización';
   $('#dlgSub').textContent = `${producto.nombre} · ${producto.empresa_nombre}. Completa tus datos y enviaremos tu pedido directamente a esta empresa por WhatsApp.`;
-  $('#dlgSubmit').textContent = 'Enviar pedido por WhatsApp';
+  $('#dlgSubmit').textContent = 'Contactar por WhatsApp';
   $('#f-role').closest('.field').hidden = true;
   $('#f-cat').closest('.field').hidden = true;
   $('#f-name').closest('.field').querySelector('label').textContent = 'Tu nombre o empresa';
