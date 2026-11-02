@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RED TEXTIL PERÚ | El mercado de la industria textil peruana</title>
+<meta name="description" content="Encuentra fabricantes, proveedores, maquinaria e insumos de la cadena textil peruana. Empezamos en Trujillo.">
+<meta name="theme-color" content="#0A1B4D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --navy:#0A1B4D;
+  --navy-900:#071238;
+  --electric:#1F4BFF;
+  --electric-deep:#1236C9;
+  --pink:#D4107F;
+  --pink-deep:#A80A62;
+  --pink-soft:#FDE6F2;
+  --sky:#7CD3F7;
+  --sky-soft:#E8F6FD;
+  --white:#FFFFFF;
+  --paper:#F5F8FD;
+  --line:#DDE5F2;
+  --ink:#0B1230;
+  --ink-soft:#4B5878;
+
+  --f-display:"Sora","Segoe UI",system-ui,sans-serif;
+  --f-body:"Public Sans","Segoe UI",system-ui,sans-serif;
+
+  --r-s:8px; --r-m:16px; --r-l:28px;
+  --wrap:1200px;
+  --shadow:0 10px 30px rgba(10,27,77,.10);
+}
+
+/* ============ BASE ============ */
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font-family:var(--f-body);font-size:1.0625rem;line-height:1.6;color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.1;letter-spacing:-.025em;margin:0}
+p{margin:0}
+:focus-visible{outline:3px solid var(--electric);outline-offset:3px;border-radius:6px}
+.wrap{width:min(100% - 36px,var(--wrap));margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+section{padding:88px 0}
+.bg-paper{background:var(--paper)}
+.bg-sky{background:var(--sky-soft)}
+.bg-navy{background:radial-gradient(900px 420px at 100% 0,rgba(31,75,255,.38),transparent 62%),radial-gradient(700px 380px at 0 100%,rgba(212,16,127,.16),transparent 65%),var(--navy);color:var(--white)}
+
+.s-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:36px}
+.s-head h2{font-size:clamp(1.75rem,3.8vw,2.6rem);font-weight:700;max-width:620px}
+.s-head p{margin-top:12px;color:var(--ink-soft);max-width:560px}
+.bg-navy .s-head p{color:#B9C8EA}
+.more{font-weight:700;color:var(--electric);text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:6px 0;border-bottom:2px solid var(--pink)}
+.more:hover{color:var(--pink-deep)}
+
+/* ============ BOTONES ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 28px;border-radius:12px;border:2px solid transparent;font-family:var(--f-body);font-weight:700;font-size:1rem;line-height:1.2;text-decoration:none;transition:background .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s;text-align:center}
+.btn:active{transform:translateY(1px)}
+.btn-pink{background:var(--pink);color:var(--white)}
+.btn-pink:hover{background:var(--pink-deep);box-shadow:0 8px 22px rgba(212,16,127,.35)}
+.btn-electric{background:var(--electric);color:var(--white)}
+.btn-electric:hover{background:var(--electric-deep)}
+.btn-white{background:var(--white);color:var(--navy)}
+.btn-white:hover{background:var(--sky-soft)}
+.btn-outline{border-color:rgba(255,255,255,.7);color:var(--white);background:rgba(255,255,255,.06)}
+.btn-outline:hover{background:var(--white);color:var(--navy)}
+.btn-line{border-color:var(--electric);color:var(--electric);background:transparent}
+.btn-line:hover{background:var(--electric);color:var(--white)}
+.btn-sm{min-height:46px;padding:10px 22px;font-size:.9375rem;border-radius:10px}
+
+/* ============ HEADER ============ */
+.top{position:sticky;top:0;z-index:60;background:var(--white);border-bottom:1px solid var(--line);transition:box-shadow .2s}
+.top.scrolled{box-shadow:0 6px 24px rgba(10,27,77,.10)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy)}
+.brand svg{width:42px;height:42px;flex:none}
+.brand b{font-family:var(--f-display);font-weight:800;font-size:1.0625rem;letter-spacing:.01em;line-height:1.05;display:block}
+.brand b span{color:var(--pink)}
+.brand small{display:block;font-size:.6875rem;font-weight:600;color:var(--ink-soft);letter-spacing:.02em;margin-top:2px}
+.nav{display:flex;align-items:center;gap:26px}
+.nav a.l{color:var(--navy);text-decoration:none;font-size:.9375rem;font-weight:600;padding:6px 0;border-bottom:2px solid transparent;transition:.2s}
+.nav a.l:hover{color:var(--electric);border-bottom-color:var(--pink)}
+.burger{display:none;width:46px;height:46px;border:1px solid var(--line);background:var(--white);color:var(--navy);border-radius:12px}
+.burger svg{margin:auto}
+@media (max-width:1020px){
+  .burger{display:block}
+  .nav{position:fixed;inset:72px 0 auto 0;background:var(--white);flex-direction:column;align-items:stretch;gap:0;padding:8px 18px 22px;border-bottom:1px solid var(--line);box-shadow:0 20px 40px rgba(10,27,77,.15);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.2s;max-height:calc(100dvh - 72px);overflow:auto}
+  .nav.open{transform:none;opacity:1;visibility:visible}
+  .nav a.l{padding:15px 2px;border-bottom:1px solid var(--line);font-size:1.0625rem}
+  .nav .btn{margin-top:16px}
+}
+
+/* ============ HERO (luminoso) ============ */
+.hero{position:relative;padding:0;overflow:hidden;color:var(--ink);background:linear-gradient(180deg,#EAF3FF 0%,#F6FAFF 55%,#FFFFFF 100%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:64px;align-items:center;padding-block:64px 52px}
+.hero-copy{min-width:0}
+.hero h1{font-size:clamp(2.1rem,4.4vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;color:var(--navy);max-width:560px}
+.hero .lead{margin-top:20px;font-size:1.125rem;line-height:1.65;color:var(--ink-soft);max-width:520px}
+
+/* Buscador compacto */
+.finder{margin-top:32px;max-width:560px;min-width:0}
+.f-bar{display:flex;align-items:center;gap:8px;background:var(--white);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:6px 6px 6px 18px;box-shadow:0 12px 32px rgba(10,27,77,.12);transition:box-shadow .2s,border-color .2s}
+.f-bar:focus-within{border-color:var(--electric);box-shadow:0 0 0 3px rgba(31,75,255,.18),0 12px 32px rgba(10,27,77,.12)}
+.f-bar>svg{flex:none;width:22px;height:22px;color:var(--electric)}
+.f-bar input{flex:1;min-width:0;height:48px;border:0;outline:none;background:transparent;font-size:1rem;color:var(--ink);padding:0 4px}
+.f-bar input::placeholder{color:#7A87A6}
+.f-bar .btn{flex:none;min-height:48px;padding:0 28px;border-radius:12px}
+.f-tabs{display:flex;flex-wrap:nowrap;gap:8px;margin-top:14px;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none;padding-bottom:2px}
+.f-tabs::-webkit-scrollbar{display:none}
+.f-tab{flex:none;scroll-snap-align:start;white-space:nowrap;min-height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:var(--white);color:var(--navy);font-weight:600;font-size:.9rem;transition:.15s}
+.f-tab:hover{border-color:var(--electric);color:var(--electric)}
+.f-tab[aria-pressed="true"]{background:var(--electric);border-color:var(--electric);color:var(--white)}
+
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+
+/* Fotografías de la portada */
+.hero-media{position:relative;min-width:0;padding-bottom:30px}
+.hm-main{position:relative;aspect-ratio:5/4;border-radius:28px;overflow:hidden;background:repeating-linear-gradient(0deg,rgba(31,75,255,.06) 0 2px,transparent 2px 10px),linear-gradient(135deg,#DCEBFF,#F4F8FF);box-shadow:0 30px 70px rgba(10,27,77,.22)}
+.hm-inset{position:absolute;left:-30px;bottom:0;width:36%;aspect-ratio:1/1;border-radius:20px;overflow:hidden;border:6px solid var(--white);background:linear-gradient(135deg,#CFE3FF,#F4F8FF);box-shadow:0 18px 40px rgba(10,27,77,.26)}
+.hm-main img,.hm-inset img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.hm-main img{object-position:50% 40%}
+.hm-main img.on,.hm-inset img.on{opacity:1}
+.hm-card{position:absolute;right:18px;top:18px;display:flex;align-items:center;gap:10px;background:var(--white);padding:11px 16px;border-radius:14px;box-shadow:0 12px 30px rgba(10,27,77,.22);font-weight:700;font-size:.875rem;color:var(--navy)}
+.pulse{flex:none;width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 0 0 rgba(212,16,127,.55);animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(212,16,127,0)}100%{box-shadow:0 0 0 0 rgba(212,16,127,0)}}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:28px;padding-block:28px 36px}
+  .hero-media{order:-1;padding-bottom:0}
+  .hm-main{aspect-ratio:16/10;border-radius:22px}
+  .hm-inset{display:none}
+  .hm-card{right:auto;left:12px;top:auto;bottom:12px;padding:9px 13px;font-size:.8125rem}
+  .hero h1{font-size:clamp(1.95rem,7.4vw,2.6rem)}
+  .hero .lead{font-size:1.0625rem;margin-top:16px}
+  .finder{margin-top:24px}
+}
+@media (max-width:640px){
+  .hero-cta{flex-direction:column;gap:12px}
+  .hero-cta .btn{width:100%}
+  .f-bar{padding-left:14px}
+  .f-bar .btn{padding:0 20px}
+  .f-tabs{margin-inline:-18px;padding-inline:18px;scroll-padding-inline:18px}
+}
+
+/* ============ FRANJA DE BENEFICIOS ============ */
+.perks{position:relative;z-index:5;padding:0 0 4px;background:var(--white)}
+.perks ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);background:var(--white);border-radius:20px;border:1px solid var(--line);box-shadow:0 14px 40px rgba(10,27,77,.10)}
+.perks li{display:flex;align-items:center;gap:14px;padding:22px 20px;border-right:1px solid var(--line)}
+.perks li:last-child{border-right:0}
+.perks .pi{flex:none;width:46px;height:46px;border-radius:50%;background:var(--sky-soft);color:var(--electric);display:grid;place-items:center}
+.perks .pi svg{width:22px;height:22px}
+.perks b{display:block;font-family:var(--f-display);font-size:.9688rem;color:var(--navy);line-height:1.2}
+.perks span.t{font-size:.8438rem;color:var(--ink-soft);line-height:1.35;display:block;margin-top:2px}
+@media (max-width:900px){.perks ul{grid-template-columns:repeat(2,1fr)}.perks li:nth-child(2){border-right:0}.perks li:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media (max-width:480px){.perks li{padding:14px 12px;gap:10px}.perks .pi{width:38px;height:38px}.perks .pi svg{width:19px;height:19px}.perks b{font-size:.875rem}.perks span.t{display:none}}
+
+/* ============ IMÁGENES (con respaldo de textura) ============ */
+.ph{position:absolute;inset:0;overflow:hidden;display:block;
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.10) 0 2px,transparent 2px 9px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.07) 0 2px,transparent 2px 9px),
+    linear-gradient(140deg,var(--g1),var(--g2))}
+.ph>svg{position:absolute;left:50%;top:42%;translate:-50% -50%;width:34%;max-width:96px;color:rgba(255,255,255,.55)}
+.ph>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s,transform .6s}
+.ph>img.on{opacity:1}
+
+/* ============ CATEGORÍAS ============ */
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.cat{position:relative;display:block;aspect-ratio:4/5;border:0;border-radius:var(--r-m);overflow:hidden;padding:0;text-align:left;color:var(--white);background:var(--navy);isolation:isolate;box-shadow:var(--shadow)}
+.cat::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(7,18,56,0) 35%,rgba(7,18,56,.92) 100%);transition:.3s}
+.cat:hover .ph>img{transform:scale(1.06)}
+.cat:hover::after{background:linear-gradient(180deg,rgba(212,16,127,.05) 20%,rgba(7,18,56,.95) 100%)}
+.cat .tx{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:20px}
+.cat h3{font-size:1.25rem;font-weight:700;line-height:1.15}
+.cat .n{display:inline-block;margin-top:8px;font-size:.8438rem;font-weight:600;color:var(--sky)}
+.cat .go{position:absolute;right:14px;top:14px;z-index:2;width:38px;height:38px;border-radius:50%;background:var(--white);color:var(--pink);display:grid;place-items:center;opacity:0;transform:translateY(-4px);transition:.25s}
+.cat:hover .go,.cat:focus-visible .go{opacity:1;transform:none}
+.cat .go svg{width:18px;height:18px}
+@media (max-width:980px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:14px}.cat{aspect-ratio:1/1.05}.cat .go{opacity:1;transform:none;width:34px;height:34px}.cat .tx{padding:14px}.cat h3{font-size:1.0625rem}}
+
+/* ============ PRODUCTORES DESTACADOS ============ */
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.fcard{background:var(--white);border-radius:var(--r-m);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s}
+.fcard:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(10,27,77,.16)}
+.fcard .pic{position:relative;aspect-ratio:4/3;background:var(--navy)}
+.pill{position:absolute;z-index:2;left:12px;top:12px;font-size:.75rem;font-weight:700;padding:5px 11px;border-radius:999px;background:var(--white);color:var(--navy)}
+.pill.pk{background:var(--pink);color:var(--white)}
+.fcard .bd{padding:18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.fcard h3{font-size:1.125rem;font-weight:700;line-height:1.2}
+.fcard .meta{font-size:.875rem;color:var(--ink-soft)}
+.fcard .ds{font-size:.9375rem;margin-top:4px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tag{font-size:.78rem;padding:3px 10px;border-radius:999px;background:var(--sky-soft);color:var(--electric-deep);font-weight:600}
+.fcard .acts{display:flex;gap:8px;margin-top:auto;padding-top:16px}
+.fcard .acts .btn{flex:1}
+@media (max-width:1020px){
+  .feat{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin-inline:-18px;padding:6px 18px 22px;scrollbar-width:none}
+  .feat::-webkit-scrollbar{display:none}
+  .fcard{flex:0 0 min(78%,320px);scroll-snap-align:start}
+}
+
+/* ============ DIRECTORIO ============ */
+.dir-tools{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-bottom:16px}
+.search{position:relative;flex:1 1 300px;max-width:460px}
+.search svg{position:absolute;left:16px;top:50%;translate:0 -50%;width:20px;height:20px;color:var(--electric)}
+.search input{width:100%;height:52px;padding:0 16px 0 46px;border:2px solid var(--line);border-radius:12px;background:var(--white);outline:none}
+.search input:focus{border-color:var(--electric)}
+.seg{display:inline-flex;background:var(--white);border:1px solid var(--line);border-radius:12px;padding:4px}
+.seg button{min-height:42px;padding:0 16px;border:0;border-radius:9px;background:transparent;font-weight:600;font-size:.9375rem;color:var(--ink-soft)}
+.seg button[aria-pressed="true"]{background:var(--navy);color:var(--white)}
+.count{font-size:.9375rem;color:var(--ink-soft);margin-left:auto}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 14px;margin-bottom:10px;scrollbar-width:thin}
+.chip{flex:none;min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--white);font-size:.9375rem;font-weight:600;color:var(--ink-soft);transition:.15s}
+.chip:hover{border-color:var(--electric);color:var(--electric)}
+.chip[aria-pressed="true"]{background:var(--electric);border-color:var(--electric);color:var(--white)}
+.dir-list{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.co{display:grid;grid-template-columns:112px 1fr;gap:18px;padding:16px;background:var(--white);border:1px solid var(--line);border-radius:var(--r-m);transition:border-color .2s,box-shadow .2s}
+.co:hover{border-color:var(--electric);box-shadow:var(--shadow)}
+.co .th{position:relative;border-radius:12px;overflow:hidden;min-height:112px;background:var(--navy)}
+.co h3{font-size:1.125rem;font-weight:700;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ex{font-family:var(--f-body);font-size:.6875rem;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--pink-soft);color:var(--pink-deep);letter-spacing:0}
+.co .meta{font-size:.875rem;color:var(--ink-soft);margin-top:2px}
+.co .ds{font-size:.9375rem;margin-top:8px}
+.co .go{margin-top:12px;padding:0;border:0;background:none;font-weight:700;font-size:.9375rem;color:var(--electric);text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--pink);text-decoration-thickness:2px}
+.co .profile-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;margin-right:16px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--navy);font-weight:700;font-size:.875rem}
+.co .profile-btn:hover{border-color:var(--electric);color:var(--electric)}
+.profile-cover{width:100%;height:190px;object-fit:cover;background:var(--paper);border-radius:14px;margin:8px 0 18px}
+.profile-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.profile-meta div{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.profile-meta small{display:block;color:var(--ink-soft);font-size:.75rem;margin-bottom:4px}
+.profile-meta strong{font-size:.9375rem}
+.profile-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.profile-actions .btn{flex:1 1 180px}
+@media(max-width:480px){.profile-meta{grid-template-columns:1fr}.profile-cover{height:150px}}
+.empty{grid-column:1/-1;padding:40px 24px;text-align:center;border:2px dashed var(--line);border-radius:var(--r-m);color:var(--ink-soft);background:var(--white)}
+.empty .btn{margin-top:16px}
+@media (max-width:860px){.dir-list{grid-template-columns:1fr}.count{margin-left:0}}
+@media (max-width:480px){.co{grid-template-columns:1fr}.co .th{min-height:0;aspect-ratio:16/8}}
+
+/* ============ PARTICIPA ============ */
+.tabs{display:flex;gap:10px;margin-bottom:22px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:1 0 220px;text-align:left;padding:18px 20px;border-radius:var(--r-m);border:2px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);transition:.2s}
+.tab strong{display:block;font-family:var(--f-display);font-size:1.1875rem;color:var(--white)}
+.tab span{font-size:.9rem;color:#B9C8EA;line-height:1.35;display:block;margin-top:2px}
+.tab:hover{border-color:var(--sky)}
+.tab[aria-selected="true"]{background:var(--white);border-color:var(--white)}
+.tab[aria-selected="true"] strong{color:var(--navy)}
+.tab[aria-selected="true"] span{color:var(--ink-soft)}
+.panel{background:var(--white);border-radius:var(--r-l);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;box-shadow:var(--shadow)}
+.panel .pimg{position:relative;min-height:320px;background:var(--navy)}
+.panel .pbody{padding:38px}
+.panel h3{font-size:1.625rem;font-weight:700}
+.panel .intro{margin-top:10px;color:var(--ink-soft)}
+.panel ul{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px}
+.panel li{display:grid;grid-template-columns:24px 1fr;gap:10px}
+.panel li svg{width:24px;height:24px;color:var(--pink);margin-top:1px}
+.steps{list-style:none;margin:22px 0 0;padding:16px 0 0;border-top:1px solid var(--line);display:flex;gap:10px;counter-reset:s}
+.steps li{display:block;counter-increment:s;flex:1;font-size:.875rem;color:var(--ink-soft);line-height:1.35}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--electric);color:var(--white);font-weight:700;font-size:.8125rem;margin-bottom:6px}
+.steps b{display:block;color:var(--navy);font-family:var(--f-display);font-size:.9375rem}
+.panel .btn{margin-top:24px}
+@media (max-width:900px){.panel{grid-template-columns:1fr}.panel .pimg{min-height:0;aspect-ratio:16/8}.panel .pbody{padding:24px}.steps{flex-direction:column}.steps li{display:grid;grid-template-columns:34px 1fr;gap:0}.steps li::before{margin:0}}
+
+/* ============ CATÁLOGO ============ */
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.prod{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden;transition:.25s}
+.prod:hover{border-color:var(--electric);box-shadow:var(--shadow)}
+.prod .pic{position:relative;aspect-ratio:1/1;background:var(--navy)}
+.prod .bd{padding:16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.prod h3{font-size:1.0625rem;font-weight:700;line-height:1.25}
+.prod .by{font-size:.875rem;color:var(--ink-soft)}
+.prod .ask{margin-top:8px;font-size:.875rem;font-weight:700;color:var(--pink-deep)}
+.prod .btn{margin-top:12px}
+@media (max-width:1020px){.prod-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:760px){.prod-grid{grid-template-columns:repeat(2,1fr);gap:12px}.prod .bd{padding:12px}.prod h3{font-size:.9688rem}.prod .btn{padding:0 10px}}
+
+/* ============ OPORTUNIDADES ============ */
+.opp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.opp{display:flex;flex-direction:column;gap:12px;background:var(--white);border:1px solid var(--line);border-top:5px solid var(--electric);border-radius:var(--r-m);padding:22px}
+.opp.k-compra{border-top-color:var(--navy)}
+.opp.k-maquila{border-top-color:var(--electric)}
+.opp.k-alianza{border-top-color:var(--pink)}
+.opp .top-r{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.kind{font-size:.8125rem;font-weight:700;padding:4px 12px;border-radius:999px}
+.k-compra .kind{background:#E4E9F7;color:var(--navy)}
+.k-maquila .kind{background:#E3EBFF;color:var(--electric-deep)}
+.k-alianza .kind{background:var(--pink-soft);color:var(--pink-deep)}
+.opp h3{font-size:1.1875rem;font-weight:700;line-height:1.25}
+.opp .who{font-size:.875rem;color:var(--ink-soft)}
+.opp .ds{font-size:.9375rem}
+.opp .foot{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;padding-top:14px;border-top:1px solid var(--line);font-size:.875rem;color:var(--ink-soft)}
+@media (max-width:1020px){.opp-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.opp-grid{grid-template-columns:1fr}}
+
+/* ============ COMUNIDAD ============ */
+.comm{display:grid;grid-template-columns:1.1fr 1fr;border-radius:var(--r-l);overflow:hidden;background:var(--navy);color:var(--white);box-shadow:var(--shadow)}
+.comm .cimg{position:relative;min-height:380px;background:var(--navy-900)}
+.comm .cimg::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(212,16,127,.0),rgba(10,27,77,.55))}
+.comm .cbody{padding:42px}
+.comm h2{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:700}
+.comm .cbody>p{margin-top:12px;color:#C3D1EF}
+.cfeat{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:14px}
+.cfeat li{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.cfeat .ci{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.1);color:var(--sky);display:grid;place-items:center}
+.cfeat .ci svg{width:22px;height:22px}
+.cfeat b{display:block;font-family:var(--f-display);font-size:1.0625rem}
+.cfeat span.t{font-size:.9375rem;color:#B9C8EA}
+.comm .btn{margin-top:28px}
+.topics{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.topics span{font-size:.8438rem;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.25);color:#DCE6F8}
+@media (max-width:900px){.comm{grid-template-columns:1fr}.comm .cimg{min-height:0;aspect-ratio:16/8}.comm .cbody{padding:26px}}
+
+/* ============ CAPACITACIONES Y EVENTOS ============ */
+.ev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ev{display:flex;flex-direction:column;background:var(--white);border:1px solid var(--line);border-radius:var(--r-m);overflow:hidden}
+.ev .pic{position:relative;aspect-ratio:16/8;background:var(--navy)}
+.ev .bd{padding:20px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ev h3{font-size:1.125rem;font-weight:700;line-height:1.25}
+.ev p{font-size:.9375rem;color:var(--ink-soft)}
+.ev .when{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.875rem;font-weight:600;color:var(--navy)}
+.ev .when span{display:inline-flex;align-items:center;gap:6px}
+.ev .when svg{width:18px;height:18px;color:var(--pink)}
+@media (max-width:1020px){.ev-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.ev-grid{grid-template-columns:1fr}}
+
+/* ============ EXPANSIÓN ============ */
+.road{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+.road::before{content:"";position:absolute;left:0;right:0;top:15px;height:2px;background:var(--line)}
+.road li{position:relative;padding:48px 24px 0 0}
+.road li::before{content:"";position:absolute;left:0;top:6px;width:20px;height:20px;border-radius:50%;background:var(--white);border:3px solid #B7C6E6}
+.road li.now::before{background:var(--pink);border-color:var(--pink);box-shadow:0 0 0 6px rgba(212,16,127,.18)}
+.road li.now::after{content:"";position:absolute;left:0;top:15px;width:25%;height:2px;background:var(--pink)}
+.road b{display:block;font-family:var(--f-display);font-size:1.25rem;color:var(--navy)}
+.road small{display:block;color:var(--pink-deep);font-weight:700;margin-bottom:6px}
+.road p{color:var(--ink-soft);font-size:.9688rem}
+@media (max-width:820px){
+  .road{grid-template-columns:1fr;gap:26px}
+  .road::before{left:9px;right:auto;top:0;bottom:0;width:2px;height:auto}
+  .road li{padding:0 0 0 44px}
+  .road li::before{left:0;top:2px}
+  .road li.now::after{display:none}
+}
+
+/* ============ CTA + FOOTER ============ */
+.cta{padding:80px 0;color:var(--white);background:linear-gradient(110deg,var(--electric) 0%,#6A2BE0 55%,var(--pink) 100%)}
+.cta .wrap{display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:space-between}
+.cta h2{font-size:clamp(1.7rem,3.8vw,2.6rem);font-weight:800;max-width:660px}
+footer{background:var(--navy-900);color:#9FB0D6;padding:56px 0 34px;font-size:.9375rem}
+.foot{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:36px}
+.foot h4{color:var(--white);font-size:1rem;margin-bottom:12px}
+.foot a{display:block;text-decoration:none;padding:4px 0}
+.foot a:hover{color:var(--sky)}
+footer .brand{color:var(--white);margin-bottom:14px}
+footer .brand small{color:#9FB0D6}
+.legal{margin-top:38px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);font-size:.8125rem;line-height:1.55}
+@media (max-width:760px){.foot{grid-template-columns:1fr}}
+
+/* ============ MODAL + TOAST ============ */
+dialog{width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 24px);padding:0;border:0;border-radius:var(--r-l);background:var(--white);color:var(--ink);box-shadow:0 30px 80px rgba(7,18,56,.5)}
+dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
+.dlg{padding:30px}
+.dlg-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:6px}
+.dlg h3{font-size:1.5rem;font-weight:700}
+.dlg .x{flex:none;width:42px;height:42px;border-radius:50%;border:0;background:var(--paper);font-size:1.15rem;line-height:1}
+.dlg .sub{color:var(--ink-soft);font-size:.9688rem;margin-bottom:20px}
+.field{display:grid;gap:6px;margin-bottom:14px}
+.field label{font-size:.875rem;font-weight:700;color:var(--navy)}
+.field input,.field select,.field textarea{height:50px;padding:0 14px;border:2px solid var(--line);border-radius:12px;background:var(--white);outline:none;width:100%}
+.field textarea{height:96px;padding:12px 14px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--electric)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:480px){.two{grid-template-columns:1fr}.dlg{padding:20px}}
+.dlg .btn{width:100%;margin-top:6px}
+.dlg .demo{margin-top:12px;font-size:.8125rem;color:var(--ink-soft);text-align:center}
+
+.toast{position:fixed;left:50%;bottom:22px;translate:-50% 150%;z-index:100;max-width:calc(100% - 28px);padding:14px 22px;border-radius:14px;background:var(--navy);color:var(--white);border-left:5px solid var(--pink);box-shadow:0 14px 40px rgba(7,18,56,.45);transition:translate .35s cubic-bezier(.2,.8,.2,1);font-weight:600;font-size:.9688rem}
+.toast.show{translate:-50% 0}
+
+/* ============ AJUSTES V2 ============ */
+/* Filtros que se deslizan en horizontal */
+.chips{flex-wrap:nowrap;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{scroll-snap-align:start;white-space:nowrap}
+.tabs{scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+
+/* Elementos sobre fondo azul marino */
+.bg-navy .more{color:var(--sky)}
+.bg-navy .more:hover{color:var(--white)}
+.bg-navy .chip{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.30);color:#DCE6F8}
+.bg-navy .chip:hover{border-color:var(--sky);color:var(--white)}
+.bg-navy .chip[aria-pressed="true"]{background:var(--pink);border-color:var(--pink);color:var(--white)}
+.opp.k-compra{border-top-color:var(--sky)}
+
+
+/* Categorías con fotos: carrusel horizontal en celular y tablet */
+@media (max-width:980px){
+  .cat-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none;margin-inline:-18px;padding:4px 18px 16px;scroll-padding-inline:18px}
+  .cat-grid::-webkit-scrollbar{display:none}
+  .cat{flex:0 0 min(68%,270px);aspect-ratio:4/5;scroll-snap-align:start}
+  .cat .tx{padding:16px}
+  .cat h3{font-size:1.125rem}
+}
+
+/* Botones completos y con espacio dentro de las tarjetas */
+.fcard .acts{flex-wrap:wrap;gap:10px}
+.fcard .acts .btn{flex:1 1 130px}
+.prod .btn{width:100%}
+.opp .foot{flex-direction:column;align-items:stretch;gap:12px}
+.opp .foot .btn{width:100%}
+.ev .when{flex-direction:column;align-items:stretch;gap:12px}
+.ev .when .btn{width:100%}
+.co .go{padding:8px 0}
+.search input{height:50px}
+
+@media (max-width:640px){
+  section{padding:60px 0}
+  .s-head{margin-bottom:26px}
+  .chips{margin-inline:-18px;padding-inline:18px;scroll-padding-inline:18px}
+  .tabs{margin-inline:-18px;padding-inline:18px}
+  .cta .btn{width:100%}
+  .comm .btn,.panel .btn{width:100%}
+}
+
+/* ============ CUENTAS Y REGISTRO (nuevo) ============ */
+.authtabs{display:flex;width:100%;margin-bottom:16px}
+.authtabs button{flex:1}
+.msg{padding:12px 14px;border-radius:12px;font-size:.9375rem;line-height:1.45;margin-bottom:14px;border:1px solid transparent}
+.msg.ok{background:var(--sky-soft);color:var(--navy);border-color:#BFE6F8}
+.msg.err{background:var(--pink-soft);color:var(--pink-deep);border-color:#F6BFDC}
+.msg.info{background:var(--paper);color:var(--ink-soft);border-color:var(--line)}
+.hint{font-size:.8125rem;color:var(--ink-soft)}
+.showpw{display:flex;align-items:center;gap:8px;font-size:.875rem;color:var(--ink-soft);margin:-4px 0 14px}
+.showpw input{width:18px;height:18px;accent-color:var(--electric)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.status{border:1px solid var(--line);border-radius:var(--r-m);padding:18px;background:var(--paper);margin-bottom:14px}
+.owner-dashboard{display:grid;gap:15px}
+.owner-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.owner-head h4{font-family:var(--f-display);font-size:1.25rem;color:var(--navy);margin-top:10px}
+.owner-head p,.owner-status-text,.owner-note{color:var(--ink-soft);font-size:.9rem;line-height:1.5;margin-top:6px}
+.owner-logo{width:76px;height:76px;object-fit:contain;border:1px solid var(--line);border-radius:14px;background:#fff;padding:5px}
+.owner-details{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.owner-detail{padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;min-width:0}
+.owner-detail small,.owner-description small{display:block;color:var(--ink-soft);font-size:.75rem;margin-bottom:4px}
+.owner-detail strong{font-size:.9rem;overflow-wrap:anywhere}
+.owner-description{padding:12px;border-radius:11px;background:#fff;border:1px solid var(--line)}
+.owner-description p{font-size:.9rem;line-height:1.5}
+.owner-actions{display:flex;flex-wrap:wrap;gap:9px}
+.owner-note{font-size:.78rem}
+.owner-edit-form{display:grid;gap:12px;padding:15px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.owner-edit-form h5{font-family:var(--f-display);font-size:1.05rem;color:var(--navy)}
+.owner-edit-form label{display:grid;gap:5px;font-size:.82rem;color:var(--ink-soft);font-weight:600}
+.owner-edit-form input,.owner-edit-form textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px 11px;background:#fff;color:var(--ink);font:inherit}
+.owner-edit-form textarea{min-height:95px;resize:vertical}
+.owner-edit-form .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+@media(max-width:480px){.owner-details{grid-template-columns:1fr}.owner-head{align-items:center}}
+
+.status b{display:block;font-family:var(--f-display);font-size:1.125rem;color:var(--navy)}
+.status p{margin-top:8px;color:var(--ink-soft);font-size:.9688rem}
+.badge{display:inline-block;margin-top:10px;font-size:.8125rem;font-weight:700;padding:4px 12px;border-radius:999px;background:var(--pink-soft);color:var(--pink-deep)}
+.badge.ok{background:var(--sky-soft);color:var(--electric-deep)}
+.dlg .btn+.btn{margin-top:10px}
+.who{font-size:.875rem;color:var(--ink-soft);margin-bottom:14px;overflow-wrap:anywhere}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* ============ GALERÍA DE EMPRESA ============ */
+.gallery-owner{display:grid;gap:10px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.gallery-item{position:relative;aspect-ratio:1/1;border-radius:10px;overflow:hidden;background:var(--paper);border:1px solid var(--line)}
+.gallery-item img{width:100%;height:100%;object-fit:cover}
+.gallery-item button{position:absolute;right:6px;top:6px;border:0;border-radius:8px;background:rgba(7,18,56,.88);color:#fff;padding:6px 9px;font-size:.75rem}
+.gallery-public{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.gallery-public img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+.gallery-title{font-family:var(--f-display);font-size:1.05rem;color:var(--navy);font-weight:700}
+@media(max-width:480px){.gallery-grid,.gallery-public{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+
+/* ============ PRODUCTOS DE EMPRESA ============ */
+.owner-products{display:grid;gap:12px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.owner-products-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.owner-product-form{display:grid;gap:10px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.owner-product-form label{display:grid;gap:5px;font-size:.82rem;font-weight:600;color:var(--ink-soft)}
+.owner-product-form input,.owner-product-form textarea,.owner-product-form select{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;background:#fff;font:inherit}
+.owner-product-form textarea{min-height:76px;resize:vertical}
+.product-image-preview img{display:block;max-width:180px;max-height:150px;object-fit:contain;border:1px solid var(--line);border-radius:10px;background:#fff;padding:4px}.product-image-preview{padding:4px 0}
+.owner-product-list{display:grid;gap:9px}
+.owner-product-row{display:grid;grid-template-columns:72px 1fr auto;gap:10px;align-items:center;padding:9px;border:1px solid var(--line);border-radius:10px}
+.owner-product-row img{width:72px;height:72px;object-fit:cover;border-radius:8px;background:var(--paper)}
+.owner-product-row strong{display:block;font-size:.9rem}
+.owner-product-row small{display:block;color:var(--ink-soft);font-size:.78rem}
+.owner-product-actions{display:flex;gap:6px;flex-wrap:wrap}
+.owner-product-actions button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 9px;font-size:.78rem;font-weight:700;color:var(--navy)}
+.profile-products{margin:20px 0}
+.profile-products h4{margin-bottom:12px}
+.profile-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.profile-product{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.profile-product img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--paper)}
+.profile-product .bd{padding:10px}
+.profile-product strong{display:block;font-size:.9rem}
+.profile-product p{font-size:.8rem;color:var(--ink-soft);margin-top:4px}
+.profile-product .price{font-weight:700;color:var(--pink-deep);margin-top:6px}
+.prod .pic img{width:100%;height:100%;object-fit:cover}
+.prod .by a{color:var(--electric);font-weight:700;text-decoration:none}
+.prod .by a:hover{text-decoration:underline}
+@media(max-width:480px){.owner-product-row{grid-template-columns:58px 1fr}.owner-product-row img{width:58px;height:58px}.owner-product-actions{grid-column:2}.profile-product-grid{grid-template-columns:1fr 1fr}}
+
+</style>
+</head>
+
+<body>
+
+<!-- ============ ENCABEZADO BLANCO ============ -->
+<header class="top" id="top">
+  <div class="wrap">
+    <a href="#inicio" class="brand" aria-label="RED TEXTIL PERÚ, inicio">
+      <svg viewBox="0 0 44 44" aria-hidden="true">
+        <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F4BFF"/><stop offset="1" stop-color="#0A1B4D"/></linearGradient></defs>
+        <rect width="44" height="44" rx="12" fill="url(#lg)"/>
+        <g stroke="#fff" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M9 14h26M9 22h26M9 30h26"/></g>
+        <g stroke="#7CD3F7" stroke-width="2.6" stroke-linecap="round" fill="none"><path d="M15 9v9M15 26v9M22 9v4M22 31v4M29 9v9M29 26v9"/></g>
+        <circle cx="22" cy="22" r="4.2" fill="#D4107F" stroke="#fff" stroke-width="1.6"/>
+      </svg>
+      <span><b>RED TEXTIL <span>PERÚ</span></b><small>Conectando la industria textil</small></span>
+    </a>
+
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+
+    <nav class="nav" id="nav" aria-label="Principal">
+      <a class="l" href="#categorias">Categorías</a>
+      <a class="l" href="#directorio">Directorio</a>
+      <a class="l" href="#catalogo">Catálogo</a>
+      <a class="l" href="#oportunidades">Oportunidades</a>
+      <a class="l" href="#comunidad">Comunidad</a>
+      <a class="l" href="#capacitaciones">Capacitaciones</a>
+      <a class="l" id="navLogout" href="#" hidden>Salir</a>
+      <button class="btn btn-pink btn-sm" data-open="join">Registrar empresa</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ PORTADA ============ -->
+<section class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1>El mercado de la industria textil peruana, en un solo lugar.</h1>
+      <p class="lead">Encuentra fabricantes, proveedores, maquinaria e insumos. Cotiza directo con las empresas y abre nuevas oportunidades de negocio. Empezamos en Trujillo.</p>
+
+      <form class="finder" id="finder" role="search" aria-label="Buscar en la red">
+        <div class="f-bar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <label class="sr" for="hq">Buscar</label>
+          <input id="hq" type="search" placeholder="Busca polos, telas, máquinas…" autocomplete="off">
+          <button class="btn btn-pink" type="submit">Buscar</button>
+        </div>
+        <div class="f-tabs" role="group" aria-label="¿Qué buscas?">
+          <button type="button" class="f-tab" data-scope="all" aria-pressed="true">Todo</button>
+          <button type="button" class="f-tab" data-scope="fab" aria-pressed="false">Fabricantes</button>
+          <button type="button" class="f-tab" data-scope="prov" aria-pressed="false">Proveedores</button>
+          <button type="button" class="f-tab" data-scope="maq" aria-pressed="false">Maquinaria</button>
+          <button type="button" class="f-tab" data-scope="ins" aria-pressed="false">Insumos</button>
+        </div>
+      </form>
+
+      <div class="hero-cta">
+        <button class="btn btn-pink" data-open="join">Registrar mi empresa</button>
+        <a class="btn btn-electric" href="#productores">Encontrar productores</a>
+      </div>
+    </div>
+
+    <div class="hero-media" aria-hidden="true">
+      <div class="hm-main"><img id="heroImg" alt="" fetchpriority="high" decoding="async"></div>
+      <div class="hm-inset"><img id="heroImg2" alt="" decoding="async"></div>
+      <div class="hm-card"><span class="pulse"></span>Primera fase activa en Trujillo</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BENEFICIOS ============ -->
+<div class="perks" aria-label="Qué puedes hacer en la red">
+  <div class="wrap">
+    <ul>
+      <li><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><span><b>Busca por rubro</b><span class="t">Fabricantes, telas, estampado y más</span></span></li>
+      <li><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span><b>Cotiza directo</b><span class="t">Escribe a la empresa sin intermediarios</span></span></li>
+      <li><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v13H3zM8 7V4h8v3"/></svg></span><span><b>Oportunidades</b><span class="t">Pedidos, maquila y alianzas</span></span></li>
+      <li><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5-10-5zM6 11.5V16c3 2.5 9 2.5 12 0v-4.5"/></svg></span><span><b>Aprende y conecta</b><span class="t">Capacitaciones y comunidad</span></span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ CATEGORÍAS CON FOTOGRAFÍAS ============ -->
+<section id="categorias">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2>Explora por categoría</h2>
+        <p>Ocho rubros que cubren la cadena completa, de la tela al producto terminado.</p>
+      </div>
+      <a class="more" href="#directorio">Ver directorio completo →</a>
+    </div>
+    <div class="cat-grid" id="catGrid"></div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTORES DESTACADOS ============ -->
+<section id="productores" class="bg-navy">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2>Productores destacados</h2>
+        <p>Productores textiles registrados y aprobados en Red Textil Perú. Conoce sus especialidades y visita sus fichas comerciales.</p>
+      </div>
+      <a class="more" href="#directorio">Ver todos →</a>
+    </div>
+    <div class="feat" id="featGrid"></div>
+  </div>
+</section>
+
+<!-- ============ DIRECTORIO ============ -->
+<section id="directorio">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2>Directorio de empresas textiles</h2>
+        <p>Busca por nombre, servicio o distrito, y filtra por rubro o tipo de empresa.</p>
+      </div>
+    </div>
+
+    <div class="dir-tools">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <label class="sr" for="q">Buscar empresa</label>
+        <input id="q" type="search" placeholder="Busca por nombre, servicio o distrito" autocomplete="off">
+      </div>
+      <div class="seg" id="roleSeg" role="group" aria-label="Tipo de empresa">
+        <button type="button" data-role="all" aria-pressed="true">Todas</button>
+        <button type="button" data-role="productor" aria-pressed="false">Fabricantes</button>
+        <button type="button" data-role="proveedor" aria-pressed="false">Proveedores</button>
+      </div>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+
+    <div class="chips" id="dirChips" role="group" aria-label="Filtrar por categoría"></div>
+    <div class="dir-list" id="dirList"></div>
+  </div>
+</section>
+
+<!-- ============ PROVEEDORES, PRODUCTORES Y COMPRADORES ============ -->
+<section id="participa" class="bg-navy">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2>Una red, tres formas de participar</h2>
+        <p>Elige tu rol hoy. Puedes sumar otro cuando tu negocio lo necesite.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Roles en la red" id="tabs">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="p-prov" id="t-prov"><strong>Proveedores</strong><span>Vendo telas, insumos, equipos o servicios</span></button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-prod" id="t-prod" tabindex="-1"><strong>Productores</strong><span>Confecciono, estampo o fabrico</span></button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-comp" id="t-comp" tabindex="-1"><strong>Compradores</strong><span>Necesito prendas, uniformes o productos</span></button>
+    </div>
+
+    <div id="panels"></div>
+  </div>
+</section>
+
+<!-- ============ CATÁLOGO ============ -->
+<section id="catalogo">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2>Catálogo de productos</h2>
+        <p>Prendas, telas, estampados y equipos publicados por las empresas. Pide tu cotización en un toque.</p>
+      </div>
+    </div>
+    <div class="chips" id="prodChips" role="group" aria-label="Filtrar catálogo"></div>
+    <div class="prod-grid" id="prodGrid"></div>
+  </div>
+</section>
+
+<!-- ============ OPORTUNIDADES COMERCIALES ============ -->
+<section id="oportunidades" class="bg-navy">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2>Oportunidades comerciales</h2>
+        <p>Pedidos, servicios de maquila y alianzas entre empresas. Los casos de abajo son ejemplos de cómo se verán.</p>
+      </div>
+    </div>
+    <div class="chips" id="oppChips" role="group" aria-label="Filtrar oportunidades"></div>
+    <div class="opp-grid" id="oppList"></div>
+  </div>
+</section>
+
+<!-- ============ COMUNIDAD EMPRESARIAL ============ -->
+<section id="comunidad">
+  <div class="wrap">
+    <div class="comm">
+      <div class="cimg" id="commImg" aria-hidden="true"></div>
+      <div class="cbody">
+        <h2>Comunidad empresarial textil</h2>
+        <p>Un espacio para conocer a otros empresarios, compartir experiencias y resolver dudas de producción, costos y ventas.</p>
+        <ul class="cfeat">
+          <li><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg></span><span><b>Conversaciones por rubro</b><span class="t">Confección, estampado, telas y maquinaria.</span></span></li>
+          <li><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 5.5a3 3 0 0 1 0 5.7M18 14.3c1.8.7 3 2.4 3 4.7"/></svg></span><span><b>Mesas de encuentro</b><span class="t">Reuniones entre productores y proveedores.</span></span></li>
+          <li><span class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></span><span><b>Buenas prácticas</b><span class="t">Aprende de quienes ya producen y venden.</span></span></li>
+        </ul>
+        <div class="topics" aria-label="Temas frecuentes"><span>Costos por prenda</span><span>Tela dry-fit</span><span>Prensado DTF</span><span>Pedidos para empresas</span></div>
+        <button class="btn btn-pink" data-open="join">Unirme a la comunidad</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CAPACITACIONES Y EVENTOS ============ -->
+<section id="capacitaciones" class="bg-navy">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2>Capacitaciones y eventos</h2>
+        <p>Talleres, charlas y encuentros para crecer tu negocio. Las fechas se confirmarán al abrir inscripciones.</p>
+      </div>
+    </div>
+    <div class="chips" id="evChips" role="group" aria-label="Filtrar capacitaciones y eventos"></div>
+    <div class="ev-grid" id="evGrid"></div>
+  </div>
+</section>
+
+<!-- ============ EXPANSIÓN ============ -->
+<section id="expansion">
+  <div class="wrap">
+    <div class="s-head">
+      <div>
+        <h2>De Trujillo a todo el Perú</h2>
+        <p>Crecemos por zonas para que cada ciudad llegue con empresas reales y compradores activos.</p>
+      </div>
+    </div>
+    <ol class="road">
+      <li class="now"><small>En marcha</small><b>Trujillo</b><p>Alta de empresas, directorio y primeras oportunidades.</p></li>
+      <li><small>Siguiente</small><b>Norte del Perú</b><p>Chiclayo, Piura, Chimbote y Cajamarca.</p></li>
+      <li><small>Después</small><b>Lima y Arequipa</b><p>Conexión con los grandes polos de confección y compra.</p></li>
+      <li><small>Meta</small><b>Todo el país</b><p>Una red nacional con proveedores y compradores en cada región.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta" aria-labelledby="ctaT">
+  <div class="wrap">
+    <h2 id="ctaT">Sé parte de las primeras empresas de la red.</h2>
+    <button class="btn btn-white" data-open="join">Registrar mi empresa</button>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PIE DE PÁGINA ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="brand">
+          <svg viewBox="0 0 44 44" aria-hidden="true"><rect width="44" height="44" rx="12" fill="#1F4BFF"/><path d="M9 14h26M9 22h26M9 30h26" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M15 9v9M15 26v9M22 9v4M22 31v4M29 9v9M29 26v9" stroke="#7CD3F7" stroke-width="2.6" stroke-linecap="round"/><circle cx="22" cy="22" r="4.2" fill="#D4107F" stroke="#fff" stroke-width="1.6"/></svg>
+          <span><b>RED TEXTIL <span style="color:#FF5CB0">PERÚ</span></b><small>Conectando la industria textil</small></span>
+        </div>
+        <p>La plataforma que conecta a la cadena textil peruana. Nace en Trujillo.</p>
+      </div>
+      <div>
+        <h4>Explora</h4>
+        <a href="#categorias">Categorías</a>
+        <a href="#directorio">Directorio</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#oportunidades">Oportunidades</a>
+      </div>
+      <div>
+        <h4>Participa</h4>
+        <a href="#participa">Proveedores</a>
+        <a href="#participa">Productores</a>
+        <a href="#participa">Compradores</a>
+        <a href="#capacitaciones">Capacitaciones</a>
+      </div>
+    </div>
+    <p class="legal">© 2026 RED TEXTIL PERÚ. Versión visual de prueba: empresas, productos y oportunidades son ejemplos y no representan negocios reales. Fotografías referenciales de Unsplash; se reemplazarán por fotos propias de la red.</p>
+  </div>
+</footer>
+
+<!-- ============ MODAL ============ -->
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <form class="dlg" id="form" novalidate>
+    <div class="dlg-head">
+      <h3 id="dlgTitle">Registra tu empresa</h3>
+      <button type="button" class="x" id="dlgClose" aria-label="Cerrar">✕</button>
+    </div>
+    <p class="sub" id="dlgSub">Cuéntanos sobre tu empresa. Te contactaremos para activar tu perfil.</p>
+
+    <div class="field"><label for="f-name">Nombre de la empresa</label><input id="f-name" required placeholder="Ej. Confecciones Moche SAC"></div>
+    <div class="two">
+      <div class="field"><label for="f-role">Soy</label>
+        <select id="f-role"><option>Proveedor</option><option>Productor</option><option>Comprador</option></select></div>
+      <div class="field"><label for="f-cat">Rubro principal</label><select id="f-cat"></select></div>
+    </div>
+    <div class="two">
+      <div class="field"><label for="f-city">Ciudad</label><input id="f-city" value="Trujillo"></div>
+      <div class="field"><label for="f-contact">WhatsApp o correo</label><input id="f-contact" required placeholder="9XX XXX XXX"></div>
+    </div>
+    <div class="field" id="msgField" hidden><label for="f-msg">Tu mensaje</label><textarea id="f-msg" placeholder="Cantidad, tallas, colores y fecha que necesitas"></textarea></div>
+
+    <button class="btn btn-pink" type="submit" id="dlgSubmit">Enviar solicitud</button>
+    <p class="demo">Versión de prueba: los datos aún no se guardan.</p>
+  </form>
+</dialog>
+
+<!-- ============ CUENTA (registro / inicio de sesión) ============ -->
+<dialog id="authDlg" aria-labelledby="authTitle">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h3 id="authTitle">Crea tu cuenta</h3>
+      <button type="button" class="x" data-close="authDlg" aria-label="Cerrar">✕</button>
+    </div>
+    <p class="sub" id="authSub"></p>
+    <div class="seg authtabs" role="group" aria-label="Crear cuenta o iniciar sesión">
+      <button type="button" data-auth="register" aria-pressed="true">Crear cuenta</button>
+      <button type="button" data-auth="login" aria-pressed="false">Iniciar sesión</button>
+    </div>
+    <div id="authMsg" class="msg" role="alert" hidden></div>
+    <form id="authForm" novalidate>
+      <div class="field"><label for="a-email">Correo electrónico</label><input id="a-email" type="email" inputmode="email" autocomplete="email" placeholder="correo@tuempresa.com"></div>
+      <div class="field"><label for="a-pass">Contraseña</label><input id="a-pass" type="password" autocomplete="new-password" minlength="8"><span class="hint" id="a-hint">Mínimo 8 caracteres.</span></div>
+      <div class="field" id="a-pass2Wrap"><label for="a-pass2">Repite la contraseña</label><input id="a-pass2" type="password" autocomplete="new-password"></div>
+      <label class="showpw"><input type="checkbox" id="a-show"> Mostrar contraseña</label>
+      <div class="hp" aria-hidden="true"><label>No llenar este campo<input id="a-hp" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn btn-pink" type="submit" id="authSubmit">Crear cuenta</button>
+      <button class="btn btn-line" type="button" id="authResend" hidden>Reenviar correo de confirmación</button>
+    </form>
+  </div>
+</dialog>
+
+<!-- ============ DATOS DE LA EMPRESA ============ -->
+<dialog id="empDlg" aria-labelledby="empTitle">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h3 id="empTitle">Registra tu empresa</h3>
+      <button type="button" class="x" data-close="empDlg" aria-label="Cerrar">✕</button>
+    </div>
+    <p class="who" id="empWho"></p>
+    <div id="empMsg" class="msg" role="alert" hidden></div>
+
+    <div class="status" id="empStatus" hidden>
+      <b id="empStName"></b>
+      <span class="badge" id="empStBadge"></span>
+      <p id="empStText"></p>
+    </div>
+
+    <form id="empForm" novalidate hidden>
+      <p class="sub">Tu empresa quedará <b>pendiente de aprobación</b> y no aparecerá en el directorio hasta que la revisemos.</p>
+      <div class="field"><label for="e-nombre">Nombre comercial</label><input id="e-nombre" maxlength="120" autocomplete="organization"></div>
+      <div class="two">
+        <div class="field"><label for="e-ruc">RUC</label><input id="e-ruc" inputmode="numeric" maxlength="11" placeholder="11 dígitos"></div>
+        <div class="field"><label for="e-rep">Representante</label><input id="e-rep" maxlength="100" autocomplete="name"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="e-tipo">Tipo de empresa</label><select id="e-tipo"></select></div>
+        <div class="field"><label for="e-cat">Categoría</label><select id="e-cat"><option value="">Cargando…</option></select></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="e-ciudad">Ciudad</label><input id="e-ciudad" value="Trujillo" maxlength="60"></div>
+        <div class="field"><label for="e-dir">Dirección</label><input id="e-dir" maxlength="150" autocomplete="street-address"></div>
+      </div>
+      <div class="field"><label for="e-wsp">WhatsApp de contacto</label><input id="e-wsp" type="tel" inputmode="tel" maxlength="20" placeholder="9XX XXX XXX"></div>
+      <div class="field"><label for="e-correo">Correo de contacto</label><input id="e-correo" type="email" inputmode="email" maxlength="120"></div>
+      <div class="field"><label for="e-desc">Descripción</label><textarea id="e-desc" maxlength="600" placeholder="Qué fabricas o vendes, tu capacidad y tu experiencia"></textarea></div>
+      <div class="hp" aria-hidden="true"><label>No llenar este campo<input id="e-hp" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn btn-pink" type="submit" id="empSubmit">Enviar para aprobación</button>
+    </form>
+
+    <button class="btn btn-line btn-sm" type="button" id="empLogout">Cerrar sesión</button>
+  </div>
+</dialog>
+
+<!-- ============ PERFIL PÚBLICO DE EMPRESA ============ -->
+<dialog id="profileDlg" aria-labelledby="profileTitle">
+  <div class="dlg">
+    <div class="dlg-head">
+      <h3 id="profileTitle">Perfil de empresa</h3>
+      <button type="button" class="x" id="profileClose" aria-label="Cerrar">✕</button>
+    </div>
+    <div id="profileContent"></div>
+  </div>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+/* =========================================================
+   FOTOGRAFÍAS
+   Cambia aquí las URLs por tus propias fotos (rutas locales
+   o enlaces). Si una foto no carga, se muestra una textura
+   de tejido con los colores de la marca.
+   ========================================================= */
+const P = (id,w=900) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+/* Portada: se prueba cada foto en orden; si ninguna carga, se ve la ilustración de respaldo */
+const HERO = [
+  P('1741275273025-56dbe819d03a',1400), // costurera en taller de confección
+  P('1770196035129-0a0affd4a519',1400), // trabajadora con hilo azul en máquina
+  P('1758270804188-8ca0b6d254bc',1400)  // telares industriales
+];
+const HERO2 = [
+  P('1758270804188-8ca0b6d254bc',700),  // telares industriales
+  P('1782828152662-cb3ba2eff30d',700)   // telares en fábrica
+];
+const IMG = {
+  confeccion:  P('1741275273025-56dbe819d03a'), // costurera en taller
+  deportiva:   P('1770196035129-0a0affd4a519'), // hilo azul en máquina
+  sublimacion: P('1782828152833-e49c0d363683'), // conos de hilo de colores
+  dtf:         P('1758271613743-748b409c196b'), // máquina con hilos y rodillos
+  telas:       P('1782828151611-a825182fb111'), // telares con rollos de tela
+  merch:       P('1760328715293-6410199deca5'), // hileras de conos de hilo
+  maquinaria:  P('1758271452953-46f4e12ae2fd'), // maquinaria industrial
+  uniformes:   P('1782828152662-cb3ba2eff30d'), // telares en fábrica
+  telar:       P('1758270804188-8ca0b6d254bc')  // telares con carrete grande
+};
+// Fotografías locales exclusivas para las ocho tarjetas de categorías.
+// Se guardan en el repositorio para que GitHub Pages las sirva sin depender de terceros.
+const CAT_IMG = {
+  confeccion:  'assets/categorias/confeccion.webp',
+  deportiva:   'assets/categorias/deportiva.webp',
+  sublimacion: 'assets/categorias/sublimacion.webp',
+  dtf:         'assets/categorias/dtf.webp',
+  telas:       'assets/categorias/telas.webp',
+  merch:       'assets/categorias/merchandising.webp',
+  maquinaria:  'assets/categorias/maquinaria.webp',
+  uniformes:   'assets/categorias/uniformes.webp'
+};
+
+/* =========================================================
+   DATOS DE EJEMPLO (se reemplazarán por base de datos luego)
+   ========================================================= */
+const CATS = [
+  {id:'confeccion', name:'Confección',     ico:'M8 3 3 6l2 4 3-1v11h8V9l3 1 2-4-5-3a4 4 0 0 1-8 0z'},
+  {id:'deportiva',  name:'Ropa deportiva', ico:'M13 2 4 14h7l-1 8 9-12h-7z'},
+  {id:'sublimacion',name:'Sublimación',    ico:'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z'},
+  {id:'dtf',        name:'DTF',            ico:'M12 3l9 5-9 5-9-5 9-5zM3 13l9 5 9-5'},
+  {id:'telas',      name:'Telas e insumos',ico:'M4 4h16v16H4zM4 12h16M12 4v16'},
+  {id:'merch',      name:'Merchandising',  ico:'M5 8h14l-1 12H6zM9 8a3 3 0 0 1 6 0'},
+  {id:'maquinaria', name:'Maquinaria',     ico:'M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2'},
+  {id:'uniformes',  name:'Uniformes',      ico:'M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z'}
+];
+const catName = id => (CATS.find(c=>c.id===id)||{}).name || '';
+const catIco  = id => (CATS.find(c=>c.id===id)||CATS[0]).ico;
+
+const COMPANIES = [
+  {n:'Hilos del Norte',            c:'confeccion', r:'productor', d:'La Esperanza',      t:'Taller de confección de polos, camisas y pantalones para marcas locales.', tags:['Polos','Camisas','Maquila'], f:1},
+  {n:'Andes Sport Lab',            c:'deportiva',  r:'productor', d:'Trujillo',          t:'Equipación para clubes, ligas y academias con diseño propio.',            tags:['Camisetas','Buzos','Dry-fit'], f:1},
+  {n:'Sublima Trujillo',           c:'sublimacion',r:'productor', d:'El Porvenir',       t:'Sublimación en gran formato y por docena sobre poliéster.',              tags:['Full print','Jerseys','Banderas'], f:1},
+  {n:'Print DTF Norte',            c:'dtf',        r:'productor', d:'Víctor Larco',      t:'Transfers DTF por metro y estampado sobre prendas del cliente.',         tags:['Transfer','Estampado']},
+  {n:'Telas Moche',                c:'telas',      r:'proveedor', d:'Trujillo',          t:'Distribuidor de algodón, poliéster, dry-fit y tela industrial.',         tags:['Algodón','Dry-fit','Por rollo'], f:1},
+  {n:'Avíos y Cierres La Libertad',c:'telas',      r:'proveedor', d:'Trujillo',          t:'Hilos, botones, cierres, etiquetas tejidas y elásticos.',                tags:['Hilos','Etiquetas','Cierres']},
+  {n:'Regalo Corporativo Chan Chan',c:'merch',     r:'productor', d:'Trujillo',          t:'Gorras bordadas, polos y bolsos con logo para empresas y eventos.',      tags:['Gorras','Bordado','Eventos']},
+  {n:'Maquinaria Textil Huanchaco',c:'maquinaria', r:'proveedor', d:'Huanchaco',         t:'Máquinas rectas, remalladoras y recubridoras. Servicio técnico.',        tags:['Venta','Alquiler','Repuestos']},
+  {n:'Uniformes Santa Rosa',       c:'uniformes',  r:'productor', d:'La Esperanza',      t:'Uniformes escolares y de trabajo por pedido.',                           tags:['Escolar','Industrial','Bordado']},
+  {n:'Taller Sol de Chimú',        c:'confeccion', r:'productor', d:'El Porvenir',       t:'Confección de ropa infantil y pijamas en lotes pequeños.',               tags:['Infantil','Pijamas','Lotes pequeños']},
+  {n:'Bordados Huaca',             c:'merch',      r:'productor', d:'Florencia de Mora', t:'Bordado computarizado de logos en gorras, mandiles y polos.',            tags:['Bordado','Parches']},
+  {n:'Fit Norte Producción',       c:'deportiva',  r:'productor', d:'Trujillo',          t:'Fabricación de ropa deportiva para marcas con tela técnica.',            tags:['Leggings','Tops','Marca propia']}
+];
+
+const PRODUCTS = [
+  {n:'Polos corporativos',          by:'Hilos del Norte',              c:'confeccion', tag:'Prendas'},
+  {n:'Buzos dry-fit para academias',by:'Andes Sport Lab',              c:'deportiva',  tag:'Deportivo'},
+  {n:'Camisetas sublimadas full color', by:'Sublima Trujillo',         c:'sublimacion',tag:'Sublimado'},
+  {n:'Transfers DTF por metro',     by:'Print DTF Norte',              c:'dtf',        tag:'DTF'},
+  {n:'Telas de algodón y poliéster',by:'Telas Moche',                  c:'telas',      tag:'Telas'},
+  {n:'Gorras bordadas con logo',    by:'Regalo Corporativo Chan Chan', c:'merch',      tag:'Merchandising'},
+  {n:'Uniformes escolares e industriales', by:'Uniformes Santa Rosa',  c:'uniformes',  tag:'Uniformes'},
+  {n:'Máquinas rectas y remalladoras', by:'Maquinaria Textil Huanchaco', c:'maquinaria', tag:'Maquinaria'}
+];
+
+const OPPS = [
+  {k:'compra', t:'Uniformes para personal de una empresa', w:'Empresa agroindustrial', d:'Busca camisa y pantalón con bordado de logo. Pide muestras y cotización.', z:'Trujillo'},
+  {k:'maquila',t:'Maquila de polos sublimados',            w:'Marca de ropa deportiva', d:'Necesita un taller de costura con capacidad estable y control de calidad.', z:'Trujillo y alrededores'},
+  {k:'alianza',t:'Alianza para campaña de uniformes escolares', w:'Taller de uniformes', d:'Busca proveedor de tela y servicio de bordado para trabajar en conjunto.', z:'La Esperanza'},
+  {k:'compra', t:'Camisetas para un campeonato barrial',   w:'Liga deportiva', d:'Camisetas sublimadas con varios diseños. Recibe propuestas de talleres.', z:'El Porvenir'},
+  {k:'maquila',t:'Corte y empaque para marca emergente',   w:'Estudio de moda', d:'Servicio de corte por lotes con etiquetado y empaque.', z:'Trujillo'},
+  {k:'alianza',t:'Compra conjunta de tela dry-fit',        w:'Grupo de talleres deportivos', d:'Reunir volumen entre talleres para negociar mejores condiciones con proveedores.', z:'Trujillo'}
+];
+const KIND = {compra:'Compra', maquila:'Maquila', alianza:'Alianza'};
+
+const EVENTS = [
+  {k:'cap',    s:'telar',      t:'Costos de producción para prendas',        p:'Calcula el precio real de tu prenda y tu margen de ganancia.', f:'Taller presencial'},
+  {k:'cap',    s:'dtf',        t:'DTF vs sublimación: cuándo usar cada uno', p:'Compara costos, acabados y tiempos de entrega.', f:'En vivo'},
+  {k:'cap',    s:'confeccion', t:'Cómo vender a empresas',                    p:'Armar propuestas, cotizaciones y cumplir requisitos de proveedor.', f:'Taller presencial'},
+  {k:'evento', s:'telas',      t:'Mesa de encuentro de talleres de Trujillo', p:'Networking entre productores y proveedores de telas.', f:'Evento presencial'},
+  {k:'evento', s:'maquinaria', t:'Rueda de negocios textil',                  p:'Reuniones cortas entre compradores, fabricantes y proveedores.', f:'Evento presencial'},
+  {k:'cap',    s:'deportiva',  t:'Calidad y control en confección',           p:'Cómo reducir mermas y reprocesos en tu taller.', f:'Taller presencial'}
+];
+
+const ROLES = {
+  prov:{id:'p-prov',tab:'t-prov',slot:'telas',h:'Muestra lo que vendes a quien compra',i:'Tu perfil y tu catálogo llegan a productores y compradores que hoy buscan por recomendación o por WhatsApp.',
+    li:['Perfil de empresa con productos y zonas de atención','Solicitudes de cotización directas a tu contacto','Visibilidad ante compradores de varias ciudades'],
+    st:[['Crea tu perfil','Datos y rubro'],['Sube tu catálogo','Fotos y detalles'],['Recibe cotizaciones','Desde la plataforma']],role:'Proveedor',btn:'Registrarme como proveedor'},
+  prod:{id:'p-prod',tab:'t-prod',slot:'confeccion',h:'Consigue insumos, pedidos y aliados',i:'Encuentra proveedores cercanos, ofrece tu capacidad libre y toma pedidos más grandes junto a otros talleres.',
+    li:['Publica tu capacidad y tus máquinas','Postula a pedidos de maquila y alianzas','Compara proveedores de telas y estampado'],
+    st:[['Presenta tu taller','Especialidad y prendas'],['Explora y postula','Oportunidades abiertas'],['Cierra el trato','Plazos y entrega']],role:'Productor',btn:'Registrarme como productor'},
+  comp:{id:'p-comp',tab:'t-comp',slot:'uniformes',h:'Pide lo que necesitas y compara',i:'Empresas, colegios, clubes y emprendedores encuentran fabricantes sin recorrer taller por taller.',
+    li:['Busca por categoría, zona y volumen','Publica un requerimiento y recibe propuestas','Solicita muestras antes de producir'],
+    st:[['Describe tu pedido','Prenda y cantidad'],['Compara propuestas','Plazo y experiencia'],['Elige y compra','Con el fabricante']],role:'Comprador',btn:'Registrarme como comprador'}
+};
+
+/* =========================================================
+   UTILIDADES
+   ========================================================= */
+const $  = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const svgIco = (d,sw=1.8) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const GRAD = [['#0A1B4D','#1F4BFF'],['#1F4BFF','#D4107F'],['#D4107F','#0A1B4D'],['#0A1B4D','#7CD3F7']];
+
+/* Imagen con textura de respaldo */
+function photo(slot, catId, i=0, sourceMap=IMG){
+  const g = GRAD[i % GRAD.length];
+  const url = sourceMap[slot];
+  return `<span class="ph" style="--g1:${g[0]};--g2:${g[1]}">${catId?svgIco(catIco(catId),1.4):''}${url?`<img src="${url}" alt="" loading="lazy" decoding="async" onload="this.classList.add('on')" onerror="this.remove()">`:''}</span>`;
+}
+
+let toastTimer;
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 3800);
+}
+
+function chipRow(el, items, active, onPick){
+  el.innerHTML = items.map(i=>`<button class="chip" data-v="${i.id}" aria-pressed="${i.id===active}">${i.name}</button>`).join('');
+  el.onclick = e=>{
+    const b = e.target.closest('.chip'); if(!b) return;
+    $$('.chip',el).forEach(c=>c.setAttribute('aria-pressed', c===b));
+    onPick(b.dataset.v);
+  };
+}
+
+/* Foto del encabezado de portada */
+(function(){
+  function chain(img, list){
+    if(!img) return;
+    let i = 0;
+    img.onload = ()=>img.classList.add('on');
+    img.onerror = ()=>{ i++; if(i < list.length){ img.src = list[i]; } else { img.remove(); } };
+    img.src = list[0];
+  }
+  chain($('#heroImg'), HERO);
+  chain($('#heroImg2'), HERO2);
+})();
+
+/* Sombra del header al hacer scroll */
+addEventListener('scroll',()=>$('#top').classList.toggle('scrolled', scrollY>8),{passive:true});
+
+/* =========================================================
+   MENÚ MÓVIL
+   ========================================================= */
+const burger = $('#burger'), nav = $('#nav');
+burger.onclick = ()=>{
+  const open = nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded', open);
+};
+$$('#nav a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');burger.setAttribute('aria-expanded','false')}));
+
+/* =========================================================
+   CATEGORÍAS CON FOTOS
+   ========================================================= */
+function renderCats(){
+  $('#catGrid').innerHTML = CATS.map((c,i)=>{
+    const n = directorioEmpresas.filter(x=>x.c===c.id).length;
+    return `<button class="cat" data-cat="${c.id}" aria-label="${c.name}: ver empresas">
+      ${photo(c.id,c.id,i,CAT_IMG)}
+      <span class="go">${svgIco('M5 12h14M13 6l6 6-6 6',2.2)}</span>
+      <span class="tx"><h3>${c.name}</h3><span class="n">${n} ${n===1?'empresa':'empresas'} registradas</span></span>
+    </button>`;
+  }).join('');
+}
+$('#catGrid').addEventListener('click',e=>{
+  const b = e.target.closest('.cat'); if(!b) return;
+  setDir({cat:b.dataset.cat, role:'all', q:''});
+  $('#directorio').scrollIntoView({behavior:'smooth'});
+});
+
+/* =========================================================
+   PRODUCTORES DESTACADOS
+   ========================================================= */
+function renderFeat(){
+  // Esta sección muestra empresas reales aprobadas, no perfiles de demostración.
+  const list = directorioEmpresas.filter(x=>x.r==='productor').slice(0,4);
+  if(directorioCargando){
+    $('#featGrid').innerHTML='<div class="empty" style="grid-column:1/-1">Cargando productores registrados…</div>';
+    return;
+  }
+  if(!list.length){
+    $('#featGrid').innerHTML='<div class="empty" style="grid-column:1/-1"><p>Aún no hay productores aprobados para destacar.</p><span class="hint">Las empresas aparecerán aquí cuando completen su registro y sean aprobadas.</span></div>';
+    return;
+  }
+  $('#featGrid').innerHTML = list.map((x,i)=>{
+    const image = x.logo_url && /^https:\/\//i.test(x.logo_url)
+      ? `<img src="${escaparHTML(x.logo_url)}" alt="Logo de ${escaparHTML(x.n)}" loading="lazy">`
+      : photo(x.c,x.c,i);
+    return `<article class="fcard">
+      <div class="pic">${image}<span class="pill pk">Productor registrado</span></div>
+      <div class="bd">
+        <h3>${escaparHTML(x.n)}</h3>
+        <p class="meta">${escaparHTML(x.categoria)} · ${escaparHTML([x.d,x.departamento].filter(Boolean).join(', '))}</p>
+        <p class="ds">${escaparHTML(x.t || 'Empresa productora registrada en Red Textil Perú.')}</p>
+        <div class="acts">
+          <button class="btn btn-electric btn-sm" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil</button>
+          ${x.whatsapp ? `<a class="btn btn-line btn-sm" href="https://wa.me/51${String(x.whatsapp).replace(/\D/g,'').replace(/^51/,'')}" target="_blank" rel="noopener noreferrer">Contactar</a>` : ''}
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+/* =========================================================
+   DIRECTORIO
+   ========================================================= */
+const dirState = {cat:'todas', role:'all', q:''};
+// El directorio público usa únicamente empresas reales aprobadas en Supabase.
+let directorioEmpresas = [];
+let directorioCargando = true;
+let directorioError = '';
+function escaparHTML(v){ return String(v ?? '').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function slugCategoria(nombre){
+  const n = norm(String(nombre||''));
+  if(n.includes('confeccion')) return 'confeccion';
+  if(n.includes('deportiva')) return 'deportiva';
+  if(n.includes('sublimacion')) return 'sublimacion';
+  if(n === 'dtf' || n.includes('dtf')) return 'dtf';
+  if(n.includes('telas') || n.includes('insumos')) return 'telas';
+  if(n.includes('merch')) return 'merch';
+  if(n.includes('maquinaria')) return 'maquinaria';
+  if(n.includes('uniform')) return 'uniformes';
+  return 'confeccion';
+}
+function setDir(p){
+  Object.assign(dirState,p);
+  $$('#dirChips .chip').forEach(c=>c.setAttribute('aria-pressed', c.dataset.v===dirState.cat));
+  $$('#roleSeg button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.role===dirState.role));
+  $('#q').value = dirState.q;
+  renderDir();
+}
+function renderDir(){
+  if(directorioCargando){ $('#count').textContent='Cargando…'; $('#dirList').innerHTML='<div class="empty"><p>Estamos cargando las empresas registradas.</p></div>'; return; }
+  if(directorioError){ $('#count').textContent='No disponible'; $('#dirList').innerHTML='<div class="empty"><p>No pudimos cargar el directorio en este momento. Inténtalo de nuevo más tarde.</p><button class="btn btn-pink btn-sm" id="reintentarDirectorio" type="button">Reintentar</button></div>'; return; }
+  const q = norm(dirState.q.trim());
+  const list = directorioEmpresas.filter(x=>{
+    if(dirState.cat!=='todas' && x.c!==dirState.cat) return false;
+    if(dirState.role!=='all' && x.r!==dirState.role) return false;
+    if(!q) return true;
+    return norm([x.n,x.t,x.d,x.departamento,x.categoria,x.r,x.tags.join(' ')].join(' ')).includes(q);
+  });
+  $('#count').textContent = `${list.length} ${list.length===1?'empresa':'empresas'}`;
+  if(!list.length){
+    $('#dirList').innerHTML = `<div class="empty"><p>No hay empresas aprobadas con ese filtro todavía.</p><button class="btn btn-pink btn-sm" data-open="join">Registrar mi empresa</button></div>`;
+    return;
+  }
+  $('#dirList').innerHTML = list.map((x,i)=>{
+    const contact = x.whatsapp ? `https://wa.me/51${String(x.whatsapp).replace(/\D/g,'').replace(/^51/,'')}` : (x.correo ? `mailto:${encodeURIComponent(x.correo)}` : '');
+    const contactLabel = x.whatsapp ? 'Contactar por WhatsApp' : (x.correo ? 'Contactar por correo' : 'Contacto no disponible');
+    const logo = x.logo_url && /^https:\/\//i.test(x.logo_url) ? `<img src="${escaparHTML(x.logo_url)}" alt="Logo de ${escaparHTML(x.n)}" style="width:100%;height:100%;object-fit:cover">` : photo(x.c,x.c,i+1);
+    return `<article class="co">
+      <div class="th">${logo}</div>
+      <div>
+        <h3>${escaparHTML(x.n)}</h3>
+        <p class="meta">${escaparHTML(x.categoria)} · ${x.r==='productor'?'Fabricante':x.r==='comprador'?'Comprador':'Proveedor'} · ${escaparHTML(x.d || x.departamento || '')}</p>
+        <p class="ds">${escaparHTML(x.t || 'Empresa registrada en Red Textil Perú.')}</p>
+        <div class="tags">${x.tags.map(t=>`<span class="tag">${escaparHTML(t)}</span>`).join('')}</div>
+        <button class="profile-btn" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil de empresa</button>
+        ${contact ? `<a class="go" href="${contact}" target="_blank" rel="noopener noreferrer">${contactLabel}</a>` : `<span class="go">${contactLabel}</span>`}
+      </div>
+    </article>`;
+  }).join('');
+}
+async function cargarDirectorio(){
+  directorioCargando = true; directorioError = ''; renderDir();
+  if(!sb){ directorioCargando=false; directorioError='Supabase no está configurado'; renderDir(); return; }
+  try{
+    const [{data:cats,error:catError},{data:rows,error}] = await Promise.all([
+      sb.from('categorias').select('id,nombre'),
+      sb.from('empresas').select('id,nombre,descripcion,ciudad,departamento,whatsapp,correo,tipo_empresa,categoria_id,logo_url,sitio_web,direccion,capacidad_produccion').eq('activa',true).eq('estado_revision','aprobada').order('nombre')
+    ]);
+    if(error) throw error;
+    if(catError) throw catError;
+    const catById = new Map((cats||[]).map(c=>[String(c.id),String(c.nombre||'')]));
+    directorioEmpresas = (rows||[]).map(row=>{
+      const categoria = catById.get(String(row.categoria_id)) || 'Confección';
+      const c = slugCategoria(categoria);
+      return {id:row.id,n:row.nombre||'Empresa textil',c,r:row.tipo_empresa||'proveedor',d:row.ciudad||'',departamento:row.departamento||'',t:row.descripcion||'',categoria,whatsapp:row.whatsapp||'',correo:row.correo||'',logo_url:row.logo_url||'',sitio_web:row.sitio_web||'',direccion:row.direccion||'',capacidad:row.capacidad_produccion||'',tags:[]};
+    });
+    directorioCargando = false; renderDir(); renderCats(); renderFeat(); cargarProductosPublicos();
+  }catch(err){
+    console.error('RED TEXTIL PERÚ: no se pudo cargar el directorio desde Supabase.',err);
+    directorioCargando = false; directorioError = String(err?.message || 'Error de conexión'); renderDir(); renderFeat();
+  }
+}
+$('#dirList').addEventListener('click',e=>{ if(e.target.id==='reintentarDirectorio') cargarDirectorio(); });
+chipRow($('#dirChips'), [{id:'todas',name:'Todas'},...CATS], 'todas', v=>{dirState.cat=v;renderDir()});
+$('#q').addEventListener('input',e=>{dirState.q=e.target.value;renderDir()});
+$('#roleSeg').addEventListener('click',e=>{
+  const b = e.target.closest('button'); if(!b) return;
+  setDir({role:b.dataset.role});
+});
+
+/* Buscador de la portada */
+let heroScope = 'all';
+$$('.f-tab').forEach(b=>b.addEventListener('click',()=>{
+  heroScope = b.dataset.scope;
+  $$('.f-tab').forEach(x=>x.setAttribute('aria-pressed', x===b));
+}));
+$('#finder').addEventListener('submit',e=>{
+  e.preventDefault();
+  const map = {all:{cat:'todas',role:'all'}, fab:{cat:'todas',role:'productor'}, prov:{cat:'todas',role:'proveedor'}, maq:{cat:'maquinaria',role:'all'}, ins:{cat:'telas',role:'all'}};
+  setDir({...map[heroScope], q:$('#hq').value});
+  $('#directorio').scrollIntoView({behavior:'smooth'});
+});
+
+/* =========================================================
+   ROLES (pestañas accesibles)
+   ========================================================= */
+const check = svgIco('M5 12.5l4.5 4.5L19 7',2.4);
+$('#panels').innerHTML = Object.values(ROLES).map((r,i)=>`
+  <div class="panel" role="tabpanel" id="${r.id}" aria-labelledby="${r.tab}" ${i?'hidden':''}>
+    <div class="pimg">${photo(r.slot,null,i)}</div>
+    <div class="pbody">
+      <h3>${r.h}</h3>
+      <p class="intro">${r.i}</p>
+      <ul>${r.li.map(l=>`<li>${check}<span>${l}</span></li>`).join('')}</ul>
+      <ol class="steps">${r.st.map(s=>`<li><span><b>${s[0]}</b>${s[1]}</span></li>`).join('')}</ol>
+      <button class="btn btn-pink" data-open="join" data-role="${r.role}">${r.btn}</button>
+    </div>
+  </div>`).join('');
+const tabs = $$('#tabs .tab');
+function selectTab(t){
+  tabs.forEach(x=>{
+    const on = x===t;
+    x.setAttribute('aria-selected',on); x.tabIndex = on?0:-1;
+    $('#'+x.getAttribute('aria-controls')).hidden = !on;
+  });
+}
+tabs.forEach((t,i)=>{
+  t.addEventListener('click',()=>selectTab(t));
+  t.addEventListener('keydown',e=>{
+    let j = null;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') j=(i+1)%tabs.length;
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp') j=(i-1+tabs.length)%tabs.length;
+    if(j!==null){e.preventDefault();tabs[j].focus();selectTab(tabs[j])}
+  });
+});
+
+/* =========================================================
+   CATÁLOGO
+   ========================================================= */
+const prodState = {cat:'todas'};
+let productosPublicos = [];
+let productosCargando = true;
+function precioProducto(v){
+  return v===null || v===undefined || v==='' ? 'Precio a cotizar' : 'S/ '+Number(v).toLocaleString('es-PE',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function renderProds(){
+  const list = productosPublicos.filter(p=>prodState.cat==='todas'||p.c===prodState.cat);
+  $('#prodGrid').innerHTML = productosCargando
+    ? '<div class="empty" style="grid-column:1/-1">Cargando productos publicados por las empresas…</div>'
+    : list.length ? list.map(p=>`
+      <article class="prod">
+        <div class="pic">${p.imagen_url ? `<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.nombre)}" loading="lazy">` : photo(p.c,p.c,0)}<span class="pill">${escaparHTML(p.categoria)}</span></div>
+        <div class="bd"><h3>${escaparHTML(p.nombre)}</h3><p class="by"><a href="#directorio" data-open-company="${escaparHTML(p.empresa_id)}">${escaparHTML(p.empresa_nombre)}</a></p><p class="ask">${precioProducto(p.precio)}</p><button class="btn btn-line btn-sm" data-product-quote="${escaparHTML(p.id)}">Pedir cotización</button></div>
+      </article>`).join('')
+    : `<div class="empty" style="grid-column:1/-1"><p>Aún no hay productos publicados en esta categoría.</p><span class="hint">Las empresas aprobadas podrán publicar desde su panel.</span></div>`;
+}
+function actualizarChipsProductos(){
+  const categorias = CATS.filter(c=>productosPublicos.some(p=>p.c===c.id));
+  chipRow($('#prodChips'), [{id:'todas',name:'Todos'},...categorias], prodState.cat, v=>{prodState.cat=v;renderProds()});
+}
+async function cargarProductosPublicos(){
+  productosCargando=true; renderProds();
+  if(!sb){productosCargando=false;renderProds();return;}
+  try{
+    const [{data,error},{data:cats,error:catError}]=await Promise.all([
+      sb.from('productos').select('id,empresa_id,categoria_id,nombre,descripcion,precio,imagen_url,activo').eq('activo',true).order('created_at',{ascending:false}),
+      sb.from('categorias').select('id,nombre')
+    ]);
+    if(error) throw error;
+    if(catError) throw catError;
+    const empresas = new Map(directorioEmpresas.map(e=>[String(e.id),e]));
+    const catById = new Map((cats||[]).map(c=>[String(c.id),String(c.nombre||'')]));
+    productosPublicos=(data||[]).filter(p=>empresas.has(String(p.empresa_id))).map(p=>{
+      const e=empresas.get(String(p.empresa_id));
+      const categoria=catById.get(String(p.categoria_id)) || e.categoria;
+      return {...p,c:slugCategoria(categoria),categoria,empresa_nombre:e.n,empresa_whatsapp:e.whatsapp||'',empresa_ciudad:e.d||e.departamento||''};
+    });
+    productosCargando=false; actualizarChipsProductos(); renderProds();
+  }catch(err){
+    console.error('No se pudo cargar el catálogo:',err);
+    productosCargando=false; productosPublicos=[]; actualizarChipsProductos(); renderProds();
+    $('#prodGrid').innerHTML='<div class="empty" style="grid-column:1/-1">No pudimos cargar el catálogo. Verifica las políticas de la tabla productos.</div>';
+  }
+}
+async function cargarProductosPerfil(companyId,target){
+  if(!target) return;
+  if(!sb){
+    target.innerHTML='<p class="hint">No se pudo conectar con el catálogo.</p>';
+    return;
+  }
+  target.innerHTML='<p class="hint">Cargando productos…</p>';
+  try{
+    // Consulta mínima: no depende del selector de categorías del panel privado.
+    const {data,error}=await sb.from('productos')
+      .select('id,nombre,descripcion,precio,imagen_url,activo,created_at')
+      .eq('empresa_id',companyId)
+      .eq('activo',true)
+      .order('created_at',{ascending:false});
+    if(error) throw error;
+    const rows=data||[];
+    target.innerHTML=rows.length ? rows.map(p=>`<article class="profile-product">${p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.nombre)}" loading="lazy">`:`<div style="aspect-ratio:4/3;background:var(--paper)"></div>`}<div class="bd"><strong>${escaparHTML(p.nombre)}</strong>${p.descripcion?`<p>${escaparHTML(p.descripcion)}</p>`:''}<p class="price">${precioProducto(p.precio)}</p></div></article>`).join('') : '<p class="hint">Esta empresa aún no ha publicado productos.</p>';
+  }catch(err){
+    console.error('No se pudieron cargar productos del perfil:',err);
+    // Si el catálogo público ya cargó, úsalo como respaldo para no dejar la ficha bloqueada.
+    const fallback=(productosPublicos||[]).filter(p=>String(p.empresa_id)===String(companyId));
+    target.innerHTML=fallback.length ? fallback.map(p=>`<article class="profile-product">${p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.nombre)}" loading="lazy">`:`<div style="aspect-ratio:4/3;background:var(--paper)"></div>`}<div class="bd"><strong>${escaparHTML(p.nombre)}</strong>${p.descripcion?`<p>${escaparHTML(p.descripcion)}</p>`:''}<p class="price">${precioProducto(p.precio)}</p></div></article>`).join('') : '<p class="hint">No se pudieron cargar los productos. Intenta actualizar la página.</p>';
+  }
+}
+
+chipRow($('#prodChips'), [{id:'todas',name:'Todos'},...CATS], 'todas', v=>{prodState.cat=v;renderProds()});
+
+/* =========================================================
+   OPORTUNIDADES
+   ========================================================= */
+const oppState = {k:'todas'};
+function renderOpps(){
+  const list = OPPS.filter(o=>oppState.k==='todas'||o.k===oppState.k);
+  $('#oppList').innerHTML = list.map(o=>`
+    <article class="opp k-${o.k}">
+      <div class="top-r"><span class="kind">${KIND[o.k]}</span><span class="ex">Ejemplo</span></div>
+      <h3>${o.t}</h3>
+      <p class="who">${o.w} · ${o.z}</p>
+      <p class="ds">${o.d}</p>
+      <div class="foot"><span>Monto por definir</span><button class="btn btn-electric btn-sm" data-quote="${o.t}" data-mode="apply">Postular</button></div>
+    </article>`).join('');
+}
+chipRow($('#oppChips'), [{id:'todas',name:'Todas'},{id:'compra',name:'Compras'},{id:'maquila',name:'Maquila'},{id:'alianza',name:'Alianzas'}], 'todas', v=>{oppState.k=v;renderOpps()});
+
+/* =========================================================
+   COMUNIDAD + EVENTOS
+   ========================================================= */
+$('#commImg').innerHTML = photo('telar','telas',0);
+
+const evState = {k:'todos'};
+const cal = svgIco('M7 3v3M17 3v3M4 8h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z',2);
+function renderEvents(){
+  const list = EVENTS.filter(e=>evState.k==='todos'||e.k===evState.k);
+  $('#evGrid').innerHTML = list.map((e,i)=>`
+    <article class="ev">
+      <div class="pic">${photo(e.s,null,i)}<span class="pill ${e.k==='evento'?'pk':''}">${e.k==='evento'?'Evento':'Capacitación'}</span></div>
+      <div class="bd">
+        <h3>${e.t}</h3>
+        <p>${e.p}</p>
+        <div class="when"><span>${cal} Fecha por confirmar</span><button class="btn btn-line btn-sm" data-enroll="${e.t}">Me interesa</button></div>
+      </div>
+    </article>`).join('');
+}
+chipRow($('#evChips'), [{id:'todos',name:'Todos'},{id:'cap',name:'Capacitaciones'},{id:'evento',name:'Eventos'}], 'todos', v=>{evState.k=v;renderEvents()});
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+const dlg = $('#dlg'), form = $('#form');
+let cotizacionProductoActual = null;
+$('#f-cat').innerHTML = CATS.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
+
+function openDlg({title='Registra tu empresa', sub='Cuéntanos sobre tu empresa. Te contactaremos para activar tu perfil.', btn='Enviar solicitud', role, msg=false, placeholder='Cantidad, tallas, colores y fecha que necesitas'}={}){
+  $('#dlgTitle').textContent = title;
+  $('#dlgSub').textContent = sub;
+  $('#dlgSubmit').textContent = btn;
+  $('.demo').hidden = false;
+  if(role) $('#f-role').value = role;
+  $('#msgField').hidden = !msg;
+  $('#f-msg').placeholder = placeholder;
+  // Restaurar el formulario estándar al abrir solicitudes que no son cotizaciones de producto.
+  $('#f-role').closest('.field').hidden = false;
+  $('#f-cat').closest('.field').hidden = false;
+  $('#f-name').closest('.field').querySelector('label').textContent = 'Nombre de la empresa';
+  $('#f-name').placeholder = 'Ej. Confecciones Moche SAC';
+  $('#f-contact').closest('.field').querySelector('label').textContent = 'WhatsApp o correo';
+  $('#f-contact').required = true;
+  $('#f-city').required = false;
+  $('#msgField').querySelector('label').textContent = 'Tu mensaje';
+  cotizacionProductoActual = null;
+  dlg.showModal();
+  $('#f-name').focus();
+}
+function abrirCotizacionProducto(producto){
+  cotizacionProductoActual = producto;
+  $('#dlgTitle').textContent = 'Solicitar cotización';
+  $('#dlgSub').textContent = `${producto.nombre} · ${producto.empresa_nombre}. Completa tus datos y enviaremos tu pedido directamente a esta empresa por WhatsApp.`;
+  $('#dlgSubmit').textContent = 'Contactar por WhatsApp';
+  $('.demo').hidden = true;
+  $('#f-role').closest('.field').hidden = true;
+  $('#f-cat').closest('.field').hidden = true;
+  $('#f-name').closest('.field').querySelector('label').textContent = 'Tu nombre o empresa';
+  $('#f-name').placeholder = '¿Quién solicita la cotización?';
+  $('#f-contact').closest('.field').querySelector('label').textContent = 'Tu WhatsApp (opcional)';
+  $('#f-contact').required = false;
+  $('#f-city').required = true;
+  $('#f-city').value = '';
+  $('#f-contact').value = '';
+  $('#f-name').value = '';
+  $('#f-msg').value = '';
+  $('#msgField').hidden = false;
+  $('#msgField').querySelector('label').textContent = 'Cantidad y detalles del pedido';
+  $('#f-msg').placeholder = 'Indica cantidad, medidas, colores, tallas y fecha en que lo necesitas.';
+  dlg.showModal();
+  $('#f-name').focus();
+}
+document.addEventListener('click',e=>{
+  const o = e.target.closest('[data-open]');
+  if(o){ nav.classList.remove('open'); abrirRegistro(o.dataset.role); return; }
+
+  const qt = e.target.closest('[data-quote]');
+  if(qt){
+    const apply = qt.dataset.mode==='apply';
+    openDlg({
+      title: apply ? 'Postular a esta oportunidad' : 'Pedir cotización',
+      sub: qt.dataset.quote,
+      btn: apply ? 'Enviar postulación' : 'Enviar pedido',
+      role: apply ? 'Productor' : 'Comprador',
+      msg: true,
+      placeholder: apply ? 'Cuéntanos tu capacidad y experiencia' : 'Cantidad, tallas, colores y fecha que necesitas'
+    });
+    return;
+  }
+
+  const pf = e.target.closest('[data-profile]');
+  if(pf){
+    const company = directorioEmpresas.find(x=>String(x.id)===String(pf.dataset.profile));
+    if(!company) return;
+    if(pf.dataset.ownerProfile) cerrar('empDlg');
+    const roleLabel = company.r==='productor'?'Fabricante o productor':company.r==='comprador'?'Comprador':'Proveedor';
+    const wa = company.whatsapp ? 'https://wa.me/51'+String(company.whatsapp).replace(/\D/g,'').replace(/^51/,'') : '';
+    const email = company.correo ? 'mailto:'+encodeURIComponent(company.correo) : '';
+    let website = '';
+    if(company.sitio_web){ try{ const u=new URL(/^https?:\/\//i.test(company.sitio_web)?company.sitio_web:'https://'+company.sitio_web); if(['http:','https:'].includes(u.protocol)) website=u.href; }catch(_){} }
+    const image = company.logo_url && /^https:\/\//i.test(company.logo_url) ? `<img class="profile-cover" src="${escaparHTML(company.logo_url)}" alt="Imagen de ${escaparHTML(company.n)}">` : `<div class="profile-cover" style="display:grid;place-items:center;color:var(--ink-soft)">Perfil de ${escaparHTML(company.n)}</div>`;
+    $('#profileContent').innerHTML = `${image}<p class="meta">${escaparHTML(company.categoria)} · ${roleLabel}</p><p class="sub">${escaparHTML(company.t || 'Empresa registrada en Red Textil Perú.')}</p><h4 class="gallery-title">Galería de trabajos</h4><div id="publicCompanyGallery" class="gallery-public"><p class="hint">Cargando fotografías…</p></div><section class="profile-products"><h4 class="gallery-title">Productos de esta empresa</h4><div id="publicCompanyProducts" class="profile-product-grid"><p class="hint">Cargando productos…</p></div></section><div class="profile-meta"><div><small>Ciudad</small><strong>${escaparHTML([company.d,company.departamento].filter(Boolean).join(', ')||'No especificada')}</strong></div>${company.capacidad?`<div><small>Capacidad de producción</small><strong>${escaparHTML(company.capacidad)}</strong></div>`:''}${company.direccion?`<div><small>Dirección</small><strong>${escaparHTML(company.direccion)}</strong></div>`:''}${company.correo?`<div><small>Correo</small><strong>${escaparHTML(company.correo)}</strong></div>`:''}</div><div class="profile-actions">${wa?`<a class="btn btn-pink" href="${wa}" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>`:''}${email?`<a class="btn btn-line" href="${email}">Enviar correo</a>`:''}${website?`<a class="btn btn-line" href="${escaparHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio web</a>`:''}</div>`;
+    $('#profileDlg').showModal();
+    cargarGaleriaPublica(company.id, $('#publicCompanyGallery'));
+    cargarProductosPerfil(company.id, $('#publicCompanyProducts'));
+    return;
+  }
+
+  const ct = e.target.closest('[data-contact]');
+  if(ct){
+    openDlg({title:'Contactar empresa', sub:ct.dataset.contact, btn:'Enviar mensaje', role:'Comprador', msg:true, placeholder:'Escribe tu consulta'});
+    return;
+  }
+
+  const en = e.target.closest('[data-enroll]');
+  if(en){ toast('Anotado (demo): te avisaremos cuando abra "'+en.dataset.enroll+'".'); }
+});
+$('#dlgClose').onclick = ()=>dlg.close();
+$('#profileClose').onclick = ()=>$('#profileDlg').close();
+$('#profileDlg').addEventListener('click',e=>{ if(e.target===$('#profileDlg')) $('#profileDlg').close(); });
+dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(cotizacionProductoActual){
+    const p=cotizacionProductoActual;
+    const nombre=$('#f-name').value.trim();
+    const ciudad=$('#f-city').value.trim();
+    const contacto=$('#f-contact').value.trim();
+    const detalle=$('#f-msg').value.trim();
+    const telefono=String(p.empresa_whatsapp||'').replace(/\D/g,'').replace(/^51/,'');
+    if(!nombre || !ciudad || !detalle){
+      toast('Completa tu nombre o empresa, ciudad y detalles del pedido.');
+      return;
+    }
+    if(!/^9\d{8}$/.test(telefono)){
+      toast('Esta empresa todavía no tiene un WhatsApp válido publicado. Contacta desde su perfil.');
+      return;
+    }
+    const mensaje=[
+      `Hola, vi su producto en Red Textil Perú y deseo solicitar una cotización.`,
+      `Producto: ${p.nombre}`,
+      `Empresa proveedora: ${p.empresa_nombre}`,
+      `Solicitante: ${nombre}`,
+      `Ciudad: ${ciudad}`,
+      contacto ? `Mi WhatsApp: ${contacto}` : '',
+      `Cantidad y detalles: ${detalle}`,
+      `Enviado desde Red Textil Perú.`
+    ].filter(Boolean).join('\n');
+    const url=`https://wa.me/51${telefono}?text=${encodeURIComponent(mensaje)}`;
+    window.location.href = url;
+    return;
+  }
+  toast('Esta función aún no está habilitada, por eso tu solicitud no se envió.');
+});
+
+
+/* =========================================================
+   SUPABASE: cuentas y registro de empresas
+   ---------------------------------------------------------
+   1) Completa url y publishableKey (sb_publishable_en1WycE_AVozTEV5VjBuWQ_8gjPjUmQ).
+      NUNCA pegues aquí la clave secret ni la service_role.
+   2) Los nombres de COL se ajustaron a la tabla empresas
+      existente. La conexión permanece deshabilitada hasta
+      configurar URL y clave publishable.
+   ========================================================= */
+const CFG = {
+  url: 'https://ffhsgajnufujnrhqyibl.supabase.co',
+  publishableKey: 'sb_publishable_en1WycE_AVozTEV5VjBuWQ_8gjPjUmQ',         // sb_publishable_...
+  columnasVerificadas: true   // columnas contrastadas con la tabla existente
+};
+const COL = {
+  tabla: 'empresas',
+  owner: 'propietario',       // columna UUID que guarda auth.uid()
+  nombre: 'nombre', ruc: 'ruc', representante: 'representante',
+  tipo_empresa: 'tipo_empresa', categoria_id: 'categoria_id', ciudad: 'ciudad',
+  direccion: 'direccion', whatsapp: 'whatsapp',
+  correo: 'correo', descripcion: 'descripcion',
+  estado_revision: 'estado_revision', activa: 'activa'
+};
+const CAT = { tabla: 'categorias', id: 'id', nombre: 'nombre' };
+const TIPOS_EMPRESA = [['productor','Fabricante o productor'],['proveedor','Proveedor'],['comprador','Comprador']];
+const TIPO_POR_ROL = {Productor:'productor', Proveedor:'proveedor', Comprador:'comprador'};
+const REDIRECT = location.origin + location.pathname;
+
+function claveSegura(k){
+  if(/^sb_secret_/i.test(k)) return false;
+  try{
+    const parts = k.split('.');
+    if(parts.length === 3){
+      const j = JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+      if(j.role === 'service_role') return false;
+    }
+  }catch(_){}
+  return true;
+}
+let sb = null;
+if(window.supabase && CFG.url && CFG.publishableKey){
+  if(claveSegura(CFG.publishableKey)){
+    sb = window.supabase.createClient(CFG.url, CFG.publishableKey, {
+      auth:{flowType:'pkce', persistSession:true, autoRefreshToken:true, detectSessionInUrl:true}
+    });
+  }else{
+    console.error('RED TEXTIL PERÚ: la clave configurada no es una clave publishable. No se conectó a Supabase.');
+  }
+}
+const registroHabilitado = ()=> !!sb && CFG.columnasVerificadas === true;
+
+let sesion = null, miEmpresa, rolPendiente, modoAuth = 'register', categoriasListas = false;
+
+/* ---------- utilidades de interfaz ---------- */
+function avisar(el, tipo, texto){
+  el.className = 'msg' + (tipo ? ' ' + tipo : '');
+  el.textContent = texto || '';
+  el.hidden = !texto;
+}
+function bloquear(btn, on, texto){
+  if(on){ btn.dataset.t = btn.textContent; btn.textContent = texto; btn.disabled = true; }
+  else { btn.disabled = false; if(btn.dataset.t){ btn.textContent = btn.dataset.t; } }
+}
+function cerrar(id){ const d = $('#'+id); if(d && d.open) d.close(); }
+$$('[data-close]').forEach(b=>b.addEventListener('click',()=>cerrar(b.dataset.close)));
+['authDlg','empDlg'].forEach(id=>{
+  const d = $('#'+id);
+  d.addEventListener('click',e=>{ if(e.target === d) d.close(); });
+});
+$('#e-tipo').innerHTML = '<option value="">Elige una opción</option>' + TIPOS_EMPRESA.map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('');
+
+function actualizarNav(){
+  const b = $('#nav .btn[data-open="join"]');
+  if(b) b.textContent = sesion ? 'Mi empresa' : 'Registrar empresa';
+  $('#navLogout').hidden = !sesion;
+}
+
+/* ---------- mensajes de error comprensibles ---------- */
+function errAuth(err){
+  const c = String(err.code || '').toLowerCase(), m = String(err.message || '').toLowerCase();
+  if(c === 'invalid_credentials' || m.includes('invalid login')) return 'Correo o contraseña incorrectos.';
+  if(c === 'email_not_confirmed' || m.includes('not confirmed')) return 'Aún no confirmaste tu correo. Abre el enlace que te enviamos o pide que te lo reenviemos.';
+  if(c.includes('rate_limit') || err.status === 429 || m.includes('rate limit')) return 'Demasiados intentos. Espera unos minutos e inténtalo otra vez.';
+  if(c === 'weak_password' || m.includes('password should')) return 'La contraseña es muy débil. Usa 8 o más caracteres, con letras y números.';
+  if(c === 'user_already_exists' || m.includes('already registered')) return 'Ese correo ya tiene una cuenta. Usa «Iniciar sesión».';
+  if(m.includes('fetch') || m.includes('network')) return 'No hay conexión con el servidor. Revisa tu internet e inténtalo otra vez.';
+  return 'No se pudo completar la acción. Inténtalo de nuevo en unos minutos.';
+}
+function errDB(err){
+  const c = String(err.code || ''), m = String(err.message || '');
+  if(c === '23505') return 'Ya existe una empresa con ese RUC, o tu cuenta ya tiene una empresa registrada. No se guardó nada nuevo.';
+  if(c === '23503') return 'La categoría elegida no es válida. Elígela otra vez.';
+  if(['23514','22001','22P02','23502'].includes(c)) return 'Algún dato no tiene el formato esperado. Revísalo e inténtalo otra vez.';
+  if(c === '42501' || /row-level security/i.test(m)) return 'No tienes permiso para registrar esta empresa. Confirma tu correo, cierra sesión, vuelve a ingresar e inténtalo otra vez.';
+  if(['PGRST204','PGRST205','42703','42P01'].includes(c)) return 'Error de configuración: la base de datos no coincide con el formulario. No se guardó nada. Avísanos para corregirlo.';
+  if(/fetch|network/i.test(m)) return 'No hay conexión con el servidor. No se guardó nada; revisa tu internet e inténtalo otra vez.';
+  return 'No se pudo guardar tu empresa. No se registró nada; inténtalo de nuevo en unos minutos.';
+}
+
+/* ---------- cuenta: crear / iniciar sesión ---------- */
+function aplicarDisponibilidad(){
+  const off = !registroHabilitado();
+  $$('#authForm input, #authForm button').forEach(x=>{ x.disabled = off; });
+  if(off) avisar($('#authMsg'),'info','El registro de empresas todavía no está habilitado. Estamos terminando la conexión con la base de datos; vuelve pronto.');
+}
+function setModo(m){
+  modoAuth = m;
+  const reg = m === 'register';
+  $$('[data-auth]').forEach(b=>b.setAttribute('aria-pressed', b.dataset.auth === m));
+  $('#authTitle').textContent = reg ? 'Crea tu cuenta' : 'Inicia sesión';
+  $('#authSub').textContent = reg
+    ? 'Usa el correo de tu empresa. Luego completarás sus datos y quedará pendiente de aprobación.'
+    : 'Ingresa con el correo y la contraseña de tu cuenta.';
+  $('#a-pass2Wrap').hidden = !reg;
+  $('#a-hint').hidden = !reg;
+  $('#a-pass').autocomplete = reg ? 'new-password' : 'current-password';
+  $('#authSubmit').textContent = reg ? 'Crear cuenta' : 'Iniciar sesión';
+  $('#authResend').hidden = true;
+  avisar($('#authMsg'),'','');
+  aplicarDisponibilidad();
+}
+function abrirAuth(modo){
+  setModo(modo || 'register');
+  if(!$('#authDlg').open) $('#authDlg').showModal();
+  if(registroHabilitado()) $('#a-email').focus();
+}
+$$('[data-auth]').forEach(b=>b.addEventListener('click',()=>setModo(b.dataset.auth)));
+$('#a-show').addEventListener('change',e=>{
+  const t = e.target.checked ? 'text' : 'password';
+  $('#a-pass').type = t; $('#a-pass2').type = t;
+});
+
+$('#authForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  if(!registroHabilitado()) return;
+  if($('#a-hp').value) return;                       // trampa anti-bots
+  const m = $('#authMsg'), btn = $('#authSubmit');
+  const email = $('#a-email').value.trim().toLowerCase(), pass = $('#a-pass').value;
+  avisar(m,'',''); $('#authResend').hidden = true;
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ avisar(m,'err','Escribe un correo válido.'); $('#a-email').focus(); return; }
+  if(pass.length < 8){ avisar(m,'err','La contraseña debe tener al menos 8 caracteres.'); $('#a-pass').focus(); return; }
+  if(modoAuth === 'register' && pass !== $('#a-pass2').value){ avisar(m,'err','Las contraseñas no coinciden.'); $('#a-pass2').focus(); return; }
+
+  bloquear(btn, true, 'Enviando…');
+  try{
+    if(modoAuth === 'register'){
+      const {data, error} = await sb.auth.signUp({email, password: pass, options:{emailRedirectTo: REDIRECT}});
+      if(error) throw error;
+      if(data.session){                              // confirmación de correo desactivada en Supabase
+        sesion = data.session; actualizarNav(); cerrar('authDlg'); await trasIngreso();
+      }else{
+        avisar(m,'ok','Si este correo es nuevo, te enviamos un mensaje para confirmarlo. Ábrelo y toca el enlace; revisa también la carpeta de spam. Si ya tenías cuenta, usa «Iniciar sesión».');
+        $('#a-pass').value = ''; $('#a-pass2').value = '';
+      }
+    }else{
+      const {data, error} = await sb.auth.signInWithPassword({email, password: pass});
+      if(error) throw error;
+      sesion = data.session; actualizarNav(); cerrar('authDlg'); $('#a-pass').value = '';
+      await trasIngreso();
+    }
+  }catch(err){
+    avisar(m,'err',errAuth(err));
+    if(String(err.code||'').toLowerCase() === 'email_not_confirmed' || /not confirmed/i.test(String(err.message||''))) $('#authResend').hidden = false;
+  }finally{ bloquear(btn, false); }
+});
+
+$('#authResend').addEventListener('click', async ()=>{
+  if(!registroHabilitado()) return;
+  const m = $('#authMsg'), email = $('#a-email').value.trim().toLowerCase();
+  if(!email){ avisar(m,'err','Escribe tu correo para reenviar el mensaje.'); return; }
+  const {error} = await sb.auth.resend({type:'signup', email, options:{emailRedirectTo: REDIRECT}});
+  if(error) avisar(m,'err',errAuth(error));
+  else avisar(m,'ok','Si hay una cuenta pendiente de confirmar con ese correo, te reenviamos el mensaje. Revisa también el spam.');
+});
+
+/* ---------- empresa ---------- */
+function abrirRegistro(role){
+  rolPendiente = role;
+  if(sesion && registroHabilitado()){ abrirEmpresa(role); return; }
+  abrirAuth('register');
+}
+async function trasIngreso(){ await abrirEmpresa(rolPendiente); }
+
+async function cargarMiEmpresa(){
+  miEmpresa = undefined;
+  if(!sb || !sesion) return;
+  const cols = [
+    'id','nombre','ruc','representante','tipo_empresa','categoria_id',
+    'ciudad','departamento','direccion','whatsapp','correo','descripcion',
+    'logo_url','sitio_web','capacidad_produccion','estado_revision','activa','verificada'
+  ].join(',');
+  const {data, error} = await sb.from(COL.tabla).select(cols).eq(COL.owner, sesion.user.id).maybeSingle();
+  miEmpresa = error ? {error:true} : (data || null);
+}
+async function cargarCategorias(){
+  if(categoriasListas) return true;
+  const sel = $('#e-cat');
+  const {data, error} = await sb.from(CAT.tabla).select(CAT.id + ',' + CAT.nombre).order(CAT.nombre);
+  if(error || !data || !data.length){
+    sel.innerHTML = '';
+    const o = document.createElement('option'); o.value = ''; o.textContent = 'No se pudieron cargar las categorías'; sel.appendChild(o);
+    return false;
+  }
+  sel.innerHTML = '';
+  const o0 = document.createElement('option'); o0.value = ''; o0.textContent = 'Elige una categoría'; sel.appendChild(o0);
+  data.forEach(c=>{ const o = document.createElement('option'); o.value = String(c[CAT.id]); o.textContent = String(c[CAT.nombre]); sel.appendChild(o); });
+  categoriasListas = true;
+  return true;
+}
+function mostrarEstado(){
+  const d = (miEmpresa && !miEmpresa.error) ? miEmpresa : null;
+  $('#empTitle').textContent = d ? 'Mi empresa' : 'Registra tu empresa';
+  const est = d ? String(d.estado_revision || '').toLowerCase() : 'pendiente';
+  const publicado = !!(d && d.activa && (est === 'aprobada' || est === 'aprobado'));
+  const etiqueta = publicado ? 'Publicada en el directorio' :
+    est === 'pendiente' ? 'Pendiente de aprobación' :
+    (est === 'rechazada' || est === 'rechazado') ? 'Requiere revisión' : 'Estado: ' + est;
+  const badgeClass = publicado ? 'badge ok' : 'badge';
+  const tipo = d?.tipo_empresa === 'productor' ? 'Fabricante o productor' :
+    d?.tipo_empresa === 'comprador' ? 'Comprador' : 'Proveedor';
+  const cat = CATS.find(c=>String(c.id)===String(d?.categoria_id));
+  const catNameText = cat ? cat.name : 'Categoría registrada';
+  const detail = (label,value)=>value ? `<div class="owner-detail"><small>${label}</small><strong>${escaparHTML(value)}</strong></div>` : '';
+  const publicButton = publicado && d?.id
+    ? `<button class="btn btn-pink" type="button" data-profile="${escaparHTML(d.id)}" data-owner-profile="1">Ver mi perfil público</button>`
+    : '';
+  const statusText = publicado
+    ? 'Tu empresa está visible para compradores, fabricantes y proveedores que visitan Red Textil Perú.'
+    : est === 'pendiente'
+      ? 'Recibimos los datos de tu empresa. La publicaremos cuando termine la revisión administrativa.'
+      : (est === 'rechazada' || est === 'rechazado')
+        ? 'Tu solicitud necesita revisión. Comunícate con el equipo de Red Textil Perú para conocer qué debes corregir.'
+        : 'Aquí puedes consultar la información y el estado de tu empresa.';
+  $('#empStatus').innerHTML = d ? `
+    <section class="owner-dashboard">
+      <div class="owner-head">
+        <div><span class="${badgeClass}">${etiqueta}</span><h4>${escaparHTML(d.nombre || 'Mi empresa')}</h4>
+        <p>${escaparHTML(catNameText)} · ${escaparHTML(tipo)}${d.ciudad ? ' · '+escaparHTML(d.ciudad) : ''}</p></div>
+        ${d.logo_url && /^https:\/\//i.test(d.logo_url) ? `<img class="owner-logo" src="${escaparHTML(d.logo_url)}" alt="Logotipo de ${escaparHTML(d.nombre)}">` : ''}
+      </div>
+      <p class="owner-status-text">${statusText}</p>
+      <div class="owner-details">
+        ${detail('RUC',d.ruc)}
+        ${detail('Representante',d.representante)}
+        ${detail('Ciudad', [d.ciudad,d.departamento].filter(Boolean).join(', '))}
+        ${detail('Dirección',d.direccion)}
+        ${detail('WhatsApp',d.whatsapp)}
+        ${detail('Correo de contacto',d.correo)}
+        ${detail('Capacidad de producción',d.capacidad_produccion)}
+        ${detail('Sitio web',d.sitio_web)}
+      </div>
+      ${d.descripcion ? `<div class="owner-description"><small>Descripción</small><p>${escaparHTML(d.descripcion)}</p></div>` : ''}
+      ${publicado ? `<div class="gallery-owner"><strong class="gallery-title">Fotografías de mi empresa</strong><p class="owner-note">Sube hasta 5 fotos de tus productos, trabajos o instalaciones. Se publicarán automáticamente si son imágenes válidas. Máximo 5 MB por imagen.</p><label class="btn btn-line btn-sm" for="companyGalleryFiles">Agregar fotografías</label><input id="companyGalleryFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden><div id="ownerCompanyGallery" class="gallery-grid"><p class="hint">Cargando fotografías…</p></div></div>` : ''}
+      ${publicado ? `<section class="owner-products"><div class="owner-products-head"><strong class="gallery-title">Mis productos</strong><span class="hint">Aparecerán en tu ficha comercial y en el catálogo general.</span></div><form id="ownerProductForm" class="owner-product-form"><input type="hidden" name="id"><label>Nombre del producto<input name="nombre" maxlength="120" required placeholder="Ej. Buzos escolares"></label><label>Categoría<select name="categoria_id" required><option value="">Cargando categorías…</option></select></label><label>Descripción<textarea name="descripcion" maxlength="500" placeholder="Materiales, medidas y características"></textarea></label><label>Precio referencial (S/)<input name="precio" type="number" min="0" step="0.01" placeholder="Vacío si es a cotizar"></label><label>Fotografía del producto<input name="imagen_archivo" type="file" accept="image/jpeg,image/png,image/webp"><small class="owner-note">JPG, PNG o WEBP · máximo 5 MB. Puedes dejarlo vacío si no deseas mostrar una foto.</small></label><div id="productImagePreview" class="product-image-preview" hidden></div><div class="owner-actions"><button class="btn btn-pink btn-sm" type="submit">Publicar producto</button><button class="btn btn-line btn-sm" type="button" id="cancelProductEdit" hidden>Cancelar edición</button></div><p class="owner-note">La fotografía se subirá automáticamente y aparecerá en tu ficha comercial y en el catálogo.</p></form><div id="ownerProductList" class="owner-product-list"><p class="hint">Cargando productos…</p></div></section>` : ''}
+      <div class="owner-actions">${publicButton}${publicado ? `<button class="btn btn-line" type="button" data-edit-company>Editar mi empresa</button>` : ''}</div>
+      ${publicado ? `
+      <form id="editCompanyForm" class="owner-edit-form" hidden>
+        <h5>Editar información comercial</h5>
+        <p class="owner-note">Estos datos se actualizarán automáticamente. Los cambios de RUC, representante, nombre comercial, categoría o propietario requieren revisión administrativa.</p>
+        <label>Descripción<textarea name="descripcion" maxlength="600">${escaparHTML(d.descripcion||'')}</textarea></label>
+        <div class="two">
+          <label>Ciudad<input name="ciudad" maxlength="60" value="${escaparHTML(d.ciudad||'')}"></label>
+          <label>Departamento<input name="departamento" maxlength="60" value="${escaparHTML(d.departamento||'')}"></label>
+        </div>
+        <label>Dirección<input name="direccion" maxlength="150" value="${escaparHTML(d.direccion||'')}"></label>
+        <div class="two">
+          <label>WhatsApp<input name="whatsapp" maxlength="20" value="${escaparHTML(d.whatsapp||'')}"></label>
+          <label>Correo<input name="correo" type="email" maxlength="120" value="${escaparHTML(d.correo||'')}"></label>
+        </div>
+        <label>Sitio web<input name="sitio_web" maxlength="200" value="${escaparHTML(d.sitio_web||'')}" placeholder="https://"></label>
+        <label>Capacidad de producción<input name="capacidad_produccion" maxlength="160" value="${escaparHTML(d.capacidad_produccion||'')}"></label>
+        <label>URL del logotipo<input name="logo_url" maxlength="500" value="${escaparHTML(d.logo_url||'')}" placeholder="https://..."></label>
+        <div class="owner-actions"><button class="btn btn-pink" type="submit">Guardar cambios</button><button class="btn btn-line" type="button" data-cancel-edit>Cancelar</button></div>
+        <p class="owner-note">Al guardar, los cambios permitidos se publicarán automáticamente y quedará un registro de actividad para administración.</p>
+      </form>` : ''}
+    </section>` : `<section class="owner-dashboard"><h4>Tu empresa</h4><p>No encontramos una empresa vinculada a esta cuenta. Puedes completar el formulario de registro.</p></section>`;
+  $('#empStatus').hidden = false;
+  $('#empForm').hidden = !!d;
+  if(d && d.activa && ['aprobada','aprobado'].includes(String(d.estado_revision||'').toLowerCase())){
+    cargarGaleriaPropietario();
+    // Inicializa también el módulo de productos al abrir Mi empresa.
+    // Sin esta llamada, el selector y el listado permanecían en 'Cargando…'.
+    cargarProductosPropietario();
+  }
+}
+async function abrirEmpresa(role){
+  $('#empTitle').textContent = 'Mi empresa';
+  const m = $('#empMsg');
+  avisar(m,'',''); $('#empStatus').hidden = true; $('#empForm').hidden = true;
+  $('#empWho').textContent = sesion && sesion.user ? 'Sesión: ' + sesion.user.email : '';
+  if(!$('#empDlg').open) $('#empDlg').showModal();
+  await cargarMiEmpresa();
+  if(miEmpresa && !miEmpresa.error){ mostrarEstado(); return; }
+  if(!miEmpresa || miEmpresa.error) $('#empTitle').textContent = 'Registra tu empresa';
+  if(miEmpresa && miEmpresa.error) avisar(m,'info','No pudimos consultar si tu cuenta ya tiene una empresa. Si ya la registraste, no necesitas volver a hacerlo.');
+  $('#empForm').hidden = false;
+  if(role && TIPO_POR_ROL[role]) $('#e-tipo').value = TIPO_POR_ROL[role];
+  if(!$('#e-correo').value && sesion && sesion.user) $('#e-correo').value = sesion.user.email || '';
+  const ok = await cargarCategorias();
+  if(!ok) avisar(m,'err','No pudimos cargar las categorías, así que por ahora no es posible registrar la empresa. Inténtalo más tarde.');
+}
+
+function leerEmpresa(){
+  const g = id => $('#'+id).value.trim().replace(/\s+/g,' ');
+  return {nombre:g('e-nombre'), ruc:g('e-ruc'), rep:g('e-rep'), tipo:$('#e-tipo').value, cat:$('#e-cat').value,
+          ciudad:g('e-ciudad'), dir:g('e-dir'), wsp:g('e-wsp'), correo:g('e-correo').toLowerCase(),
+          desc:$('#e-desc').value.trim()};
+}
+function validarEmpresa(v){
+  const f = (id,texto)=>({campo:$('#'+id), texto});
+  if(v.nombre.length < 3) return f('e-nombre','Escribe el nombre comercial de tu empresa.');
+  if(!/^\d{11}$/.test(v.ruc) || !/^(10|15|16|17|20)/.test(v.ruc)) return f('e-ruc','El RUC debe tener 11 dígitos y empezar con 10, 15, 16, 17 o 20.');
+  if(v.rep.length < 3) return f('e-rep','Escribe el nombre del representante.');
+  if(!TIPOS_EMPRESA.some(t=>t[0] === v.tipo)) return f('e-tipo','Elige el tipo de empresa.');
+  if(!v.cat) return f('e-cat','Elige una categoría.');
+  if(v.ciudad.length < 2) return f('e-ciudad','Escribe la ciudad.');
+  let w = v.wsp.replace(/\D/g,''); if(w.length === 11 && w.startsWith('51')) w = w.slice(2);
+  if(!/^9\d{8}$/.test(w)) return f('e-wsp','Escribe un WhatsApp de 9 dígitos que empiece con 9.');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.correo)) return f('e-correo','Escribe un correo de contacto válido.');
+  v.wspN = w;
+  return null;
+}
+$('#empForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const m = $('#empMsg'), btn = $('#empSubmit');
+  if(!registroHabilitado()){ avisar(m,'err','El registro todavía no está habilitado.'); return; }
+  if($('#e-hp').value) return;                       // trampa anti-bots
+  if(!categoriasListas){ avisar(m,'err','Las categorías no están disponibles, por eso no se puede enviar el registro.'); return; }
+  avisar(m,'','');
+  const v = leerEmpresa(), problema = validarEmpresa(v);
+  if(problema){ avisar(m,'err',problema.texto); problema.campo.focus(); return; }
+
+  bloquear(btn, true, 'Enviando…');
+  try{
+    const {data:u, error:eu} = await sb.auth.getUser();
+    if(eu || !u || !u.user){
+      sesion = null; actualizarNav(); cerrar('empDlg'); abrirAuth('login');
+      avisar($('#authMsg'),'err','Tu sesión venció. Inicia sesión otra vez.');
+      return;
+    }
+    const fila = {
+      [COL.owner]: u.user.id,
+      [COL.nombre]: v.nombre, [COL.ruc]: v.ruc, [COL.representante]: v.rep,
+      [COL.tipo_empresa]: v.tipo, [COL.categoria_id]: v.cat, [COL.ciudad]: v.ciudad,
+      [COL.direccion]: v.dir || null, [COL.whatsapp]: v.wspN,
+      [COL.correo]: v.correo, [COL.descripcion]: v.desc || null,
+      [COL.estado_revision]: 'pendiente', [COL.activa]: false
+    };
+    // Sin .select(): quien se registra no puede leer filas pendientes de otros, y no hace falta.
+    const {error} = await sb.from(COL.tabla).insert(fila);
+    if(error){ avisar(m,'err',errDB(error)); return; }  // fallo: NO se muestra confirmación
+    await cargarMiEmpresa();
+    mostrarEstado();
+    toast('Empresa registrada. Está pendiente de aprobación.');
+  }catch(err){
+    avisar(m,'err',errDB(err || {}));
+  }finally{ bloquear(btn, false); }
+});
+
+
+// Edición automática de campos comerciales de bajo riesgo vía RPC segura de Supabase.
+document.addEventListener('click',e=>{
+  const edit=e.target.closest('[data-edit-company]');
+  if(edit){ const f=$('#editCompanyForm'); if(f) f.hidden=!f.hidden; return; }
+  const cancel=e.target.closest('[data-cancel-edit]');
+  if(cancel){ const f=$('#editCompanyForm'); if(f) f.hidden=true; }
+});
+document.addEventListener('submit',async e=>{
+  const f=e.target.closest('#editCompanyForm');
+  if(!f) return;
+  e.preventDefault();
+  const btn=f.querySelector('button[type="submit"]');
+  const fd=new FormData(f);
+  const cambios={};
+  ['descripcion','ciudad','departamento','direccion','whatsapp','correo','sitio_web','capacidad_produccion','logo_url'].forEach(k=>{
+    cambios[k]=String(fd.get(k)||'').trim();
+  });
+  if(cambios.correo && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cambios.correo)){
+    toast('Escribe un correo válido.'); return;
+  }
+  if(cambios.logo_url && !/^https:\/\//i.test(cambios.logo_url)){
+    toast('El logotipo debe tener una dirección HTTPS segura.'); return;
+  }
+  bloquear(btn,true,'Guardando…');
+  try{
+    const {error}=await sb.rpc('actualizar_perfil_empresa',{p_cambios:cambios});
+    if(error) throw error;
+    await cargarMiEmpresa();
+    await cargarDirectorio();
+    mostrarEstado();
+    toast('Perfil actualizado. Se registró una alerta informativa para administración.');
+  }catch(err){
+    console.error('No se pudo actualizar el perfil:',err);
+    toast(err?.message || 'No se pudieron guardar los cambios. Revisa la configuración de Supabase.');
+  }finally{ bloquear(btn,false); }
+});
+
+
+// Galería pública y privada de cada empresa (Supabase Storage).
+const GALERIA_BUCKET = 'empresa-galeria';
+function rutaGaleriaEmpresa(companyId){ return String(companyId); }
+async function listarFotosEmpresa(companyId){
+  const {data,error}=await sb.storage.from(GALERIA_BUCKET).list(rutaGaleriaEmpresa(companyId),{
+    limit:5, sortBy:{column:'created_at',order:'asc'}
+  });
+  if(error) throw error;
+  return (data||[]).filter(x=>x.name && !x.name.startsWith('.')).slice(0,5);
+}
+async function cargarGaleriaPublica(companyId, target){
+  if(!target || !sb) return;
+  try{
+    const files=await listarFotosEmpresa(companyId);
+    if(!files.length){target.innerHTML='<p class="hint">Esta empresa aún no ha publicado fotografías.</p>';return;}
+    target.innerHTML=files.map(file=>{
+      const {data}=sb.storage.from(GALERIA_BUCKET).getPublicUrl(`${rutaGaleriaEmpresa(companyId)}/${file.name}`);
+      return `<img src="${escaparHTML(data.publicUrl)}" alt="Fotografía de trabajos de empresa" loading="lazy">`;
+    }).join('');
+  }catch(err){
+    console.warn('No se pudo cargar la galería pública:',err);
+    target.innerHTML='<p class="hint">Las fotografías estarán disponibles cuando se configure la galería.</p>';
+  }
+}
+async function cargarGaleriaPropietario(){
+  const target=$('#ownerCompanyGallery');
+  if(!target || !miEmpresa?.id || !sb) return;
+  try{
+    const files=await listarFotosEmpresa(miEmpresa.id);
+    if(!files.length){target.innerHTML='<p class="hint">Todavía no has agregado fotografías.</p>';return;}
+    target.innerHTML=files.map(file=>{
+      const {data}=sb.storage.from(GALERIA_BUCKET).getPublicUrl(`${rutaGaleriaEmpresa(miEmpresa.id)}/${file.name}`);
+      return `<div class="gallery-item"><img src="${escaparHTML(data.publicUrl)}" alt="Fotografía de mi empresa" loading="lazy"><button type="button" data-delete-gallery="${escaparHTML(file.name)}">Eliminar</button></div>`;
+    }).join('');
+  }catch(err){
+    console.warn('No se pudo cargar la galería del propietario:',err);
+    target.innerHTML='<p class="hint">No se pudo cargar la galería. Verifica la configuración de almacenamiento.</p>';
+  }
+}
+async function subirFotosEmpresa(input){
+  if(!miEmpresa?.id || !sb || !input.files?.length) return;
+  const target=$('#ownerCompanyGallery');
+  const files=Array.from(input.files);
+  try{
+    const actuales=await listarFotosEmpresa(miEmpresa.id);
+    if(actuales.length + files.length > 5){
+      toast(`Puedes tener hasta 5 fotografías. Ya tienes ${actuales.length}.`);
+      input.value=''; return;
+    }
+    for(const file of files){
+      if(!['image/jpeg','image/png','image/webp'].includes(file.type)){
+        toast('Solo se permiten imágenes JPG, PNG o WEBP.'); input.value=''; return;
+      }
+      if(file.size > 5*1024*1024){
+        toast('Cada fotografía debe pesar máximo 5 MB.'); input.value=''; return;
+      }
+    }
+    const userId=sesion?.user?.id;
+    if(!userId) throw new Error('Tu sesión venció. Inicia sesión nuevamente.');
+    const {data:authData}=await sb.auth.getUser();
+    if(!authData?.user) throw new Error('Tu sesión venció. Inicia sesión nuevamente.');
+    const base=`${rutaGaleriaEmpresa(miEmpresa.id)}/`;
+    for(const file of files){
+      const ext=file.type==='image/jpeg'?'jpg':file.type==='image/png'?'png':'webp';
+      const name=`${crypto.randomUUID()}.${ext}`;
+      const {error}=await sb.storage.from(GALERIA_BUCKET).upload(base+name,file,{
+        cacheControl:'3600',upsert:false,contentType:file.type
+      });
+      if(error) throw error;
+    }
+    await cargarGaleriaPropietario();
+    toast('Fotografías publicadas en el perfil de tu empresa.');
+  }catch(err){
+    console.error('Error al subir fotografías:',err);
+    toast(err?.message || 'No se pudieron subir las fotografías. Revisa el almacenamiento de Supabase.');
+    await cargarGaleriaPropietario();
+  }finally{input.value='';}
+}
+async function eliminarFotoEmpresa(name){
+  if(!miEmpresa?.id || !sb || !name || name.includes('/') || name.includes('..')) return;
+  if(!confirm('¿Eliminar esta fotografía de tu empresa?')) return;
+  const {error}=await sb.storage.from(GALERIA_BUCKET).remove([`${rutaGaleriaEmpresa(miEmpresa.id)}/${name}`]);
+  if(error){toast(error.message || 'No se pudo eliminar la fotografía.');return;}
+  await cargarGaleriaPropietario();
+  toast('Fotografía eliminada.');
+}
+document.addEventListener('change',e=>{
+  if(e.target?.id==='companyGalleryFiles') subirFotosEmpresa(e.target);
+});
+document.addEventListener('click',e=>{
+  const del=e.target.closest('[data-delete-gallery]');
+  if(del) eliminarFotoEmpresa(del.dataset.deleteGallery);
+});
+
+/* Publicación y administración de productos vinculados a la empresa. */
+function limpiarFormularioProducto(){
+  const f=$('#ownerProductForm'); if(!f)return;
+  f.reset(); f.elements.id.value='';
+  const preview=$('#productImagePreview'); if(preview){preview.innerHTML='';preview.hidden=true;}
+  f.querySelector('button[type="submit"]').textContent='Publicar producto';
+  $('#cancelProductEdit').hidden=true;
+}
+async function cargarProductosPropietario(){
+  const target=$('#ownerProductList');
+  if(!target||!miEmpresa?.id||!sb)return;
+  target.innerHTML='<p class="hint">Cargando productos…</p>';
+  try{
+    // Cargar las categorías también en el formulario de productos del propietario.
+    // Antes solo se llenaba el selector del registro de empresa, por eso aquí quedaba "Cargando categorías…".
+    const catSelect=$('#ownerProductForm select[name="categoria_id"]');
+    if(catSelect && catSelect.options.length<=1){
+      const {data:cats,error:catError}=await sb.from(CAT.tabla).select(CAT.id+','+CAT.nombre).order(CAT.nombre);
+      if(catError) throw catError;
+      catSelect.innerHTML='<option value="">Elige una categoría</option>'+(cats||[]).map(c=>`<option value="${escaparHTML(c[CAT.id])}">${escaparHTML(c[CAT.nombre])}</option>`).join('');
+      if(!cats || !cats.length) throw new Error('No hay categorías disponibles.');
+    }
+    const {data,error}=await sb.from('productos').select('id,categoria_id,nombre,descripcion,precio,imagen_url,activo').eq('empresa_id',miEmpresa.id).order('created_at',{ascending:false});
+    if(error)throw error;
+    target.innerHTML=(data||[]).length ? data.map(p=>`<article class="owner-product-row">${p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="">`:'<div></div>'}<div><strong>${escaparHTML(p.nombre)}</strong><small>${precioProducto(p.precio)} · ${p.activo?'Publicado':'Oculto'}</small></div><div class="owner-product-actions"><button type="button" data-edit-product="${escaparHTML(p.id)}">Editar</button><button type="button" data-toggle-product="${escaparHTML(p.id)}" data-active="${p.activo?'1':'0'}">${p.activo?'Ocultar':'Publicar'}</button><button type="button" data-delete-product="${escaparHTML(p.id)}">Eliminar</button></div></article>`).join('') : '<p class="hint">Todavía no has publicado productos. Completa el formulario para añadir el primero.</p>';
+    target.dataset.products=JSON.stringify(data||[]);
+  }catch(err){console.error('No se pudieron cargar tus productos:',err);target.innerHTML='<p class="hint">No se pudieron cargar tus productos. Verifica la configuración de Supabase.</p>';}
+}
+$('#empDlg').addEventListener('change',e=>{
+  if(e.target?.name!=='imagen_archivo')return;
+  const file=e.target.files?.[0], preview=$('#productImagePreview'); if(!preview)return;
+  if(!file){preview.innerHTML='';preview.hidden=true;return;}
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5*1024*1024){toast('Elige una imagen JPG, PNG o WEBP de máximo 5 MB.');e.target.value='';preview.innerHTML='';preview.hidden=true;return;}
+  const url=URL.createObjectURL(file);preview.innerHTML=`<img src="${url}" alt="Vista previa del producto">`;preview.hidden=false;
+});
+$('#empDlg').addEventListener('submit',async e=>{
+  const f=e.target.closest('#ownerProductForm'); if(!f)return;
+  e.preventDefault();
+  if(!miEmpresa?.id||!sb)return;
+  const fd=new FormData(f), id=String(fd.get('id')||'').trim();
+  const nombre=String(fd.get('nombre')||'').trim();
+  const categoria=String(fd.get('categoria_id')||'').trim();
+  const archivo=f.elements.imagen_archivo?.files?.[0]||null;
+  const precioRaw=String(fd.get('precio')||'').trim();
+  if(nombre.length<2||!categoria){toast('Completa el nombre y la categoría del producto.');return;}
+  if(archivo && !['image/jpeg','image/png','image/webp'].includes(archivo.type)){toast('La imagen debe ser JPG, PNG o WEBP.');return;}
+  if(archivo && archivo.size>5*1024*1024){toast('La imagen debe pesar máximo 5 MB.');return;}
+  const payload={empresa_id:miEmpresa.id,categoria_id:Number(categoria),nombre,descripcion:String(fd.get('descripcion')||'').trim()||null,precio:precioRaw===''?null:Number(precioRaw),activo:true};
+  if(precioRaw!==''&&(!Number.isFinite(payload.precio)||payload.precio<0)){toast('Escribe un precio válido.');return;}
+  const btn=f.querySelector('button[type="submit"]'); bloquear(btn,true,id?'Guardando…':'Publicando…');
+  try{
+    if(archivo){
+      const ext=archivo.type==='image/jpeg'?'jpg':archivo.type==='image/png'?'png':'webp';
+      const objectPath=`${miEmpresa.id}/${crypto.randomUUID()}.${ext}`;
+      const {error:uploadError}=await sb.storage.from('producto-imagenes').upload(objectPath,archivo,{cacheControl:'3600',upsert:false,contentType:archivo.type});
+      if(uploadError)throw uploadError;
+      const {data:publicData}=sb.storage.from('producto-imagenes').getPublicUrl(objectPath);
+      payload.imagen_url=publicData.publicUrl;
+    }else if(id){
+      const anterior=JSON.parse($('#ownerProductList')?.dataset.products||'[]').find(x=>String(x.id)===id);
+      if(anterior?.imagen_url)payload.imagen_url=anterior.imagen_url;
+    }
+    const result=id ? await sb.from('productos').update(payload).eq('id',id).eq('empresa_id',miEmpresa.id) : await sb.from('productos').insert(payload);
+    if(result.error)throw result.error;
+    limpiarFormularioProducto(); await cargarProductosPropietario(); await cargarProductosPublicos();
+    toast(id?'Producto actualizado.':'Producto publicado en el catálogo.');
+  }catch(err){console.error('Error guardando producto:',err);toast(err?.message||'No se pudo guardar el producto.');}
+  finally{bloquear(btn,false);}
+});
+$('#empDlg').addEventListener('click',async e=>{
+  const cancel=e.target.closest('#cancelProductEdit');
+  if(cancel){limpiarFormularioProducto();return;}
+  const edit=e.target.closest('[data-edit-product]');
+  if(edit){
+    const f=$('#ownerProductForm'), rows=JSON.parse($('#ownerProductList')?.dataset.products||'[]'), p=rows.find(x=>String(x.id)===edit.dataset.editProduct);
+    if(!p||!f)return;
+    f.elements.id.value=p.id;f.elements.nombre.value=p.nombre||'';f.elements.descripcion.value=p.descripcion||'';f.elements.precio.value=p.precio??'';const preview=$('#productImagePreview');if(preview){preview.innerHTML=p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="Imagen actual del producto">`:'';preview.hidden=!p.imagen_url;}
+    // Categoría del producto: usar su categoría propia.
+    f.elements.categoria_id.value=String(p.categoria_id||'');
+    f.querySelector('button[type="submit"]').textContent='Guardar producto';$('#cancelProductEdit').hidden=false;
+    f.scrollIntoView({behavior:'smooth',block:'center'});return;
+  }
+  const toggle=e.target.closest('[data-toggle-product]');
+  if(toggle){
+    const active=toggle.dataset.active!=='1';
+    const {error}=await sb.from('productos').update({activo:active}).eq('id',toggle.dataset.toggleProduct).eq('empresa_id',miEmpresa.id);
+    if(error){toast(error.message||'No se pudo cambiar la publicación.');return;}
+    await cargarProductosPropietario();await cargarProductosPublicos();toast(active?'Producto publicado.':'Producto oculto.');return;
+  }
+  const del=e.target.closest('[data-delete-product]');
+  if(del){
+    if(!confirm('¿Eliminar este producto del catálogo?'))return;
+    const {error}=await sb.from('productos').delete().eq('id',del.dataset.deleteProduct).eq('empresa_id',miEmpresa.id);
+    if(error){toast(error.message||'No se pudo eliminar el producto.');return;}
+    await cargarProductosPropietario();await cargarProductosPublicos();toast('Producto eliminado.');
+  }
+});
+document.addEventListener('click',e=>{
+  const q=e.target.closest('[data-product-quote]');
+  if(q){
+    const p=productosPublicos.find(x=>String(x.id)===q.dataset.productQuote);
+    if(p) abrirCotizacionProducto(p);
+    return;
+  }
+  const company=e.target.closest('[data-open-company]');
+  if(company){const card=document.querySelector(`[data-profile="${CSS.escape(company.dataset.openCompany)}"]`);if(card)card.click();}
+});
+
+async function cerrarSesion(){
+  if(!sb) return;
+  const {error} = await sb.auth.signOut();
+  if(error){ toast('No se pudo cerrar la sesión. Inténtalo otra vez.'); return; }
+  sesion = null; miEmpresa = undefined; cerrar('empDlg'); actualizarNav();
+  toast('Sesión cerrada.');
+}
+$('#empLogout').addEventListener('click', cerrarSesion);
+$('#navLogout').addEventListener('click', e=>{ e.preventDefault(); nav.classList.remove('open'); cerrarSesion(); });
+
+/* ---------- arranque: sesión existente y regreso desde el correo de confirmación ---------- */
+if(sb){
+  sb.auth.onAuthStateChange((ev, ses)=>{ sesion = ses; if(ev === 'SIGNED_OUT') miEmpresa = undefined; actualizarNav(); });
+  (async ()=>{
+    const q = new URLSearchParams(location.search);
+    const h = new URLSearchParams(location.hash.replace(/^#/,''));
+    const huboError = h.has('error') || q.has('error');
+    const huboCodigo = q.has('code');
+    const {data} = await sb.auth.getSession();
+    sesion = data.session; actualizarNav();
+    if(huboError || huboCodigo) history.replaceState(null,'',location.pathname);
+    if(huboError){
+      toast('El enlace de confirmación no es válido o ya venció. Si ya confirmaste tu correo, inicia sesión.');
+      abrirAuth('login');
+    }else if(huboCodigo){
+      if(sesion){ toast('Correo confirmado. Completa los datos de tu empresa.'); trasIngreso(); }
+      else{ toast('Tu correo quedó confirmado. Inicia sesión para continuar.'); abrirAuth('login'); }
+    }
+  })();
+}
+actualizarNav();
+
+/* =========================================================
+   INICIO
+   ========================================================= */
+renderCats(); renderFeat(); renderDir(); renderProds(); renderOpps(); renderEvents();
+cargarDirectorio();
+</script>
+</body>
+</html>
