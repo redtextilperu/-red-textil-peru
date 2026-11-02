@@ -486,6 +486,29 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
 .gallery-public img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
 .gallery-title{font-family:var(--f-display);font-size:1.05rem;color:var(--navy);font-weight:700}
 @media(max-width:480px){.gallery-grid,.gallery-public{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* ============ CATÁLOGO DE CADA EMPRESA ============ */
+.company-products{margin:22px 0;padding-top:18px;border-top:1px solid var(--line)}
+.company-products h4{margin-bottom:12px}
+.company-product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}
+.company-product{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+.company-product img{width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--paper)}
+.company-product .cp-body{padding:10px}
+.company-product strong{display:block;color:var(--navy);font-size:.9rem}
+.company-product p{font-size:.82rem;color:var(--ink-soft);margin-top:4px}
+.company-product .cp-price{font-weight:700;color:var(--pink-deep)}
+.product-owner{display:grid;gap:12px;margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.product-owner-form{display:grid;gap:10px}
+.product-owner-form label{display:grid;gap:5px;font-size:.85rem;font-weight:600;color:var(--navy)}
+.product-owner-form input,.product-owner-form textarea,.product-owner-form select{width:100%;min-width:0;border:1px solid var(--line);border-radius:9px;padding:10px;background:#fff}
+.product-owner-list{display:grid;gap:8px}
+.product-owner-row{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:10px;padding:8px;border:1px solid var(--line);border-radius:10px}
+.product-owner-row img{width:64px;height:64px;object-fit:cover;border-radius:8px}
+.product-owner-row strong{font-size:.88rem;display:block}
+.product-owner-row small{color:var(--ink-soft)}
+.product-owner-row button{border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:#fff;color:var(--navy);font-size:.78rem}
+.product-owner-row button[data-delete-product]{color:#b42318}
+.product-owner-actions{display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:480px){.company-product-grid{grid-template-columns:1fr 1fr}.product-owner-row{grid-template-columns:52px 1fr}.product-owner-row img{width:52px;height:52px}.product-owner-row .product-owner-actions{grid-column:1/-1}}
 
 </style>
 </head>
@@ -594,7 +617,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
     <div class="s-head">
       <div>
         <h2>Productores destacados</h2>
-        <p>Conoce a los productores textiles registrados y aprobados en Red Textil Perú.</p>
+        <p>Talleres y fábricas de Trujillo con su especialidad a la vista. Los perfiles que ves hoy son ejemplos para validar el diseño.</p>
       </div>
       <a class="more" href="#directorio">Ver todos →</a>
     </div>
@@ -1073,38 +1096,21 @@ $('#catGrid').addEventListener('click',e=>{
    PRODUCTORES DESTACADOS
    ========================================================= */
 function renderFeat(){
-  const host = $('#featGrid');
-  if(!host) return;
-  if(directorioCargando){
-    host.innerHTML = '<div class="empty">Cargando productores registrados…</div>';
-    return;
-  }
-  if(directorioError){
-    host.innerHTML = '<div class="empty">No pudimos cargar los productores. Revisa el directorio o inténtalo nuevamente.</div>';
-    return;
-  }
-  const list = directorioEmpresas.filter(x=>x.r==='productor');
-  if(!list.length){
-    host.innerHTML = '<div class="empty">Aún no hay productores aprobados para destacar. Cuando una empresa sea aprobada como productora, aparecerá aquí automáticamente.</div>';
-    return;
-  }
-  host.innerHTML = list.slice(0,8).map((x,i)=>{
-    const logo = x.logo_url && /^https?:\/\//i.test(x.logo_url)
-      ? `<img src="${escaparHTML(x.logo_url)}" alt="Logo de ${escaparHTML(x.n)}" loading="lazy" style="width:100%;height:100%;object-fit:contain;background:#fff;padding:12px">`
-      : photo(x.c,x.c,i+1);
-    return `<article class="fcard">
-      <div class="pic">${logo}<span class="pill pk">Productor</span></div>
+  const list = COMPANIES.filter(x=>x.f);
+  $('#featGrid').innerHTML = list.map((x,i)=>`
+    <article class="fcard">
+      <div class="pic">${photo(x.c,x.c,i)}<span class="pill pk">Perfil de ejemplo</span></div>
       <div class="bd">
-        <h3>${escaparHTML(x.n)}</h3>
-        <p class="meta">${escaparHTML(x.categoria)} · ${escaparHTML(x.d || x.departamento || 'Perú')}</p>
-        <p class="ds">${escaparHTML(x.t || 'Productor registrado en Red Textil Perú.')}</p>
+        <h3>${x.n}</h3>
+        <p class="meta">${catName(x.c)} · ${x.d}, Trujillo</p>
+        <p class="ds">${x.t}</p>
+        <div class="tags">${x.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
         <div class="acts">
-          <button class="btn btn-electric btn-sm" type="button" data-profile="${escaparHTML(x.id)}">Ver perfil</button>
-          <a class="btn btn-line btn-sm" href="#directorio" data-show-producers>Ver directorio</a>
+          <button class="btn btn-electric btn-sm" data-contact="${x.n}">Contactar</button>
+          <button class="btn btn-line btn-sm" data-quote="Cotización a ${x.n}">Cotizar</button>
         </div>
       </div>
-    </article>`;
-  }).join('');
+    </article>`).join('');
 }
 
 /* =========================================================
@@ -1183,14 +1189,13 @@ async function cargarDirectorio(){
       const c = slugCategoria(categoria);
       return {id:row.id,n:row.nombre||'Empresa textil',c,r:row.tipo_empresa||'proveedor',d:row.ciudad||'',departamento:row.departamento||'',t:row.descripcion||'',categoria,whatsapp:row.whatsapp||'',correo:row.correo||'',logo_url:row.logo_url||'',sitio_web:row.sitio_web||'',direccion:row.direccion||'',capacidad:row.capacidad_produccion||'',tags:[]};
     });
-    directorioCargando = false; renderDir(); renderCats(); renderFeat();
+    directorioCargando = false; renderDir(); renderCats();
   }catch(err){
     console.error('RED TEXTIL PERÚ: no se pudo cargar el directorio desde Supabase.',err);
-    directorioCargando = false; directorioError = String(err?.message || 'Error de conexión'); renderDir(); renderFeat();
+    directorioCargando = false; directorioError = String(err?.message || 'Error de conexión'); renderDir();
   }
 }
 $('#dirList').addEventListener('click',e=>{ if(e.target.id==='reintentarDirectorio') cargarDirectorio(); });
-$('#featGrid').addEventListener('click',e=>{ const b=e.target.closest('[data-show-producers]'); if(!b)return; setDir({cat:'todas',role:'productor',q:''}); $('#directorio').scrollIntoView({behavior:'smooth'}); });
 chipRow($('#dirChips'), [{id:'todas',name:'Todas'},...CATS], 'todas', v=>{dirState.cat=v;renderDir()});
 $('#q').addEventListener('input',e=>{dirState.q=e.target.value;renderDir()});
 $('#roleSeg').addEventListener('click',e=>{
@@ -1245,53 +1250,48 @@ tabs.forEach((t,i)=>{
 });
 
 /* =========================================================
-   CATÁLOGO REAL: productos publicados en Supabase
+   CATÁLOGO
    ========================================================= */
 const prodState = {cat:'todas'};
-let catalogoProductos = [];
-let catalogoCargando = true;
-let catalogoError = '';
+let productosPublicos = [];
 function renderProds(){
-  const chips = [{id:'todas',name:'Todos'},...CATS.filter(c=>catalogoProductos.some(p=>p.c===c.id))];
-  const chipHost=$('#prodChips');
-  chipHost.innerHTML=chips.map(c=>`<button type="button" class="chip" data-v="${c.id}" aria-pressed="${prodState.cat===c.id}">${c.name}</button>`).join('');
-  if(catalogoCargando){$('#prodGrid').innerHTML='<div class="empty" style="grid-column:1/-1"><p>Cargando productos publicados por las empresas…</p></div>';return;}
-  if(catalogoError){$('#prodGrid').innerHTML='<div class="empty" style="grid-column:1/-1"><p>No pudimos cargar el catálogo en este momento.</p><button class="btn btn-line btn-sm" type="button" id="retryCatalog">Volver a intentar</button></div>';return;}
-  const list=catalogoProductos.filter(p=>prodState.cat==='todas'||p.c===prodState.cat);
-  $('#prodGrid').innerHTML=list.length?list.map(p=>{
-    const image=p.imagen_url&&/^https:\/\//i.test(p.imagen_url)
-      ? `<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.n)}" loading="lazy" style="width:100%;height:100%;object-fit:cover">`
-      : photo(p.c,p.c,0);
-    const wa=p.whatsapp?'https://wa.me/51'+String(p.whatsapp).replace(/\D/g,'').replace(/^51/,''):'';
-    const precio=p.precio!==null&&p.precio!==undefined&&p.precio!==''?`S/ ${Number(p.precio).toLocaleString('es-PE',{maximumFractionDigits:2})}`:'Precio a cotizar';
-    return `<article class="prod"><div class="pic">${image}<span class="pill">${escaparHTML(p.tag||catName(p.c)||'Producto')}</span></div><div class="bd"><h3>${escaparHTML(p.n)}</h3><p class="by">${escaparHTML(p.by||'Empresa de Red Textil Perú')}</p>${p.descripcion?`<p class="by">${escaparHTML(p.descripcion)}</p>`:''}<p class="ask">${precio}</p>${wa?`<a class="btn btn-line btn-sm" href="${wa}" target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>`:`<span class="hint">Contacto no disponible</span>`}</div></article>`;
-  }).join(''):`<div class="empty" style="grid-column:1/-1"><p>${prodState.cat==='todas'?'Todavía no hay productos publicados.':'Aún no hay productos publicados en esta categoría.'}</p><p class="hint">Cuando una empresa aprobada publique sus productos, aparecerán aquí automáticamente.</p></div>`;
+  const list = productosPublicos.filter(p=>prodState.cat==='todas'||slugCategoria(p.categoria_nombre)===prodState.cat);
+  $('#prodGrid').innerHTML = list.length ? list.map(p=>`
+    <article class="prod">
+      <div class="pic">${p.imagen_url ? `<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.nombre)}" loading="lazy">` : photo(slugCategoria(p.categoria_nombre||''),p.categoria_nombre,0)}<span class="pill">${escaparHTML(p.categoria_nombre||'Producto')}</span></div>
+      <div class="bd">
+        <h3>${escaparHTML(p.nombre)}</h3>
+        <p class="by">${escaparHTML(p.empresa_nombre||'Empresa de Red Textil Perú')}</p>
+        ${p.descripcion?`<p class="ask">${escaparHTML(p.descripcion)}</p>`:''}
+        <p class="ask">${p.precio!==null && p.precio!=='' ? 'S/ '+Number(p.precio).toFixed(2) : 'Precio a cotizar'}</p>
+        <button class="btn btn-line btn-sm" data-product-quote="${escaparHTML(p.id)}">Pedir cotización</button>
+      </div>
+    </article>`).join('')
+    : `<div class="empty" style="grid-column:1/-1"><p>${sb ? 'Aún no hay productos publicados. Las empresas podrán agregarlos desde su cuenta.' : 'El catálogo se está conectando.'}</p><button class="btn btn-pink btn-sm" data-open="join" data-role="Proveedor">Registrar mi empresa</button></div>`;
 }
-$('#prodChips').addEventListener('click',e=>{const b=e.target.closest('[data-v]');if(!b)return;prodState.cat=b.dataset.v;renderProds();});
-$('#prodGrid').addEventListener('click',e=>{if(e.target.id==='retryCatalog') cargarCatalogo();});
-async function cargarCatalogo(){
-  catalogoCargando=true;catalogoError='';renderProds();
-  if(!sb){catalogoCargando=false;catalogoError='Supabase no está configurado';renderProds();return;}
+function actualizarChipsProductos(){
+  const usados = CATS.filter(c=>productosPublicos.some(p=>slugCategoria(p.categoria_nombre)===c.id));
+  chipRow($('#prodChips'), [{id:'todas',name:'Todos'},...usados], 'todas', v=>{prodState.cat=v;renderProds()});
+}
+async function cargarProductosPublicos(){
+  if(!sb){productosPublicos=[];renderProds();return;}
   try{
-    const {data:rows,error}=await sb.from('productos').select('id,empresa_id,categoria_id,nombre,descripcion,precio,imagen_url,created_at').eq('activo',true).order('created_at',{ascending:false});
+    const {data,error}=await sb.from('productos')
+      .select('id,empresa_id,categoria_id,nombre,descripcion,precio,imagen_url,created_at,empresas!inner(nombre,ciudad,activa,estado_revision),categorias(nombre)')
+      .eq('activo',true).eq('empresas.activa',true).in('empresas.estado_revision',['aprobada','aprobado'])
+      .order('created_at',{ascending:false});
     if(error) throw error;
-    const ids=[...new Set((rows||[]).map(r=>r.empresa_id).filter(Boolean))];
-    let empresas=[];
-    if(ids.length){const res=await sb.from('empresas').select('id,nombre,whatsapp,activa,estado_revision').in('id',ids).eq('activa',true).eq('estado_revision','aprobada');if(res.error)throw res.error;empresas=res.data||[];}
-    const empMap=new Map(empresas.map(e=>[String(e.id),e]));
-    const catIds=[...new Set((rows||[]).map(r=>r.categoria_id).filter(v=>v!==null&&v!==undefined))];
-    let cats=[];
-    if(catIds.length){const res=await sb.from('categorias').select('id,nombre').in('id',catIds);if(res.error)throw res.error;cats=res.data||[];}
-    const catMap=new Map(cats.map(c=>[String(c.id),String(c.nombre||'')]));
-    catalogoProductos=(rows||[]).filter(r=>empMap.has(String(r.empresa_id))).map(r=>{
-      const empresa=empMap.get(String(r.empresa_id));
-      const categoria=catMap.get(String(r.categoria_id))||'Confección';
-      return {id:r.id,n:r.nombre||'Producto textil',by:empresa.nombre||'Empresa',whatsapp:empresa.whatsapp||'',c:slugCategoria(categoria),tag:categoria,descripcion:r.descripcion||'',precio:r.precio,imagen_url:r.imagen_url||''};
-    });
-    catalogoCargando=false;renderProds();
-  }catch(err){console.error('No se pudo cargar el catálogo desde Supabase:',err);catalogoCargando=false;catalogoError=String(err?.message||'Error de conexión');renderProds();}
+    productosPublicos=(data||[]).map(p=>({...p,empresa_nombre:p.empresas?.nombre||'',categoria_nombre:p.categorias?.nombre||''}));
+    const categoryRows = await sb.from('categorias').select('id,nombre').order('nombre');
+    const names = new Map((categoryRows.data||[]).map(c=>[String(c.id),c.nombre]));
+    productosPublicos.forEach(p=>p.categoria_nombre=names.get(String(p.categoria_id))||p.categoria_nombre||'Producto');
+    renderProds();
+    chipRow($('#prodChips'), [{id:'todas',name:'Todos'},...CATS.filter(c=>productosPublicos.some(p=>slugCategoria(p.categoria_nombre)===c.id))], 'todas', v=>{prodState.cat=v;renderProds()});
+  }catch(err){
+    console.error('No se pudo cargar el catálogo:',err);
+    $('#prodGrid').innerHTML='<div class="empty"><p>No se pudo cargar el catálogo. Intenta actualizar la página.</p></div>';
+  }
 }
-
 /* =========================================================
    OPORTUNIDADES
    ========================================================= */
@@ -1375,12 +1375,24 @@ document.addEventListener('click',e=>{
     let website = '';
     if(company.sitio_web){ try{ const u=new URL(/^https?:\/\//i.test(company.sitio_web)?company.sitio_web:'https://'+company.sitio_web); if(['http:','https:'].includes(u.protocol)) website=u.href; }catch(_){} }
     const image = company.logo_url && /^https:\/\//i.test(company.logo_url) ? `<img class="profile-cover" src="${escaparHTML(company.logo_url)}" alt="Imagen de ${escaparHTML(company.n)}">` : `<div class="profile-cover" style="display:grid;place-items:center;color:var(--ink-soft)">Perfil de ${escaparHTML(company.n)}</div>`;
-    $('#profileContent').innerHTML = `${image}<p class="meta">${escaparHTML(company.categoria)} · ${roleLabel}</p><p class="sub">${escaparHTML(company.t || 'Empresa registrada en Red Textil Perú.')}</p><h4 class="gallery-title">Galería de trabajos</h4><div id="publicCompanyGallery" class="gallery-public"><p class="hint">Cargando fotografías…</p></div><div class="profile-meta"><div><small>Ciudad</small><strong>${escaparHTML([company.d,company.departamento].filter(Boolean).join(', ')||'No especificada')}</strong></div>${company.capacidad?`<div><small>Capacidad de producción</small><strong>${escaparHTML(company.capacidad)}</strong></div>`:''}${company.direccion?`<div><small>Dirección</small><strong>${escaparHTML(company.direccion)}</strong></div>`:''}${company.correo?`<div><small>Correo</small><strong>${escaparHTML(company.correo)}</strong></div>`:''}</div><div class="profile-actions">${wa?`<a class="btn btn-pink" href="${wa}" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>`:''}${email?`<a class="btn btn-line" href="${email}">Enviar correo</a>`:''}${website?`<a class="btn btn-line" href="${escaparHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio web</a>`:''}</div>`;
+    $('#profileContent').innerHTML = `${image}<p class="meta">${escaparHTML(company.categoria)} · ${roleLabel}</p><p class="sub">${escaparHTML(company.t || 'Empresa registrada en Red Textil Perú.')}</p><h4 class="gallery-title">Galería de trabajos</h4><div id="publicCompanyGallery" class="gallery-public"><p class="hint">Cargando fotografías…</p></div><div class="company-products"><h4 class="gallery-title">Productos y servicios</h4><div id="publicCompanyProducts"><p class="hint">Cargando productos…</p></div></div><div class="profile-meta"><div><small>Ciudad</small><strong>${escaparHTML([company.d,company.departamento].filter(Boolean).join(', ')||'No especificada')}</strong></div>${company.capacidad?`<div><small>Capacidad de producción</small><strong>${escaparHTML(company.capacidad)}</strong></div>`:''}${company.direccion?`<div><small>Dirección</small><strong>${escaparHTML(company.direccion)}</strong></div>`:''}${company.correo?`<div><small>Correo</small><strong>${escaparHTML(company.correo)}</strong></div>`:''}</div><div class="profile-actions">${wa?`<a class="btn btn-pink" href="${wa}" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>`:''}${email?`<a class="btn btn-line" href="${email}">Enviar correo</a>`:''}${website?`<a class="btn btn-line" href="${escaparHTML(website)}" target="_blank" rel="noopener noreferrer">Visitar sitio web</a>`:''}</div>`;
     $('#profileDlg').showModal();
     cargarGaleriaPublica(company.id, $('#publicCompanyGallery'));
+    cargarProductosEmpresaPublicos(company.id, $('#publicCompanyProducts'));
     return;
   }
 
+  const pq = e.target.closest('[data-product-quote]');
+  if(pq){
+    const p=productosPublicos.find(x=>String(x.id)===String(pq.dataset.productQuote));
+    if(p){
+      const empresa=directorioEmpresas.find(x=>String(x.id)===String(p.empresa_id));
+      const numero=empresa?.whatsapp ? 'https://wa.me/51'+String(empresa.whatsapp).replace(/\\D/g,'').replace(/^51/,'') : '';
+      if(numero){ window.open(numero+'?text='+encodeURIComponent('Hola, vi tu producto '+p.nombre+' en Red Textil Perú. ¿Podrías enviarme una cotización?'),'_blank','noopener'); }
+      else toast('Esta empresa aún no tiene WhatsApp de contacto publicado.');
+    }
+    return;
+  }
   const ct = e.target.closest('[data-contact]');
   if(ct){
     openDlg({title:'Contactar empresa', sub:ct.dataset.contact, btn:'Enviar mensaje', role:'Comprador', msg:true, placeholder:'Escribe tu consulta'});
@@ -1653,6 +1665,7 @@ function mostrarEstado(){
       </div>
       ${d.descripcion ? `<div class="owner-description"><small>Descripción</small><p>${escaparHTML(d.descripcion)}</p></div>` : ''}
       ${publicado ? `<div class="gallery-owner"><strong class="gallery-title">Fotografías de mi empresa</strong><p class="owner-note">Sube hasta 5 fotos de tus productos, trabajos o instalaciones. Se publicarán automáticamente si son imágenes válidas. Máximo 5 MB por imagen.</p><label class="btn btn-line btn-sm" for="companyGalleryFiles">Agregar fotografías</label><input id="companyGalleryFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden><div id="ownerCompanyGallery" class="gallery-grid"><p class="hint">Cargando fotografías…</p></div></div>` : ''}
+      ${publicado ? `<div class="product-owner"><strong class="gallery-title">Mis productos</strong><p class="owner-note">Publica productos o servicios. Aparecerán en esta ficha comercial y también en el catálogo general.</p><form id="productOwnerForm" class="product-owner-form"><input type="hidden" name="id"><label>Nombre del producto<input name="nombre" maxlength="120" required placeholder="Ej. Polos deportivos personalizados"></label><label>Categoría<select name="categoria_id" id="productCategory" required><option value="">Selecciona una categoría</option></select></label><label>Descripción<textarea name="descripcion" maxlength="500" rows="3" placeholder="Detalles, materiales, medidas o presentación"></textarea></label><label>Precio en soles (opcional)<input name="precio" type="number" min="0" step="0.01" placeholder="Ej. 35.00"></label><label>Fotografía (JPG, PNG o WEBP, máximo 5 MB)<input name="imagen" type="file" accept="image/jpeg,image/png,image/webp"></label><div class="product-owner-actions"><button class="btn btn-pink btn-sm" type="submit">Publicar producto</button><button class="btn btn-line btn-sm" type="button" data-cancel-product hidden>Cancelar edición</button></div><p class="owner-note" id="productFormNote" aria-live="polite"></p></form><div id="ownerProductsList" class="product-owner-list"><p class="hint">Cargando tus productos…</p></div></div>` : ''}
       <div class="owner-actions">${publicButton}${publicado ? `<button class="btn btn-line" type="button" data-edit-company>Editar mi empresa</button>` : ''}</div>
       ${publicado ? `
       <form id="editCompanyForm" class="owner-edit-form" hidden>
@@ -1679,6 +1692,7 @@ function mostrarEstado(){
   $('#empForm').hidden = !!d;
   if(d && d.activa && ['aprobada','aprobado'].includes(String(d.estado_revision||'').toLowerCase())){
     cargarGaleriaPropietario();
+    cargarCategoriasProducto().then(cargarProductosPropietario).catch(err=>{console.error(err);toast('No se pudo preparar el módulo de productos.');});
   }
 }
 async function abrirEmpresa(role){
@@ -1886,6 +1900,102 @@ document.addEventListener('change',e=>{
 document.addEventListener('click',e=>{
   const del=e.target.closest('[data-delete-gallery]');
   if(del) eliminarFotoEmpresa(del.dataset.deleteGallery);
+  const edit=e.target.closest('[data-edit-product]');
+  if(edit) prepararEdicionProducto(edit.dataset.editProduct);
+  const remove=e.target.closest('[data-delete-product]');
+  if(remove) eliminarProducto(remove.dataset.deleteProduct);
+  if(e.target.closest('[data-cancel-product]')) limpiarFormularioProducto();
+});
+
+const PRODUCTOS_BUCKET='productos-empresa';
+async function cargarCategoriasProducto(){
+  const sel=$('#productCategory');
+  if(!sel || !sb) return;
+  const {data,error}=await sb.from('categorias').select('id,nombre').order('nombre');
+  if(error) throw error;
+  sel.innerHTML='<option value="">Selecciona una categoría</option>'+(data||[]).map(c=>`<option value="${c.id}">${escaparHTML(c.nombre)}</option>`).join('');
+}
+async function listarProductosEmpresa(companyId){
+  const {data,error}=await sb.from('productos').select('id,empresa_id,categoria_id,nombre,descripcion,precio,imagen_url,activo,created_at,categorias(nombre)')
+    .eq('empresa_id',companyId).order('created_at',{ascending:false});
+  if(error) throw error;
+  return data||[];
+}
+async function cargarProductosPropietario(){
+  const target=$('#ownerProductsList');
+  if(!target || !miEmpresa?.id || !sb) return;
+  try{
+    const rows=await listarProductosEmpresa(miEmpresa.id);
+    target.innerHTML=rows.length?rows.map(p=>`<div class="product-owner-row"><img src="${p.imagen_url?escaparHTML(p.imagen_url):'https://placehold.co/120x120/e8f6fd/0a1b4d?text=Producto'}" alt=""><div><strong>${escaparHTML(p.nombre)}</strong><small>${escaparHTML(p.categorias?.nombre||'')} · ${p.precio!==null?'S/ '+Number(p.precio).toFixed(2):'Precio a cotizar'} · ${p.activo?'Publicado':'Oculto'}</small></div><div class="product-owner-actions"><button type="button" data-edit-product="${p.id}">Editar</button><button type="button" data-delete-product="${p.id}">Eliminar</button></div></div>`).join(''):'<p class="hint">Todavía no has publicado productos.</p>';
+  }catch(err){console.error(err);target.innerHTML='<p class="hint">No se pudieron cargar tus productos.</p>';}
+}
+async function cargarProductosEmpresaPublicos(companyId,target){
+  if(!target || !sb) return;
+  try{
+    const {data,error}=await sb.from('productos').select('id,nombre,descripcion,precio,imagen_url,categorias(nombre)')
+      .eq('empresa_id',companyId).eq('activo',true).order('created_at',{ascending:false});
+    if(error) throw error;
+    target.innerHTML=(data||[]).length?`<div class="company-product-grid">${data.map(p=>`<article class="company-product">${p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="${escaparHTML(p.nombre)}" loading="lazy">`:''}<div class="cp-body"><strong>${escaparHTML(p.nombre)}</strong>${p.descripcion?`<p>${escaparHTML(p.descripcion)}</p>`:''}<p class="cp-price">${p.precio!==null?'S/ '+Number(p.precio).toFixed(2):'Precio a cotizar'}</p></div></article>`).join('')}</div>`:'<p class="hint">Esta empresa todavía no ha publicado productos.</p>';
+  }catch(err){console.error('No se pudieron cargar productos de la ficha:',err);target.innerHTML='<p class="hint">No se pudieron cargar los productos de esta empresa.</p>';}
+}
+function limpiarFormularioProducto(){
+  const form=$('#productOwnerForm'); if(!form) return;
+  form.reset();form.elements.id.value='';
+  $('#productFormNote').textContent='';
+  form.querySelector('[type="submit"]').textContent='Publicar producto';
+  form.querySelector('[data-cancel-product]').hidden=true;
+}
+async function prepararEdicionProducto(id){
+  const form=$('#productOwnerForm');if(!form)return;
+  try{
+    const {data,error}=await sb.from('productos').select('id,categoria_id,nombre,descripcion,precio').eq('id',id).eq('empresa_id',miEmpresa.id).single();
+    if(error)throw error;
+    form.elements.id.value=data.id;form.elements.nombre.value=data.nombre||'';
+    form.elements.categoria_id.value=data.categoria_id||'';
+    form.elements.descripcion.value=data.descripcion||'';
+    form.elements.precio.value=data.precio??'';
+    form.querySelector('[type="submit"]').textContent='Guardar cambios';
+    form.querySelector('[data-cancel-product]').hidden=false;
+    form.scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(err){toast(err.message||'No se pudo abrir el producto para editar.');}
+}
+async function guardarProducto(form){
+  if(!miEmpresa?.id || !sb) return;
+  const btn=form.querySelector('[type="submit"]');
+  const fd=new FormData(form),id=String(fd.get('id')||'');
+  const nombre=String(fd.get('nombre')||'').trim(),categoria_id=Number(fd.get('categoria_id'));
+  if(!nombre||!categoria_id){toast('Completa el nombre y la categoría del producto.');return;}
+  const precioRaw=String(fd.get('precio')||'').trim();
+  const precio=precioRaw===''?null:Number(precioRaw);
+  if(precio!==null&&(!Number.isFinite(precio)||precio<0)){toast('Revisa el precio ingresado.');return;}
+  const imageFile=form.elements.imagen.files?.[0]||null;
+  if(imageFile&&(!['image/jpeg','image/png','image/webp'].includes(imageFile.type)||imageFile.size>5*1024*1024)){toast('La imagen debe ser JPG, PNG o WEBP y pesar máximo 5 MB.');return;}
+  bloquear(btn,true,'Guardando…');
+  try{
+    const payload={empresa_id:miEmpresa.id,categoria_id,nombre,descripcion:String(fd.get('descripcion')||'').trim()||null,precio,activo:true};
+    if(imageFile){
+      const ext=imageFile.type==='image/jpeg'?'jpg':imageFile.type==='image/png'?'png':'webp';
+      const path=`${miEmpresa.id}/${crypto.randomUUID()}.${ext}`;
+      const {error:upErr}=await sb.storage.from(PRODUCTOS_BUCKET).upload(path,imageFile,{cacheControl:'3600',upsert:false,contentType:imageFile.type});
+      if(upErr)throw upErr;
+      const {data:urlData}=sb.storage.from(PRODUCTOS_BUCKET).getPublicUrl(path);
+      payload.imagen_url=urlData.publicUrl;
+    }
+    const result=id?await sb.from('productos').update(payload).eq('id',id).eq('empresa_id',miEmpresa.id):await sb.from('productos').insert(payload);
+    if(result.error)throw result.error;
+    limpiarFormularioProducto();await cargarProductosPropietario();await cargarProductosPublicos();
+    toast(id?'Producto actualizado.':'Producto publicado en tu ficha y en el catálogo.');
+  }catch(err){console.error(err);toast(err.message||'No se pudo guardar el producto. Revisa la configuración de Supabase.');}
+  finally{bloquear(btn,false);}
+}
+async function eliminarProducto(id){
+  if(!confirm('¿Eliminar este producto del catálogo y de tu ficha comercial?'))return;
+  const {error}=await sb.from('productos').delete().eq('id',id).eq('empresa_id',miEmpresa.id);
+  if(error){toast(error.message||'No se pudo eliminar el producto.');return;}
+  await cargarProductosPropietario();await cargarProductosPublicos();toast('Producto eliminado.');
+}
+document.addEventListener('submit',e=>{
+  if(e.target?.id==='productOwnerForm'){e.preventDefault();guardarProducto(e.target);}
 });
 
 async function cerrarSesion(){
@@ -1925,7 +2035,6 @@ actualizarNav();
    ========================================================= */
 renderCats(); renderFeat(); renderDir(); renderProds(); renderOpps(); renderEvents();
 cargarDirectorio();
-cargarCatalogo();
 </script>
 </body>
 </html>
