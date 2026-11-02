@@ -1307,7 +1307,7 @@ async function cargarProductosPublicos(){
     productosPublicos=(data||[]).filter(p=>empresas.has(String(p.empresa_id))).map(p=>{
       const e=empresas.get(String(p.empresa_id));
       const categoria=catById.get(String(p.categoria_id)) || e.categoria;
-      return {...p,c:slugCategoria(categoria),categoria,empresa_nombre:e.n};
+      return {...p,c:slugCategoria(categoria),categoria,empresa_nombre:e.n,empresa_whatsapp:e.whatsapp||'',empresa_ciudad:e.d||e.departamento||''};
     });
     productosCargando=false; actualizarChipsProductos(); renderProds();
   }catch(err){
@@ -1385,6 +1385,7 @@ chipRow($('#evChips'), [{id:'todos',name:'Todos'},{id:'cap',name:'Capacitaciones
    MODAL
    ========================================================= */
 const dlg = $('#dlg'), form = $('#form');
+let cotizacionProductoActual = null;
 $('#f-cat').innerHTML = CATS.map(c=>`<option value="${c.id}">${c.name}</option>`).join('');
 
 function openDlg({title='Registra tu empresa', sub='Cuéntanos sobre tu empresa. Te contactaremos para activar tu perfil.', btn='Enviar solicitud', role, msg=false, placeholder='Cantidad, tallas, colores y fecha que necesitas'}={}){
@@ -1394,6 +1395,38 @@ function openDlg({title='Registra tu empresa', sub='Cuéntanos sobre tu empresa.
   if(role) $('#f-role').value = role;
   $('#msgField').hidden = !msg;
   $('#f-msg').placeholder = placeholder;
+  // Restaurar el formulario estándar al abrir solicitudes que no son cotizaciones de producto.
+  $('#f-role').closest('.field').hidden = false;
+  $('#f-cat').closest('.field').hidden = false;
+  $('#f-name').closest('.field').querySelector('label').textContent = 'Nombre de la empresa';
+  $('#f-name').placeholder = 'Ej. Confecciones Moche SAC';
+  $('#f-contact').closest('.field').querySelector('label').textContent = 'WhatsApp o correo';
+  $('#f-contact').required = true;
+  $('#f-city').required = false;
+  $('#msgField').querySelector('label').textContent = 'Tu mensaje';
+  cotizacionProductoActual = null;
+  dlg.showModal();
+  $('#f-name').focus();
+}
+function abrirCotizacionProducto(producto){
+  cotizacionProductoActual = producto;
+  $('#dlgTitle').textContent = 'Solicitar cotización';
+  $('#dlgSub').textContent = `${producto.nombre} · ${producto.empresa_nombre}. Completa tus datos y enviaremos tu pedido directamente a esta empresa por WhatsApp.`;
+  $('#dlgSubmit').textContent = 'Enviar pedido por WhatsApp';
+  $('#f-role').closest('.field').hidden = true;
+  $('#f-cat').closest('.field').hidden = true;
+  $('#f-name').closest('.field').querySelector('label').textContent = 'Tu nombre o empresa';
+  $('#f-name').placeholder = '¿Quién solicita la cotización?';
+  $('#f-contact').closest('.field').querySelector('label').textContent = 'Tu WhatsApp (opcional)';
+  $('#f-contact').required = false;
+  $('#f-city').required = true;
+  $('#f-city').value = '';
+  $('#f-contact').value = '';
+  $('#f-name').value = '';
+  $('#f-msg').value = '';
+  $('#msgField').hidden = false;
+  $('#msgField').querySelector('label').textContent = 'Cantidad y detalles del pedido';
+  $('#f-msg').placeholder = 'Indica cantidad, medidas, colores, tallas y fecha en que lo necesitas.';
   dlg.showModal();
   $('#f-name').focus();
 }
@@ -1448,6 +1481,36 @@ $('#profileDlg').addEventListener('click',e=>{ if(e.target===$('#profileDlg')) $
 dlg.addEventListener('click',e=>{ if(e.target===dlg) dlg.close(); });
 form.addEventListener('submit',e=>{
   e.preventDefault();
+  if(cotizacionProductoActual){
+    const p=cotizacionProductoActual;
+    const nombre=$('#f-name').value.trim();
+    const ciudad=$('#f-city').value.trim();
+    const contacto=$('#f-contact').value.trim();
+    const detalle=$('#f-msg').value.trim();
+    const telefono=String(p.empresa_whatsapp||'').replace(/\\D/g,'').replace(/^51/,'');
+    if(!nombre || !ciudad || !detalle){
+      toast('Completa tu nombre o empresa, ciudad y detalles del pedido.');
+      return;
+    }
+    if(!/^9\\d{8}$/.test(telefono)){
+      toast('Esta empresa todavía no tiene un WhatsApp válido publicado. Contacta desde su perfil.');
+      return;
+    }
+    const mensaje=[
+      `Hola, vi su producto en Red Textil Perú y deseo solicitar una cotización.`,
+      `Producto: ${p.nombre}`,
+      `Empresa proveedora: ${p.empresa_nombre}`,
+      `Solicitante: ${nombre}`,
+      `Ciudad: ${ciudad}`,
+      contacto ? `Mi WhatsApp: ${contacto}` : '',
+      `Cantidad y detalles: ${detalle}`,
+      `Enviado desde Red Textil Perú.`
+    ].filter(Boolean).join('\\n');
+    const url=`https://wa.me/51${telefono}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url,'_blank','noopener,noreferrer');
+    dlg.close();
+    return;
+  }
   toast('Esta función aún no está habilitada, por eso tu solicitud no se envió.');
 });
 
@@ -2043,7 +2106,11 @@ $('#empDlg').addEventListener('click',async e=>{
 });
 document.addEventListener('click',e=>{
   const q=e.target.closest('[data-product-quote]');
-  if(q){const p=productosPublicos.find(x=>String(x.id)===q.dataset.productQuote);if(p)openDlg({title:'Pedir cotización',sub:p.nombre+' · '+p.empresa_nombre,btn:'Enviar pedido',role:'Comprador',msg:true,placeholder:'Indica cantidad, medidas y fecha que necesitas'});return;}
+  if(q){
+    const p=productosPublicos.find(x=>String(x.id)===q.dataset.productQuote);
+    if(p) abrirCotizacionProducto(p);
+    return;
+  }
   const company=e.target.closest('[data-open-company]');
   if(company){const card=document.querySelector(`[data-profile="${CSS.escape(company.dataset.openCompany)}"]`);if(card)card.click();}
 });
