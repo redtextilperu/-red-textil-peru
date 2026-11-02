@@ -1931,6 +1931,15 @@ async function cargarProductosPropietario(){
   if(!target||!miEmpresa?.id||!sb)return;
   target.innerHTML='<p class="hint">Cargando productos…</p>';
   try{
+    // Cargar las categorías también en el formulario de productos del propietario.
+    // Antes solo se llenaba el selector del registro de empresa, por eso aquí quedaba "Cargando categorías…".
+    const catSelect=$('#ownerProductForm select[name="categoria_id"]');
+    if(catSelect && catSelect.options.length<=1){
+      const {data:cats,error:catError}=await sb.from(CAT.tabla).select(CAT.id+','+CAT.nombre).order(CAT.nombre);
+      if(catError) throw catError;
+      catSelect.innerHTML='<option value="">Elige una categoría</option>'+(cats||[]).map(c=>`<option value="${escaparHTML(c[CAT.id])}">${escaparHTML(c[CAT.nombre])}</option>`).join('');
+      if(!cats || !cats.length) throw new Error('No hay categorías disponibles.');
+    }
     const {data,error}=await sb.from('productos').select('id,categoria_id,nombre,descripcion,precio,imagen_url,activo').eq('empresa_id',miEmpresa.id).order('created_at',{ascending:false});
     if(error)throw error;
     target.innerHTML=(data||[]).length ? data.map(p=>`<article class="owner-product-row">${p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="">`:'<div></div>'}<div><strong>${escaparHTML(p.nombre)}</strong><small>${precioProducto(p.precio)} · ${p.activo?'Publicado':'Oculto'}</small></div><div class="owner-product-actions"><button type="button" data-edit-product="${escaparHTML(p.id)}">Editar</button><button type="button" data-toggle-product="${escaparHTML(p.id)}" data-active="${p.activo?'1':'0'}">${p.activo?'Ocultar':'Publicar'}</button><button type="button" data-delete-product="${escaparHTML(p.id)}">Eliminar</button></div></article>`).join('') : '<p class="hint">Todavía no has publicado productos. Completa el formulario para añadir el primero.</p>';
