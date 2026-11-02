@@ -495,6 +495,7 @@ dialog::backdrop{background:rgba(7,18,56,.75);backdrop-filter:blur(4px)}
 .owner-product-form label{display:grid;gap:5px;font-size:.82rem;font-weight:600;color:var(--ink-soft)}
 .owner-product-form input,.owner-product-form textarea,.owner-product-form select{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;background:#fff;font:inherit}
 .owner-product-form textarea{min-height:76px;resize:vertical}
+.product-image-preview img{display:block;max-width:180px;max-height:150px;object-fit:contain;border:1px solid var(--line);border-radius:10px;background:#fff;padding:4px}.product-image-preview{padding:4px 0}
 .owner-product-list{display:grid;gap:9px}
 .owner-product-row{display:grid;grid-template-columns:72px 1fr auto;gap:10px;align-items:center;padding:9px;border:1px solid var(--line);border-radius:10px}
 .owner-product-row img{width:72px;height:72px;object-fit:cover;border-radius:8px;background:var(--paper)}
@@ -1681,7 +1682,7 @@ function mostrarEstado(){
       </div>
       ${d.descripcion ? `<div class="owner-description"><small>Descripción</small><p>${escaparHTML(d.descripcion)}</p></div>` : ''}
       ${publicado ? `<div class="gallery-owner"><strong class="gallery-title">Fotografías de mi empresa</strong><p class="owner-note">Sube hasta 5 fotos de tus productos, trabajos o instalaciones. Se publicarán automáticamente si son imágenes válidas. Máximo 5 MB por imagen.</p><label class="btn btn-line btn-sm" for="companyGalleryFiles">Agregar fotografías</label><input id="companyGalleryFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden><div id="ownerCompanyGallery" class="gallery-grid"><p class="hint">Cargando fotografías…</p></div></div>` : ''}
-      ${publicado ? `<section class="owner-products"><div class="owner-products-head"><strong class="gallery-title">Mis productos</strong><span class="hint">Aparecerán en tu ficha comercial y en el catálogo general.</span></div><form id="ownerProductForm" class="owner-product-form"><input type="hidden" name="id"><label>Nombre del producto<input name="nombre" maxlength="120" required placeholder="Ej. Buzos escolares"></label><label>Categoría<select name="categoria_id" required><option value="">Cargando categorías…</option></select></label><label>Descripción<textarea name="descripcion" maxlength="500" placeholder="Materiales, medidas y características"></textarea></label><div class="two"><label>Precio referencial (S/)<input name="precio" type="number" min="0" step="0.01" placeholder="Vacío si es a cotizar"></label><label>Imagen del producto (URL)<input name="imagen_url" type="url" maxlength="500" placeholder="https://..."></label></div><div class="owner-actions"><button class="btn btn-pink btn-sm" type="submit">Publicar producto</button><button class="btn btn-line btn-sm" type="button" id="cancelProductEdit" hidden>Cancelar edición</button></div><p class="owner-note">Por ahora utiliza una imagen pública con dirección HTTPS.</p></form><div id="ownerProductList" class="owner-product-list"><p class="hint">Cargando productos…</p></div></section>` : ''}
+      ${publicado ? `<section class="owner-products"><div class="owner-products-head"><strong class="gallery-title">Mis productos</strong><span class="hint">Aparecerán en tu ficha comercial y en el catálogo general.</span></div><form id="ownerProductForm" class="owner-product-form"><input type="hidden" name="id"><label>Nombre del producto<input name="nombre" maxlength="120" required placeholder="Ej. Buzos escolares"></label><label>Categoría<select name="categoria_id" required><option value="">Cargando categorías…</option></select></label><label>Descripción<textarea name="descripcion" maxlength="500" placeholder="Materiales, medidas y características"></textarea></label><label>Precio referencial (S/)<input name="precio" type="number" min="0" step="0.01" placeholder="Vacío si es a cotizar"></label><label>Fotografía del producto<input name="imagen_archivo" type="file" accept="image/jpeg,image/png,image/webp"><small class="owner-note">JPG, PNG o WEBP · máximo 5 MB. Puedes dejarlo vacío si no deseas mostrar una foto.</small></label><div id="productImagePreview" class="product-image-preview" hidden></div><div class="owner-actions"><button class="btn btn-pink btn-sm" type="submit">Publicar producto</button><button class="btn btn-line btn-sm" type="button" id="cancelProductEdit" hidden>Cancelar edición</button></div><p class="owner-note">La fotografía se subirá automáticamente y aparecerá en tu ficha comercial y en el catálogo.</p></form><div id="ownerProductList" class="owner-product-list"><p class="hint">Cargando productos…</p></div></section>` : ''}
       <div class="owner-actions">${publicButton}${publicado ? `<button class="btn btn-line" type="button" data-edit-company>Editar mi empresa</button>` : ''}</div>
       ${publicado ? `
       <form id="editCompanyForm" class="owner-edit-form" hidden>
@@ -1921,6 +1922,7 @@ document.addEventListener('click',e=>{
 function limpiarFormularioProducto(){
   const f=$('#ownerProductForm'); if(!f)return;
   f.reset(); f.elements.id.value='';
+  const preview=$('#productImagePreview'); if(preview){preview.innerHTML='';preview.hidden=true;}
   f.querySelector('button[type="submit"]').textContent='Publicar producto';
   $('#cancelProductEdit').hidden=true;
 }
@@ -1935,6 +1937,13 @@ async function cargarProductosPropietario(){
     target.dataset.products=JSON.stringify(data||[]);
   }catch(err){console.error('No se pudieron cargar tus productos:',err);target.innerHTML='<p class="hint">No se pudieron cargar tus productos. Verifica la configuración de Supabase.</p>';}
 }
+$('#empDlg').addEventListener('change',e=>{
+  if(e.target?.name!=='imagen_archivo')return;
+  const file=e.target.files?.[0], preview=$('#productImagePreview'); if(!preview)return;
+  if(!file){preview.innerHTML='';preview.hidden=true;return;}
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>5*1024*1024){toast('Elige una imagen JPG, PNG o WEBP de máximo 5 MB.');e.target.value='';preview.innerHTML='';preview.hidden=true;return;}
+  const url=URL.createObjectURL(file);preview.innerHTML=`<img src="${url}" alt="Vista previa del producto">`;preview.hidden=false;
+});
 $('#empDlg').addEventListener('submit',async e=>{
   const f=e.target.closest('#ownerProductForm'); if(!f)return;
   e.preventDefault();
@@ -1942,14 +1951,26 @@ $('#empDlg').addEventListener('submit',async e=>{
   const fd=new FormData(f), id=String(fd.get('id')||'').trim();
   const nombre=String(fd.get('nombre')||'').trim();
   const categoria=String(fd.get('categoria_id')||'').trim();
-  const imagen=String(fd.get('imagen_url')||'').trim();
+  const archivo=f.elements.imagen_archivo?.files?.[0]||null;
   const precioRaw=String(fd.get('precio')||'').trim();
   if(nombre.length<2||!categoria){toast('Completa el nombre y la categoría del producto.');return;}
-  if(imagen && !/^https:\/\//i.test(imagen)){toast('La imagen debe tener una dirección HTTPS.');return;}
-  const payload={empresa_id:miEmpresa.id,categoria_id:Number(categoria),nombre,descripcion:String(fd.get('descripcion')||'').trim()||null,precio:precioRaw===''?null:Number(precioRaw),imagen_url:imagen||null,activo:true};
+  if(archivo && !['image/jpeg','image/png','image/webp'].includes(archivo.type)){toast('La imagen debe ser JPG, PNG o WEBP.');return;}
+  if(archivo && archivo.size>5*1024*1024){toast('La imagen debe pesar máximo 5 MB.');return;}
+  const payload={empresa_id:miEmpresa.id,categoria_id:Number(categoria),nombre,descripcion:String(fd.get('descripcion')||'').trim()||null,precio:precioRaw===''?null:Number(precioRaw),activo:true};
   if(precioRaw!==''&&(!Number.isFinite(payload.precio)||payload.precio<0)){toast('Escribe un precio válido.');return;}
   const btn=f.querySelector('button[type="submit"]'); bloquear(btn,true,id?'Guardando…':'Publicando…');
   try{
+    if(archivo){
+      const ext=archivo.type==='image/jpeg'?'jpg':archivo.type==='image/png'?'png':'webp';
+      const objectPath=`${miEmpresa.id}/${crypto.randomUUID()}.${ext}`;
+      const {error:uploadError}=await sb.storage.from('producto-imagenes').upload(objectPath,archivo,{cacheControl:'3600',upsert:false,contentType:archivo.type});
+      if(uploadError)throw uploadError;
+      const {data:publicData}=sb.storage.from('producto-imagenes').getPublicUrl(objectPath);
+      payload.imagen_url=publicData.publicUrl;
+    }else if(id){
+      const anterior=JSON.parse($('#ownerProductList')?.dataset.products||'[]').find(x=>String(x.id)===id);
+      if(anterior?.imagen_url)payload.imagen_url=anterior.imagen_url;
+    }
     const result=id ? await sb.from('productos').update(payload).eq('id',id).eq('empresa_id',miEmpresa.id) : await sb.from('productos').insert(payload);
     if(result.error)throw result.error;
     limpiarFormularioProducto(); await cargarProductosPropietario(); await cargarProductosPublicos();
@@ -1964,7 +1985,7 @@ $('#empDlg').addEventListener('click',async e=>{
   if(edit){
     const f=$('#ownerProductForm'), rows=JSON.parse($('#ownerProductList')?.dataset.products||'[]'), p=rows.find(x=>String(x.id)===edit.dataset.editProduct);
     if(!p||!f)return;
-    f.elements.id.value=p.id;f.elements.nombre.value=p.nombre||'';f.elements.descripcion.value=p.descripcion||'';f.elements.precio.value=p.precio??'';f.elements.imagen_url.value=p.imagen_url||'';
+    f.elements.id.value=p.id;f.elements.nombre.value=p.nombre||'';f.elements.descripcion.value=p.descripcion||'';f.elements.precio.value=p.precio??'';const preview=$('#productImagePreview');if(preview){preview.innerHTML=p.imagen_url?`<img src="${escaparHTML(p.imagen_url)}" alt="Imagen actual del producto">`:'';preview.hidden=!p.imagen_url;}
     // Categoría del producto: usar su categoría propia.
     f.elements.categoria_id.value=String(p.categoria_id||'');
     f.querySelector('button[type="submit"]').textContent='Guardar producto';$('#cancelProductEdit').hidden=false;
